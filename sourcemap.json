@@ -1,0 +1,1345 @@
+{
+ "meta": {
+  "description": "Machine-checkable map from every Clause constructor in laws.bend to the authoritative transcript section it models.",
+  "authoritative_transcripts": [
+   "https://www.archives.gov/founding-docs/constitution-transcript",
+   "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "https://www.archives.gov/founding-docs/amendments-11-27"
+  ],
+  "method": "transcript_section and source_block derived mechanically from laws.bend's clause_source match; text paraphrases taken from the rule authors' own comments in laws.bend or written from the clause name against the transcript. kind=paraphrase everywhere: no entry claims to quote the transcript.",
+  "checked_by": "tools/static_audit.py (fails loudly on any mismatch)",
+  "entry_count": 133
+ },
+ "clauses": [
+  {
+   "clause": "CL_Preamble_Purpose",
+   "index": 0,
+   "source_block": "Preamble",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Preamble",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "Preamble: ordains and establishes the Constitution for the stated purposes."
+  },
+  {
+   "clause": "CL_A1S2_Qualifications",
+   "index": 1,
+   "source_block": "A1S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 2",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "A1S2: House qualifications (25 years, 7 years a citizen, inhabitant)."
+  },
+  {
+   "clause": "CL_A1S2_ImpeachmentPower",
+   "index": 2,
+   "source_block": "A1S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 2",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S2: the House has the sole power of impeachment."
+  },
+  {
+   "clause": "CL_A1S2_ApportionmentCap",
+   "index": 3,
+   "source_block": "A1S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 2",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S2: representatives shall not exceed one for every thirty thousand."
+  },
+  {
+   "clause": "CL_A1S3_Qualifications",
+   "index": 4,
+   "source_block": "A1S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 3",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "A1S3: Senate qualifications (30 years, 9 years a citizen, inhabitant)."
+  },
+  {
+   "clause": "CL_A1S3_SenateTrial",
+   "index": 5,
+   "source_block": "A1S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 3",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S3: the Senate tries impeachments; conviction needs two thirds of the Members present (basis fixed inside impeachment_conviction)."
+  },
+  {
+   "clause": "CL_A1S3_VPTiebreak",
+   "index": 6,
+   "source_block": "A1S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 3",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S3: the Vice President votes only when the Senate is equally divided."
+  },
+  {
+   "clause": "CL_A1S4_ElectionRegulation",
+   "index": 7,
+   "source_block": "A1S4",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 4",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S4: times/places/manner prescribed by the states; Congress may alter."
+  },
+  {
+   "clause": "CL_A1S4_AnnualAssembly",
+   "index": 8,
+   "source_block": "A1S4",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 4",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S4: Congress assembles at least once every year."
+  },
+  {
+   "clause": "CL_A1S7_Presentment",
+   "index": 9,
+   "source_block": "A1S7",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 7",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S7: presentment; a bill becomes law by signature, override, or lapse. Override counts are chamber bundles; the membership basis is fixed inside bill_becomes_law (\"two thirds of that House\")."
+  },
+  {
+   "clause": "CL_A1S7_RevenueOrigination",
+   "index": 10,
+   "source_block": "A1S7",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 7",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S7: revenue bills originate in the House."
+  },
+  {
+   "clause": "CL_A2S1_Vesting",
+   "index": 11,
+   "source_block": "A2S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 1",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "A2S1: the executive power is vested in a President."
+  },
+  {
+   "clause": "CL_A2S1_Term",
+   "index": 12,
+   "source_block": "A2S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 1",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "A2S1: the President holds office during the term of four years."
+  },
+  {
+   "clause": "CL_A2S1_Qualifications",
+   "index": 13,
+   "source_block": "A2S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 1",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "A2S1: President qualifications (35 years, 14 years resident, natural born)."
+  },
+  {
+   "clause": "CL_A2S1_NaturalBorn",
+   "index": 14,
+   "source_block": "A2S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 1",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "A2S1: the natural-born condition, with the term passed as an opaque input."
+  },
+  {
+   "clause": "CL_A2S1_Electors",
+   "index": 15,
+   "source_block": "A2S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 1",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "A2S1: electors per state equal senators plus representatives."
+  },
+  {
+   "clause": "CL_A3S2_TreasonEvidence",
+   "index": 16,
+   "source_block": "A3S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 2",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S2: treason conviction needs two witnesses to the same overt act or confession in open court."
+  },
+  {
+   "clause": "CL_A3S2_JuryTrial",
+   "index": 17,
+   "source_block": "A3S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 2",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S2: trial of crimes by jury; Speedy/Impartial are opaque term inputs."
+  },
+  {
+   "clause": "CL_A5_CongressProposal",
+   "index": 18,
+   "source_block": "A5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article V",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A5: Congress proposes amendments by two thirds of both houses (full membership basis, fixed inside article_v_congress_proposal)."
+  },
+  {
+   "clause": "CL_A5_ConventionApplication",
+   "index": 19,
+   "source_block": "A5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article V",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A5: a convention is called on application of two thirds of the states."
+  },
+  {
+   "clause": "CL_A5_Ratification",
+   "index": 20,
+   "source_block": "A5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article V",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A5: ratification by three fourths of the states."
+  },
+  {
+   "clause": "CL_AM12_ElectoralMajority",
+   "index": 21,
+   "source_block": "AM12",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 12",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "AM12: a majority of the whole number of electors appoints the President. The whole number appointed is the body's membership (present == membership here)."
+  },
+  {
+   "clause": "CL_AM12_DistinctBallots",
+   "index": 22,
+   "source_block": "AM12",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 12",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "AM12: electors vote by ballot, distinctly for President and Vice-President."
+  },
+  {
+   "clause": "CL_AM13S1_Abolition",
+   "index": 23,
+   "source_block": "AM13S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 13, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM13S1: no slavery or involuntary servitude except as punishment for crime."
+  },
+  {
+   "clause": "CL_AM14S2_ApportionmentBasis",
+   "index": 24,
+   "source_block": "AM14S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 2",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM14S2: apportionment counts the whole number of persons in each state."
+  },
+  {
+   "clause": "CL_AM14S2_Reduction",
+   "index": 25,
+   "source_block": "AM14S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 2",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM14S2: representation is reduced when the vote is denied, except for rebellion or other crime."
+  },
+  {
+   "clause": "CL_AM16_IncomeTax",
+   "index": 26,
+   "source_block": "AM16",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 16",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM16: Congress may tax incomes without apportionment."
+  },
+  {
+   "clause": "CL_AM17_DirectElection",
+   "index": 27,
+   "source_block": "AM17",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 17",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM17: senators are elected by the people."
+  },
+  {
+   "clause": "CL_AM17_VacancyAppointment",
+   "index": 28,
+   "source_block": "AM17",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 17",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM17: the executive may make temporary appointments when the legislature empowers it to do so."
+  },
+  {
+   "clause": "CL_AM18S1_Prohibition",
+   "index": 29,
+   "source_block": "AM18S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 18, Section 1",
+   "effect": "RepealedProvision",
+   "kind": "paraphrase",
+   "text": "AM18S1 (repealed): no manufacture, sale, or transport of intoxicating liquors for beverage purposes. Kept for the record; not in force."
+  },
+  {
+   "clause": "CL_AM18S2_ConcurrentPower",
+   "index": 30,
+   "source_block": "AM18S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 18, Section 2",
+   "effect": "RepealedProvision",
+   "kind": "paraphrase",
+   "text": "AM18S2 (repealed): concurrent enforcement power. Kept; not in force."
+  },
+  {
+   "clause": "CL_AM18S3_EffectiveDate",
+   "index": 31,
+   "source_block": "AM18S3",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 18, Section 3",
+   "effect": "RepealedProvision",
+   "kind": "paraphrase",
+   "text": "AM18S3 (repealed): effective one year after ratification. Kept; not in force."
+  },
+  {
+   "clause": "CL_AM20S1_TermCommencement",
+   "index": 32,
+   "source_block": "AM20S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 1",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM20S1: terms of President and Vice President end at noon on January 20."
+  },
+  {
+   "clause": "CL_AM20S2_CongressAssembly",
+   "index": 33,
+   "source_block": "AM20S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 2",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM20S2: Congress assembles at noon on January 3 each year."
+  },
+  {
+   "clause": "CL_AM20S3_PresidentElectDeath",
+   "index": 34,
+   "source_block": "AM20S3",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 3",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM20S3: if the President-elect dies, the Vice President-elect becomes President."
+  },
+  {
+   "clause": "CL_AM20S4_SuccessionStatute",
+   "index": 35,
+   "source_block": "AM20S4",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 4",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM20S4: Congress provides by law for the case where no one qualifies."
+  },
+  {
+   "clause": "CL_AM21S1_Repeal",
+   "index": 36,
+   "source_block": "AM21S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 21, Section 1",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "AM21S1: the eighteenth article is repealed. The repealed text stays in the type; `clause_in_force` records that it no longer operates."
+  },
+  {
+   "clause": "CL_AM22S1_TermLimit",
+   "index": 37,
+   "source_block": "AM22S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 22, Section 1",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "AM22S1: no one is elected President more than twice."
+  },
+  {
+   "clause": "CL_AM22S2_PriorServiceLimit",
+   "index": 38,
+   "source_block": "AM22S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 22, Section 2",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "AM22S2: prior service of more than two years of another's term reduces the limit to a single election."
+  },
+  {
+   "clause": "CL_AM25S1_Succession",
+   "index": 39,
+   "source_block": "AM25S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 25, Section 1",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM25S1: the Vice President becomes President on removal, death, or resignation."
+  },
+  {
+   "clause": "CL_AM25S2_VPConfirmation",
+   "index": 40,
+   "source_block": "AM25S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 25, Section 2",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM25S2: the President nominates a Vice President, confirmed by a majority of both houses. \"Of both Houses\" without \"present\": full membership basis, fixed by the signature."
+  },
+  {
+   "clause": "CL_AM25S3_VoluntaryTransfer",
+   "index": 41,
+   "source_block": "AM25S3",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 25, Section 3",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "AM25S3: on the President's written declaration of inability, the Vice President acts; \"unable\" is an opaque term input."
+  },
+  {
+   "clause": "CL_AM25S4_CongressDecision",
+   "index": 42,
+   "source_block": "AM25S4",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 25, Section 4",
+   "effect": "ExecutiveSuccession",
+   "kind": "paraphrase",
+   "text": "President acts; \"unable\" is an opaque term input. AM25S4: Congress decides a contested inability by two thirds of both houses. \"Of both Houses\": full membership basis, fixed by the signature."
+  },
+  {
+   "clause": "CL_AM26S1_VoteAge",
+   "index": 43,
+   "source_block": "AM26S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 26, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM26S1: the right to vote of citizens 18 or older shall not be denied on account of age."
+  },
+  {
+   "clause": "CL_A1S1_Vesting",
+   "index": 44,
+   "source_block": "A1S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 1",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S1: all legislative powers vest in Congress (Senate + House)."
+  },
+  {
+   "clause": "CL_A1S5_Quorum",
+   "index": 45,
+   "source_block": "A1S5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 5",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S5: a majority of each House is a quorum to do business."
+  },
+  {
+   "clause": "CL_A1S5_Expulsion",
+   "index": 46,
+   "source_block": "A1S5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 5",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S5: expulsion needs two thirds concurrence. Judgment call: the text names no basis; modeled on the present basis (of those voting)."
+  },
+  {
+   "clause": "CL_A1S5_YeasNays",
+   "index": 47,
+   "source_block": "A1S5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 5",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S5: yeas and nays entered at the desire of one fifth of those present."
+  },
+  {
+   "clause": "CL_A1S5_Adjournment",
+   "index": 48,
+   "source_block": "A1S5",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 5",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S5: no adjournment over three days without the other House's consent."
+  },
+  {
+   "clause": "CL_A1S6_ArrestPrivilege",
+   "index": 49,
+   "source_block": "A1S6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 6",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "A1S6: privilege from arrest during attendance, except treason/felony/breach."
+  },
+  {
+   "clause": "CL_A1S6_SpeechDebate",
+   "index": 50,
+   "source_block": "A1S6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 6",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "A1S6: no questioning elsewhere for speech or debate in either House."
+  },
+  {
+   "clause": "CL_A1S6_Incompatibility",
+   "index": 51,
+   "source_block": "A1S6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 6",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "no Senator or Representative holds any other federal office while serving; no person holding federal office sits in either House."
+  },
+  {
+   "clause": "CL_A1S6_Emoluments",
+   "index": 52,
+   "source_block": "A1S6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 6",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "no member appointed during the elected term to a civil office created, or whose emoluments were increased, during that term."
+  },
+  {
+   "clause": "CL_A1S8_TaxUniformity",
+   "index": 53,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "all duties, imposts and excises uniform throughout the United States."
+  },
+  {
+   "clause": "CL_A1S8_Commerce",
+   "index": 54,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S8: regulate commerce; Commerce is an opaque term input."
+  },
+  {
+   "clause": "CL_A1S8_NaturalizationBankruptcy",
+   "index": 55,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S8: uniform rule of naturalization; uniform bankruptcy laws."
+  },
+  {
+   "clause": "CL_A1S8_CoinWeights",
+   "index": 56,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S8: coin money, regulate its value, fix weights and measures."
+  },
+  {
+   "clause": "CL_A1S8_WarDeclaration",
+   "index": 57,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "Congress declares war, grants letters of marque and reprisal, and makes rules concerning captures."
+  },
+  {
+   "clause": "CL_A1S8_NecessaryProper",
+   "index": 58,
+   "source_block": "A1S8",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 8",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S8: necessary-and-proper laws; the term stays an opaque input."
+  },
+  {
+   "clause": "CL_A1S9_HabeasCorpus",
+   "index": 59,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the privilege of the writ of habeas corpus not suspended, unless in rebellion or invasion the public safety requires it."
+  },
+  {
+   "clause": "CL_A1S9_Attainder",
+   "index": 60,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "A1S9: no bill of attainder or ex post facto law passes."
+  },
+  {
+   "clause": "CL_A1S9_DirectTax",
+   "index": 61,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S9: no capitation/direct tax unless apportioned to the census (AM16 partially supersedes for income tax; relation R_AM16_A1S9)."
+  },
+  {
+   "clause": "CL_A1S9_ExportTax",
+   "index": 62,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S9: no tax or duty on articles exported from any state."
+  },
+  {
+   "clause": "CL_A1S9_Appropriations",
+   "index": 63,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A1S9: no money drawn from the Treasury except by appropriation in law."
+  },
+  {
+   "clause": "CL_A1S9_TitlesNobility",
+   "index": 64,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "no title of nobility granted by the United States; office-holders accept none from a foreign power without Congress consent."
+  },
+  {
+   "clause": "CL_A1S10_TreatyAlliance",
+   "index": 65,
+   "source_block": "A1S10",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 10",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S10: no state treaty/alliance/confederation or marque/reprisal."
+  },
+  {
+   "clause": "CL_A1S10_CoinTender",
+   "index": 66,
+   "source_block": "A1S10",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 10",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S10: no state coinage, bills of credit, or non-gold/silver tender."
+  },
+  {
+   "clause": "CL_A1S10_Imposts",
+   "index": 67,
+   "source_block": "A1S10",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 10",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S10: no state imposts/duties on imports/exports without Congress's consent, except inspection-law necessities."
+  },
+  {
+   "clause": "CL_A1S10_StateWar",
+   "index": 68,
+   "source_block": "A1S10",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 10",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S10: no state troops/warships in peacetime, compacts, or war without Congress's consent, unless invaded or in imminent no-delay danger."
+  },
+  {
+   "clause": "CL_A2S2_CommanderInChief",
+   "index": 69,
+   "source_block": "A2S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A2S2: the President is Commander in Chief of the armed forces and militia."
+  },
+  {
+   "clause": "CL_A2S2_Pardons",
+   "index": 70,
+   "source_block": "A2S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A2S2: reprieves/pardons for federal offences, except impeachment cases."
+  },
+  {
+   "clause": "CL_A2S2_Treaty",
+   "index": 71,
+   "source_block": "A2S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 2",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A2S2: treaties need two thirds of the Senators present (basis fixed in treaty_approved)."
+  },
+  {
+   "clause": "CL_A2S2_Appointments",
+   "index": 72,
+   "source_block": "A2S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A2S2: appointments by and with the Senate's advice and consent."
+  },
+  {
+   "clause": "CL_A2S2_RecessVacancies",
+   "index": 73,
+   "source_block": "A2S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "the President fills vacancies happening during the Senate recess, commissions expiring at the end of the next session."
+  },
+  {
+   "clause": "CL_A2S3_TakeCare",
+   "index": 74,
+   "source_block": "A2S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 3",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "A2S3: the President takes care that the laws are faithfully executed."
+  },
+  {
+   "clause": "CL_A2S3_ExtraordinaryConvene",
+   "index": 75,
+   "source_block": "A2S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 3",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "the President may convene both Houses, or either of them, on extraordinary occasions."
+  },
+  {
+   "clause": "CL_A2S4_Removal",
+   "index": 76,
+   "source_block": "A2S4",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article II, Section 4",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A2S4: civil officers removed on impeachment for and conviction of treason, bribery, or other high crimes and misdemeanors (term opaque)."
+  },
+  {
+   "clause": "CL_A3S1_Vesting",
+   "index": 77,
+   "source_block": "A3S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 1",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S1: judicial power vests in one supreme Court and inferior courts."
+  },
+  {
+   "clause": "CL_A3S1_Tenure",
+   "index": 78,
+   "source_block": "A3S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 1",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S1: judges hold office during good behaviour (term opaque)."
+  },
+  {
+   "clause": "CL_A3S1_Compensation",
+   "index": 79,
+   "source_block": "A3S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 1",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S1: judicial compensation not diminished during continuance in office."
+  },
+  {
+   "clause": "CL_A3S3_TreasonDefinition",
+   "index": 80,
+   "source_block": "A3S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 3",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A3S3: treason consists only in levying war or adhering to enemies (evidence rule already modeled by treason_conviction_evidence)."
+  },
+  {
+   "clause": "CL_A3S3_PunishmentLimits",
+   "index": 81,
+   "source_block": "A3S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article III, Section 3",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "Congress declares the punishment of treason; no attainder of treason works corruption of blood or forfeiture beyond the life of the person attainted."
+  },
+  {
+   "clause": "CL_A4S1_FullFaithCredit",
+   "index": 82,
+   "source_block": "A4S1",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 1",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A4S1: full faith and credit to sister-state acts, records, proceedings."
+  },
+  {
+   "clause": "CL_A4S2_PrivilegesImmunities",
+   "index": 83,
+   "source_block": "A4S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 2",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "A4S2: citizens of each state entitled to privileges/immunities of the several."
+  },
+  {
+   "clause": "CL_A4S2_Extradition",
+   "index": 84,
+   "source_block": "A4S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 2",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "A4S2: fugitives from justice delivered up on executive demand."
+  },
+  {
+   "clause": "CL_A4S2_FugitiveLabor",
+   "index": 85,
+   "source_block": "A4S2",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 2",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "A4S2: fugitive-service clause kept verbatim; partially superseded by AM13S1 (relation R_AM13S1_A4S2) but not repealed, so it stays in force."
+  },
+  {
+   "clause": "CL_A4S3_NewStates",
+   "index": 86,
+   "source_block": "A4S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 3",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "new states admitted by Congress; none erected within another state, nor formed by junction of states, without the consent of the legislatures concerned and of Congress."
+  },
+  {
+   "clause": "CL_A4S3_Territory",
+   "index": 87,
+   "source_block": "A4S3",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 3",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A4S3: Congress disposes of and regulates territory and federal property."
+  },
+  {
+   "clause": "CL_A4S4_RepublicanForm",
+   "index": 88,
+   "source_block": "A4S4",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 4",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A4S4: the United States guarantees every state a republican form (term opaque)."
+  },
+  {
+   "clause": "CL_A4S4_Protection",
+   "index": 89,
+   "source_block": "A4S4",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article IV, Section 4",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A4S4: protection against invasion; against domestic violence on application of the legislature (or executive when it cannot convene)."
+  },
+  {
+   "clause": "CL_A6_Supremacy",
+   "index": 90,
+   "source_block": "A6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article VI",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "A6: Constitution, federal laws, and treaties are the supreme law of the land."
+  },
+  {
+   "clause": "CL_A6_Oaths",
+   "index": 91,
+   "source_block": "A6",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article VI",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "A6: federal and state legislators and officers bound by oath/affirmation to support the Constitution."
+  },
+  {
+   "clause": "CL_A7_Ratification",
+   "index": 92,
+   "source_block": "A7",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article VII",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "A7: ratification by conventions of nine states suffices to establish."
+  },
+  {
+   "clause": "CL_AM1_Religion",
+   "index": 93,
+   "source_block": "AM1",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment I",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM1: no establishment of religion; free exercise not prohibited (terms opaque)."
+  },
+  {
+   "clause": "CL_AM1_ExpressionAssembly",
+   "index": 94,
+   "source_block": "AM1",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment I",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "freedom of speech and of the press; the right of the people peaceably to assemble and petition for redress of grievances."
+  },
+  {
+   "clause": "CL_AM2_KeepBearArms",
+   "index": 95,
+   "source_block": "AM2",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment II",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the right of the people to keep and bear arms shall not be infringed."
+  },
+  {
+   "clause": "CL_AM3_Quartering",
+   "index": 96,
+   "source_block": "AM3",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment III",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM3: no peacetime quartering without owner consent; wartime only as prescribed by law."
+  },
+  {
+   "clause": "CL_AM4_UnreasonableSearch",
+   "index": 97,
+   "source_block": "AM4",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment IV",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the right of the people to be secure against unreasonable searches and seizures shall not be violated."
+  },
+  {
+   "clause": "CL_AM4_Warrants",
+   "index": 98,
+   "source_block": "AM4",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment IV",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "no warrants issue but upon probable cause, supported by oath or affirmation, particularly describing the place to be searched and things to be seized."
+  },
+  {
+   "clause": "CL_AM5_GrandJury",
+   "index": 99,
+   "source_block": "AM5",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment V",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "AM5: no holding to answer for capital/infamous crime without grand-jury presentment or indictment."
+  },
+  {
+   "clause": "CL_AM5_DoubleJeopardy",
+   "index": 100,
+   "source_block": "AM5",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment V",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "AM5: no one twice put in jeopardy for the same offence (term opaque)."
+  },
+  {
+   "clause": "CL_AM5_DueProcess",
+   "index": 101,
+   "source_block": "AM5",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment V",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM5: no deprivation of life/liberty/property without due process (term opaque)."
+  },
+  {
+   "clause": "CL_AM5_Takings",
+   "index": 102,
+   "source_block": "AM5",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment V",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM5: private property taken only for public use with just compensation."
+  },
+  {
+   "clause": "CL_AM6_SpeedyImpartialTrial",
+   "index": 103,
+   "source_block": "AM6",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VI",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "the accused enjoys a speedy and public trial by an impartial jury; Speedy/Impartial are opaque term inputs."
+  },
+  {
+   "clause": "CL_AM6_Counsel",
+   "index": 104,
+   "source_block": "AM6",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VI",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "AM6: the accused enjoys the assistance of counsel for defence."
+  },
+  {
+   "clause": "CL_AM7_CivilJury",
+   "index": 105,
+   "source_block": "AM7",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VII",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "AM7: jury right preserved where the controversy exceeds twenty dollars."
+  },
+  {
+   "clause": "CL_AM7_Reexamination",
+   "index": 106,
+   "source_block": "AM7",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VII",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "AM7: jury-tried facts re-examined only per common-law rules (term opaque)."
+  },
+  {
+   "clause": "CL_AM8_ExcessiveBailFines",
+   "index": 107,
+   "source_block": "AM8",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VIII",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "excessive bail shall not be required, nor excessive fines imposed."
+  },
+  {
+   "clause": "CL_AM8_CruelUnusual",
+   "index": 108,
+   "source_block": "AM8",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment VIII",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM8: no cruel and unusual punishments inflicted (term opaque)."
+  },
+  {
+   "clause": "CL_AM9_RetainedRights",
+   "index": 109,
+   "source_block": "AM9",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment IX",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the enumeration of certain rights shall not deny or disparage others retained by the people."
+  },
+  {
+   "clause": "CL_AM10_ReservedPowers",
+   "index": 110,
+   "source_block": "AM10",
+   "transcript": "https://www.archives.gov/founding-docs/bill-of-rights-transcript",
+   "transcript_section": "Amendment X",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "powers not delegated to the United States nor prohibited to the states are reserved to the states respectively, or to the people."
+  },
+  {
+   "clause": "CL_AM11_SovereignImmunity",
+   "index": 111,
+   "source_block": "AM11",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 11",
+   "effect": "JudicialRule",
+   "kind": "paraphrase",
+   "text": "the federal judicial power does not extend to suits against a state by citizens of another state or foreign subjects."
+  },
+  {
+   "clause": "CL_AM13S2_Enforcement",
+   "index": 112,
+   "source_block": "AM13S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 13, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM13S2: Congress enforces abolition by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM14S1_Citizenship",
+   "index": 113,
+   "source_block": "AM14S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM14S1: birth/naturalization in the U.S. plus jurisdiction = citizenship."
+  },
+  {
+   "clause": "CL_AM14S1_DueProcessEqualProtection",
+   "index": 114,
+   "source_block": "AM14S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "no state deprives any person of life, liberty, or property without due process, nor denies any person equal protection; terms are opaque inputs."
+  },
+  {
+   "clause": "CL_AM14S1_PrivilegesImmunities",
+   "index": 115,
+   "source_block": "AM14S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "no state shall make or enforce any law abridging the privileges or immunities of citizens of the United States."
+  },
+  {
+   "clause": "CL_AM14S3_DisabilityRemoved",
+   "index": 116,
+   "source_block": "AM14S3",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 3",
+   "effect": "OfficeEligibility",
+   "kind": "paraphrase",
+   "text": "AM14S3: Congress may remove the insurrection disability by two thirds of each House (membership basis)."
+  },
+  {
+   "clause": "CL_AM14S4_PublicDebt",
+   "index": 117,
+   "source_block": "AM14S4",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 4",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "the validity of the public debt shall not be questioned; debts incurred in aid of insurrection or rebellion are illegal and void."
+  },
+  {
+   "clause": "CL_AM14S5_Enforcement",
+   "index": 118,
+   "source_block": "AM14S5",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 14, Section 5",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM14S5: Congress enforces by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM15S1_VoteRace",
+   "index": 119,
+   "source_block": "AM15S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 15, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the right to vote shall not be denied or abridged on account of race, color, or previous condition of servitude."
+  },
+  {
+   "clause": "CL_AM15S2_Enforcement",
+   "index": 120,
+   "source_block": "AM15S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 15, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM15S2: Congress enforces by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM19_VoteSex",
+   "index": 121,
+   "source_block": "AM19",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 19",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "the right to vote shall not be denied or abridged on account of sex."
+  },
+  {
+   "clause": "CL_AM20S5_EffectiveDate",
+   "index": 122,
+   "source_block": "AM20S5",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 5",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "Declaratory/temporal: the article takes effect on the 15th of October following ratification; text states no operative rule beyond timing."
+  },
+  {
+   "clause": "CL_AM20S6_RatificationDeadline",
+   "index": 123,
+   "source_block": "AM20S6",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 20, Section 6",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "Declaratory/temporal: the article is inoperative unless ratified within seven years of submission; no operative rule beyond timing."
+  },
+  {
+   "clause": "CL_AM21S2_Transportation",
+   "index": 124,
+   "source_block": "AM21S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 21, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM21S2: liquor transportation/delivery in violation of state law prohibited (term opaque)."
+  },
+  {
+   "clause": "CL_AM21S3_RatificationDeadline",
+   "index": 125,
+   "source_block": "AM21S3",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 21, Section 3",
+   "effect": "Declaratory",
+   "kind": "paraphrase",
+   "text": "Declaratory/temporal: the article is inoperative unless ratified within seven years of submission; no operative rule beyond timing."
+  },
+  {
+   "clause": "CL_AM23S1_Electors",
+   "index": 126,
+   "source_block": "AM23S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 23, Section 1",
+   "effect": "ElectoralOutcome",
+   "kind": "paraphrase",
+   "text": "AM23S1: District electors equal its would-be Senate+House number, never more than the least populous state. The equality is caller-computed (as with the Sunday exclusion in presentment); the rule enforces the cap."
+  },
+  {
+   "clause": "CL_AM23S2_Enforcement",
+   "index": 127,
+   "source_block": "AM23S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 23, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM23S2: Congress enforces by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM24S1_PollTax",
+   "index": 128,
+   "source_block": "AM24S1",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 24, Section 1",
+   "effect": "RightsProtection",
+   "kind": "paraphrase",
+   "text": "AM24S1: no denial/abridgment of the vote for failure to pay a poll tax."
+  },
+  {
+   "clause": "CL_AM24S2_Enforcement",
+   "index": 129,
+   "source_block": "AM24S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 24, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM24S2: Congress enforces by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM26S2_Enforcement",
+   "index": 130,
+   "source_block": "AM26S2",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 26, Section 2",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "AM26S2: Congress enforces by appropriate legislation (term opaque)."
+  },
+  {
+   "clause": "CL_AM27_CompensationTiming",
+   "index": 131,
+   "source_block": "AM27",
+   "transcript": "https://www.archives.gov/founding-docs/amendments-11-27",
+   "transcript_section": "Amendment 27",
+   "effect": "LegislativeProcedure",
+   "kind": "paraphrase",
+   "text": "no law varying the compensation for Senators and Representatives takes effect until an election of Representatives has intervened."
+  },
+  {
+   "clause": "CL_A1S9_MigrationRestriction",
+   "index": 132,
+   "source_block": "A1S9",
+   "transcript": "https://www.archives.gov/founding-docs/constitution-transcript",
+   "transcript_section": "Article I, Section 9",
+   "effect": "FederalPower",
+   "kind": "paraphrase",
+   "text": "A1S9: \"The Migration or Importation of such Persons as any of the States now existing shall think proper to admit, shall not be prohibited by the Congress prior to the Year one thousand eight hundred and eight, but a Tax or duty may be imposed on such Importation, not exceeding ten dollars for each Person.\" (National Archives constitution transcript.) The bar on Congress operates strictly before 1808; from 1808 Congress may prohibit. True exactly when the restriction is operative."
+  }
+ ]
+}
