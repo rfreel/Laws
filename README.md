@@ -25,7 +25,7 @@ bash tools/check.sh
 
 Or: `make install-bend` then `make check`.
 
-The GitHub workflow installs via `tools/install_bend.sh` and also rejects `@unsafe`, `?TODO`, and unsafe-def shorthand before invoking the Bend checker.
+CI rejects `@unsafe`, `?TODO`, and unsafe-def shorthand, then checks `PROOF.bend` under Bend 2.0.27 from `pins/bend.json`. Prefer `bash tools/install_bend.sh` locally (and in CI once the workflow is wired to that script).
 
 Authoritative text inventory:
 
