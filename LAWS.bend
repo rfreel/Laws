@@ -398,3 +398,71 @@ law am26s1_vote_age_18:
 
 law am26s1_vote_age_17:
   {C.rule_am26s1_vote_age(17n) == False{} : Bool}
+
+# === Interpretation environment (TASKS.md item 2) ===
+
+law interp_lookup_hit:
+  {C.eval_interp(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}) == C.Known{True{}} : C.InterpValue}
+
+law interp_lookup_miss_is_unknown:
+  {C.eval_interp(C.interp_env_empty(), C.Speedy{}) == C.Unknown{} : C.InterpValue}
+
+law interp_resolved_false_is_not_unknown:
+  {C.eval_interp(C.env_extend(C.interp_env_empty(), C.Speedy{}, False{}), C.Speedy{}) == C.Known{False{}} : C.InterpValue}
+
+law interp_extend_first_wins:
+  {C.eval_interp(C.env_extend(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}, False{}), C.NaturalBornCitizen{}) == C.Known{False{}} : C.InterpValue}
+
+law interp_extend_leaves_others_undisturbed:
+  {C.eval_interp(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.Speedy{}) == C.Unknown{} : C.InterpValue}
+
+law interp_extend_visible:
+  {C.eval_interp(C.env_extend(C.interp_env_empty(), C.Impartial{}, True{}), C.Impartial{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_natural_born_true_env:
+  {C.eval_rule_a2s1_natural_born(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_natural_born_false_env_flips:
+  {C.eval_rule_a2s1_natural_born(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, False{}), C.NaturalBornCitizen{}) == C.Known{False{}} : C.InterpValue}
+
+law eval_natural_born_absent_is_unknown:
+  {C.eval_rule_a2s1_natural_born(C.interp_env_empty(), C.NaturalBornCitizen{}) == C.Unknown{} : C.InterpValue}
+
+law eval_natural_born_wrong_term_fails:
+  {C.eval_rule_a2s1_natural_born(C.env_extend(C.interp_env_empty(), C.Speedy{}, True{}), C.Speedy{}) == C.Known{False{}} : C.InterpValue}
+
+law eval_natural_born_coherent_with_direct_rule:
+  {C.eval_rule_a2s1_natural_born(C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}) == C.Known{C.rule_a2s1_natural_born(C.NaturalBornCitizen{}, True{})} : C.InterpValue}
+
+law eval_jury_trial_env_all_met:
+  {C.eval_rule_a3s2_jury_trial(C.env_extend(C.env_extend(C.interp_env_empty(), C.Speedy{}, True{}), C.Impartial{}, True{}), True{}, C.Speedy{}, C.Impartial{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_jury_trial_env_speedy_denied_flips:
+  {C.eval_rule_a3s2_jury_trial(C.env_extend(C.env_extend(C.interp_env_empty(), C.Speedy{}, False{}), C.Impartial{}, True{}), True{}, C.Speedy{}, C.Impartial{}) == C.Known{False{}} : C.InterpValue}
+
+law eval_jury_trial_env_missing_term_unknown:
+  {C.eval_rule_a3s2_jury_trial(C.env_extend(C.interp_env_empty(), C.Speedy{}, True{}), True{}, C.Speedy{}, C.Impartial{}) == C.Unknown{} : C.InterpValue}
+
+law eval_prohibition_env_applies:
+  {C.eval_rule_am18s1_prohibition(C.env_extend(C.interp_env_empty(), C.IntoxicatingLiquor{}, True{}), True{}, True{}, C.IntoxicatingLiquor{}) == C.Known{False{}} : C.InterpValue}
+
+law eval_prohibition_env_term_narrow:
+  {C.eval_rule_am18s1_prohibition(C.env_extend(C.interp_env_empty(), C.IntoxicatingLiquor{}, False{}), True{}, True{}, C.IntoxicatingLiquor{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_transfer_env_unable:
+  {C.eval_rule_am25s3_voluntary_transfer(C.env_extend(C.interp_env_empty(), C.UnableToDischarge{}, True{}), True{}, C.UnableToDischarge{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_transfer_env_able_flips:
+  {C.eval_rule_am25s3_voluntary_transfer(C.env_extend(C.interp_env_empty(), C.UnableToDischarge{}, False{}), True{}, C.UnableToDischarge{}) == C.Known{False{}} : C.InterpValue}
+
+law eval_clause_dispatcher_natural_born:
+  {C.eval_clause_under_env(C.CL_A2S1_NaturalBorn{}, C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}, C.Speedy{}, True{}, True{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_clause_dispatcher_jury_trial:
+  {C.eval_clause_under_env(C.CL_A3S2_JuryTrial{}, C.env_extend(C.env_extend(C.interp_env_empty(), C.Speedy{}, True{}), C.Impartial{}, True{}), C.Speedy{}, C.Impartial{}, True{}, True{}) == C.Known{True{}} : C.InterpValue}
+
+law eval_clause_term_free_env_inert:
+  {C.eval_clause_under_env(C.CL_A1S2_Qualifications{}, C.env_extend(C.interp_env_empty(), C.NaturalBornCitizen{}, True{}), C.NaturalBornCitizen{}, C.Speedy{}, True{}, True{}) == C.Unknown{} : C.InterpValue}
+
+law eval_clause_term_free_env_inert_other_env:
+  {C.eval_clause_under_env(C.CL_A1S2_Qualifications{}, C.interp_env_empty(), C.Speedy{}, C.Impartial{}, False{}, False{}) == C.Unknown{} : C.InterpValue}

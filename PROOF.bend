@@ -612,3 +612,70 @@ def Laws.am26s1_vote_age_18():
 
 def Laws.am26s1_vote_age_17():
   {==}
+
+
+def Laws.interp_lookup_hit():
+  {==}
+
+def Laws.interp_lookup_miss_is_unknown():
+  {==}
+
+def Laws.interp_resolved_false_is_not_unknown():
+  {==}
+
+def Laws.interp_extend_first_wins():
+  {==}
+
+def Laws.interp_extend_leaves_others_undisturbed():
+  {==}
+
+def Laws.interp_extend_visible():
+  {==}
+
+def Laws.eval_natural_born_true_env():
+  {==}
+
+def Laws.eval_natural_born_false_env_flips():
+  {==}
+
+def Laws.eval_natural_born_absent_is_unknown():
+  {==}
+
+def Laws.eval_natural_born_wrong_term_fails():
+  {==}
+
+def Laws.eval_natural_born_coherent_with_direct_rule():
+  {==}
+
+def Laws.eval_jury_trial_env_all_met():
+  {==}
+
+def Laws.eval_jury_trial_env_speedy_denied_flips():
+  {==}
+
+def Laws.eval_jury_trial_env_missing_term_unknown():
+  {==}
+
+def Laws.eval_prohibition_env_applies():
+  {==}
+
+def Laws.eval_prohibition_env_term_narrow():
+  {==}
+
+def Laws.eval_transfer_env_unable():
+  {==}
+
+def Laws.eval_transfer_env_able_flips():
+  {==}
+
+def Laws.eval_clause_dispatcher_natural_born():
+  {==}
+
+def Laws.eval_clause_dispatcher_jury_trial():
+  {==}
+
+def Laws.eval_clause_term_free_env_inert():
+  {==}
+
+def Laws.eval_clause_term_free_env_inert_other_env():
+  {==}

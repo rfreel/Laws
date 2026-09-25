@@ -1095,3 +1095,819 @@ def rule_am25s4_congress_decision(house_yes: Nat, house_basis: Nat, senate_yes: 
 # account of age.
 def rule_am26s1_vote_age(age: Nat) -> Bool:
   age_vote_protection(age)
+# === Interpretation environment (TASKS.md item 2) ===
+#
+# An InterpEnv records EXTERNAL legal tests: a binding (term, value) says
+# "under the caller's jurisprudence, this open term resolves to value".
+# The env assigns no meaning to any InterpretiveTerm; it only records
+# caller-supplied resolutions, keeping the reified-not-defined discipline.
+#
+# Absent-term policy: a term with no binding resolves to Unknown{}, never to
+# a silent default. Known{False{}} (resolved false) and Unknown{} (no
+# resolution supplied) are distinct values.
+#
+# Duplicate-binding policy: scanners are FIRST-WINS on the binding list, and
+# env_extend prepends, so the most recent extension shadows earlier ones
+# (last extension wins). Extending never disturbs other terms' slots.
+#
+# Representation note: the env is `is Type`, not `is Data`, because Bend
+# 2.0.27's Base List cannot appear as a field of a Data type. Lookup uses one
+# self-recursive scanner per term constructor: Bend 2.0.27 cannot match on a
+# computed value and requires callees to be defined before callers, so a
+# generic term-equality helper cannot drive the scan. The scanners below are
+# mechanical; each is structurally recursive on the binding list.
+
+type InterpValue is Data:
+  Known{value: Bool}
+  Unknown{}
+
+type InterpBinding is Data:
+  InterpBinding{term: InterpretiveTerm, value: Bool}
+
+type InterpEnv is Type:
+  InterpEnv{bindings: List<InterpBinding>}
+
+def interp_env_empty() -> InterpEnv:
+  InterpEnv{Nil{}}
+
+def interp_env_bindings(env: InterpEnv) -> List<InterpBinding>:
+  match env:
+    case InterpEnv{bindings}:
+      bindings
+
+def scan_interp_good_behavior(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case GoodBehavior{}:
+          Known{bv}
+        case _:
+          scan_interp_good_behavior(rest)
+
+def scan_interp_natural_born_citizen(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case NaturalBornCitizen{}:
+          Known{bv}
+        case _:
+          scan_interp_natural_born_citizen(rest)
+
+def scan_interp_necessary_and_proper(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case NecessaryAndProper{}:
+          Known{bv}
+        case _:
+          scan_interp_necessary_and_proper(rest)
+
+def scan_interp_general_welfare(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case GeneralWelfare{}:
+          Known{bv}
+        case _:
+          scan_interp_general_welfare(rest)
+
+def scan_interp_common_defence(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case CommonDefence{}:
+          Known{bv}
+        case _:
+          scan_interp_common_defence(rest)
+
+def scan_interp_commerce(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Commerce{}:
+          Known{bv}
+        case _:
+          scan_interp_commerce(rest)
+
+def scan_interp_public_safety_requires(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case PublicSafetyRequires{}:
+          Known{bv}
+        case _:
+          scan_interp_public_safety_requires(rest)
+
+def scan_interp_high_crimes_and_misdemeanors(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case HighCrimesAndMisdemeanors{}:
+          Known{bv}
+        case _:
+          scan_interp_high_crimes_and_misdemeanors(rest)
+
+def scan_interp_republican_form(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case RepublicanForm{}:
+          Known{bv}
+        case _:
+          scan_interp_republican_form(rest)
+
+def scan_interp_due_process(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case DueProcess{}:
+          Known{bv}
+        case _:
+          scan_interp_due_process(rest)
+
+def scan_interp_equal_protection(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case EqualProtection{}:
+          Known{bv}
+        case _:
+          scan_interp_equal_protection(rest)
+
+def scan_interp_privileges_or_immunities(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case PrivilegesOrImmunities{}:
+          Known{bv}
+        case _:
+          scan_interp_privileges_or_immunities(rest)
+
+def scan_interp_unreasonable(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Unreasonable{}:
+          Known{bv}
+        case _:
+          scan_interp_unreasonable(rest)
+
+def scan_interp_probable_cause(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case ProbableCause{}:
+          Known{bv}
+        case _:
+          scan_interp_probable_cause(rest)
+
+def scan_interp_excessive(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Excessive{}:
+          Known{bv}
+        case _:
+          scan_interp_excessive(rest)
+
+def scan_interp_cruel_and_unusual(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case CruelAndUnusual{}:
+          Known{bv}
+        case _:
+          scan_interp_cruel_and_unusual(rest)
+
+def scan_interp_establishment_of_religion(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case EstablishmentOfReligion{}:
+          Known{bv}
+        case _:
+          scan_interp_establishment_of_religion(rest)
+
+def scan_interp_free_exercise(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case FreeExercise{}:
+          Known{bv}
+        case _:
+          scan_interp_free_exercise(rest)
+
+def scan_interp_freedom_of_speech(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case FreedomOfSpeech{}:
+          Known{bv}
+        case _:
+          scan_interp_freedom_of_speech(rest)
+
+def scan_interp_freedom_of_press(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case FreedomOfPress{}:
+          Known{bv}
+        case _:
+          scan_interp_freedom_of_press(rest)
+
+def scan_interp_peaceably_assemble(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case PeaceablyAssemble{}:
+          Known{bv}
+        case _:
+          scan_interp_peaceably_assemble(rest)
+
+def scan_interp_petition_redress(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case PetitionRedress{}:
+          Known{bv}
+        case _:
+          scan_interp_petition_redress(rest)
+
+def scan_interp_well_regulated_militia(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case WellRegulatedMilitia{}:
+          Known{bv}
+        case _:
+          scan_interp_well_regulated_militia(rest)
+
+def scan_interp_keep_and_bear_arms(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case KeepAndBearArms{}:
+          Known{bv}
+        case _:
+          scan_interp_keep_and_bear_arms(rest)
+
+def scan_interp_infamous_crime(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case InfamousCrime{}:
+          Known{bv}
+        case _:
+          scan_interp_infamous_crime(rest)
+
+def scan_interp_same_offence(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case SameOffence{}:
+          Known{bv}
+        case _:
+          scan_interp_same_offence(rest)
+
+def scan_interp_public_use(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case PublicUse{}:
+          Known{bv}
+        case _:
+          scan_interp_public_use(rest)
+
+def scan_interp_just_compensation(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case JustCompensation{}:
+          Known{bv}
+        case _:
+          scan_interp_just_compensation(rest)
+
+def scan_interp_speedy(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Speedy{}:
+          Known{bv}
+        case _:
+          scan_interp_speedy(rest)
+
+def scan_interp_impartial(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Impartial{}:
+          Known{bv}
+        case _:
+          scan_interp_impartial(rest)
+
+def scan_interp_common_law_suit(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case CommonLawSuit{}:
+          Known{bv}
+        case _:
+          scan_interp_common_law_suit(rest)
+
+def scan_interp_retained_right(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case RetainedRight{}:
+          Known{bv}
+        case _:
+          scan_interp_retained_right(rest)
+
+def scan_interp_delegated_power(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case DelegatedPower{}:
+          Known{bv}
+        case _:
+          scan_interp_delegated_power(rest)
+
+def scan_interp_appropriate_legislation(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case AppropriateLegislation{}:
+          Known{bv}
+        case _:
+          scan_interp_appropriate_legislation(rest)
+
+def scan_interp_insurrection_or_rebellion(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case InsurrectionOrRebellion{}:
+          Known{bv}
+        case _:
+          scan_interp_insurrection_or_rebellion(rest)
+
+def scan_interp_aid_or_comfort_enemies(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case AidOrComfortEnemies{}:
+          Known{bv}
+        case _:
+          scan_interp_aid_or_comfort_enemies(rest)
+
+def scan_interp_valid_public_debt(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case ValidPublicDebt{}:
+          Known{bv}
+        case _:
+          scan_interp_valid_public_debt(rest)
+
+def scan_interp_unable_to_discharge(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case UnableToDischarge{}:
+          Known{bv}
+        case _:
+          scan_interp_unable_to_discharge(rest)
+
+def scan_interp_intoxicating_liquor(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case IntoxicatingLiquor{}:
+          Known{bv}
+        case _:
+          scan_interp_intoxicating_liquor(rest)
+
+def scan_interp_beverage_purpose(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case BeveragePurpose{}:
+          Known{bv}
+        case _:
+          scan_interp_beverage_purpose(rest)
+
+def scan_interp_extraordinary_occasion(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case ExtraordinaryOccasion{}:
+          Known{bv}
+        case _:
+          scan_interp_extraordinary_occasion(rest)
+
+def scan_interp_office_of_trust_or_profit(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case OfficeOfTrustOrProfit{}:
+          Known{bv}
+        case _:
+          scan_interp_office_of_trust_or_profit(rest)
+
+def scan_interp_office_of_honor_trust_or_profit(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case OfficeOfHonorTrustOrProfit{}:
+          Known{bv}
+        case _:
+          scan_interp_office_of_honor_trust_or_profit(rest)
+
+def scan_interp_imminent_danger_no_delay(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case ImminentDangerNoDelay{}:
+          Known{bv}
+        case _:
+          scan_interp_imminent_danger_no_delay(rest)
+
+def scan_interp_actual_invasion(bs: List<InterpBinding>) -> InterpValue:
+  match bs:
+    case Nil{}:
+      Unknown{}
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case ActualInvasion{}:
+          Known{bv}
+        case _:
+          scan_interp_actual_invasion(rest)
+
+def interp_lookup(env: InterpEnv, term: InterpretiveTerm) -> InterpValue:
+  match term:
+    case GoodBehavior{}:
+      scan_interp_good_behavior(interp_env_bindings(env))
+
+    case NaturalBornCitizen{}:
+      scan_interp_natural_born_citizen(interp_env_bindings(env))
+
+    case NecessaryAndProper{}:
+      scan_interp_necessary_and_proper(interp_env_bindings(env))
+
+    case GeneralWelfare{}:
+      scan_interp_general_welfare(interp_env_bindings(env))
+
+    case CommonDefence{}:
+      scan_interp_common_defence(interp_env_bindings(env))
+
+    case Commerce{}:
+      scan_interp_commerce(interp_env_bindings(env))
+
+    case PublicSafetyRequires{}:
+      scan_interp_public_safety_requires(interp_env_bindings(env))
+
+    case HighCrimesAndMisdemeanors{}:
+      scan_interp_high_crimes_and_misdemeanors(interp_env_bindings(env))
+
+    case RepublicanForm{}:
+      scan_interp_republican_form(interp_env_bindings(env))
+
+    case DueProcess{}:
+      scan_interp_due_process(interp_env_bindings(env))
+
+    case EqualProtection{}:
+      scan_interp_equal_protection(interp_env_bindings(env))
+
+    case PrivilegesOrImmunities{}:
+      scan_interp_privileges_or_immunities(interp_env_bindings(env))
+
+    case Unreasonable{}:
+      scan_interp_unreasonable(interp_env_bindings(env))
+
+    case ProbableCause{}:
+      scan_interp_probable_cause(interp_env_bindings(env))
+
+    case Excessive{}:
+      scan_interp_excessive(interp_env_bindings(env))
+
+    case CruelAndUnusual{}:
+      scan_interp_cruel_and_unusual(interp_env_bindings(env))
+
+    case EstablishmentOfReligion{}:
+      scan_interp_establishment_of_religion(interp_env_bindings(env))
+
+    case FreeExercise{}:
+      scan_interp_free_exercise(interp_env_bindings(env))
+
+    case FreedomOfSpeech{}:
+      scan_interp_freedom_of_speech(interp_env_bindings(env))
+
+    case FreedomOfPress{}:
+      scan_interp_freedom_of_press(interp_env_bindings(env))
+
+    case PeaceablyAssemble{}:
+      scan_interp_peaceably_assemble(interp_env_bindings(env))
+
+    case PetitionRedress{}:
+      scan_interp_petition_redress(interp_env_bindings(env))
+
+    case WellRegulatedMilitia{}:
+      scan_interp_well_regulated_militia(interp_env_bindings(env))
+
+    case KeepAndBearArms{}:
+      scan_interp_keep_and_bear_arms(interp_env_bindings(env))
+
+    case InfamousCrime{}:
+      scan_interp_infamous_crime(interp_env_bindings(env))
+
+    case SameOffence{}:
+      scan_interp_same_offence(interp_env_bindings(env))
+
+    case PublicUse{}:
+      scan_interp_public_use(interp_env_bindings(env))
+
+    case JustCompensation{}:
+      scan_interp_just_compensation(interp_env_bindings(env))
+
+    case Speedy{}:
+      scan_interp_speedy(interp_env_bindings(env))
+
+    case Impartial{}:
+      scan_interp_impartial(interp_env_bindings(env))
+
+    case CommonLawSuit{}:
+      scan_interp_common_law_suit(interp_env_bindings(env))
+
+    case RetainedRight{}:
+      scan_interp_retained_right(interp_env_bindings(env))
+
+    case DelegatedPower{}:
+      scan_interp_delegated_power(interp_env_bindings(env))
+
+    case AppropriateLegislation{}:
+      scan_interp_appropriate_legislation(interp_env_bindings(env))
+
+    case InsurrectionOrRebellion{}:
+      scan_interp_insurrection_or_rebellion(interp_env_bindings(env))
+
+    case AidOrComfortEnemies{}:
+      scan_interp_aid_or_comfort_enemies(interp_env_bindings(env))
+
+    case ValidPublicDebt{}:
+      scan_interp_valid_public_debt(interp_env_bindings(env))
+
+    case UnableToDischarge{}:
+      scan_interp_unable_to_discharge(interp_env_bindings(env))
+
+    case IntoxicatingLiquor{}:
+      scan_interp_intoxicating_liquor(interp_env_bindings(env))
+
+    case BeveragePurpose{}:
+      scan_interp_beverage_purpose(interp_env_bindings(env))
+
+    case ExtraordinaryOccasion{}:
+      scan_interp_extraordinary_occasion(interp_env_bindings(env))
+
+    case OfficeOfTrustOrProfit{}:
+      scan_interp_office_of_trust_or_profit(interp_env_bindings(env))
+
+    case OfficeOfHonorTrustOrProfit{}:
+      scan_interp_office_of_honor_trust_or_profit(interp_env_bindings(env))
+
+    case ImminentDangerNoDelay{}:
+      scan_interp_imminent_danger_no_delay(interp_env_bindings(env))
+
+    case ActualInvasion{}:
+      scan_interp_actual_invasion(interp_env_bindings(env))
+
+
+# eval_interp is the primary interpretation call: resolve one open term
+# under the caller's env.
+def eval_interp(env: InterpEnv, term: InterpretiveTerm) -> InterpValue:
+  interp_lookup(env, term)
+
+# env_extend prepends, so the new binding shadows any earlier binding for
+# the same term (first-wins scan sees the newest binding first).
+def env_extend(env: InterpEnv, term: InterpretiveTerm, value: Bool) -> InterpEnv:
+  InterpEnv{Con{InterpBinding{term, value}, interp_env_bindings(env)}}
+
+# A2S1 natural-born condition under an env: the env's resolution plays the
+# role of the rule's `satisfied` input. Absent term -> Unknown{}.
+def eval_rule_a2s1_natural_born(env: InterpEnv, term: InterpretiveTerm) -> InterpValue:
+  match term:
+    case NaturalBornCitizen{}:
+      interp_lookup(env, term)
+    case _:
+      Known{False{}}
+
+# A3S2 jury-trial under an env (Speedy and Impartial resolved from the env).
+# Bend 2.0.27 is linear: every variable is use-once, so the env cannot be
+# looked up twice. Both terms are therefore resolved in a SINGLE pass over
+# the bindings (first-wins per term, via the accumulators below).
+type JuryTerms is Data:
+  JuryTerms{speedy: InterpValue, impartial: InterpValue}
+
+def jury_terms_empty() -> JuryTerms:
+  JuryTerms{Unknown{}, Unknown{}}
+
+def jury_acc_speedy(acc: JuryTerms, bv: Bool) -> JuryTerms:
+  match acc:
+    case JuryTerms{speedy, impartial}:
+      match speedy:
+        case Known{v}:
+          JuryTerms{Known{v}, impartial}
+        case Unknown{}:
+          JuryTerms{Known{bv}, impartial}
+
+def jury_acc_impartial(acc: JuryTerms, bv: Bool) -> JuryTerms:
+  match acc:
+    case JuryTerms{speedy, impartial}:
+      match impartial:
+        case Known{v}:
+          JuryTerms{speedy, Known{v}}
+        case Unknown{}:
+          JuryTerms{speedy, Known{bv}}
+
+def scan_jury_terms(bs: List<InterpBinding>, acc: JuryTerms) -> JuryTerms:
+  match bs:
+    case Nil{}:
+      acc
+    case Con{InterpBinding{bt, bv}, rest}:
+      match bt:
+        case Speedy{}:
+          scan_jury_terms(rest, jury_acc_speedy(acc, bv))
+        case Impartial{}:
+          scan_jury_terms(rest, jury_acc_impartial(acc, bv))
+        case _:
+          scan_jury_terms(rest, acc)
+
+def eval_jury_terms(env: InterpEnv) -> JuryTerms:
+  scan_jury_terms(interp_env_bindings(env), jury_terms_empty())
+
+def eval_jury_resolved(trial_by_jury: Bool, terms: JuryTerms) -> InterpValue:
+  match terms:
+    case JuryTerms{speedy, impartial}:
+      match speedy:
+        case Known{sv}:
+          match impartial:
+            case Known{iv}:
+              Known{Bool.and(trial_by_jury, Bool.and(sv, iv))}
+            case Unknown{}:
+              Unknown{}
+        case Unknown{}:
+          Unknown{}
+
+def eval_jury_after_speedy_term(env: InterpEnv, trial_by_jury: Bool, impartial_term: InterpretiveTerm) -> InterpValue:
+  match impartial_term:
+    case Impartial{}:
+      eval_jury_resolved(trial_by_jury, eval_jury_terms(env))
+    case _:
+      Known{False{}}
+
+def eval_rule_a3s2_jury_trial(env: InterpEnv, trial_by_jury: Bool, speedy_term: InterpretiveTerm, impartial_term: InterpretiveTerm) -> InterpValue:
+  match speedy_term:
+    case Speedy{}:
+      eval_jury_after_speedy_term(env, trial_by_jury, impartial_term)
+    case _:
+      Known{False{}}
+
+# AM18S1 prohibition under an env (kept for the record; not in force).
+def eval_prohibition_resolved(liquor_traffic: Bool, beverage_purpose: Bool, liquor_found: InterpValue) -> InterpValue:
+  match liquor_found:
+    case Known{lv}:
+      Known{Bool.not(Bool.and(liquor_traffic, Bool.and(beverage_purpose, lv)))}
+    case Unknown{}:
+      Unknown{}
+
+def eval_rule_am18s1_prohibition(env: InterpEnv, liquor_traffic: Bool, beverage_purpose: Bool, liquor_term: InterpretiveTerm) -> InterpValue:
+  match liquor_term:
+    case IntoxicatingLiquor{}:
+      eval_prohibition_resolved(liquor_traffic, beverage_purpose, interp_lookup(env, liquor_term))
+    case _:
+      Known{True{}}
+
+# AM25S3 voluntary transfer under an env.
+def eval_transfer_resolved(declaration: Bool, unable_found: InterpValue) -> InterpValue:
+  match unable_found:
+    case Known{uv}:
+      Known{Bool.and(declaration, uv)}
+    case Unknown{}:
+      Unknown{}
+
+def eval_rule_am25s3_voluntary_transfer(env: InterpEnv, declaration: Bool, unable_term: InterpretiveTerm) -> InterpValue:
+  match unable_term:
+    case UnableToDischarge{}:
+      eval_transfer_resolved(declaration, interp_lookup(env, unable_term))
+    case _:
+      Known{False{}}
+
+# Clause dispatcher: evaluates the four term-dependent clause rules under an
+# env. Parameter mapping per clause (unused params are ignored):
+#   CL_A2S1_NaturalBorn:         term_a = term to check (expect NaturalBornCitizen{})
+#   CL_A3S2_JuryTrial:           term_a = speedy term, term_b = impartial term,
+#                                flag1 = trial_by_jury
+#   CL_AM18S1_Prohibition:       term_a = liquor term, flag1 = liquor_traffic,
+#                                flag2 = beverage_purpose
+#   CL_AM25S3_VoluntaryTransfer: term_a = unable term, flag1 = declaration
+# Any other clause has no interpretive-term dependency: the dispatcher is
+# inert for it (Unknown{} = out of domain). Term-free clauses are evaluated
+# by their direct rules; the env cannot change their verdicts.
+def eval_clause_under_env(clause: Clause, env: InterpEnv, term_a: InterpretiveTerm, term_b: InterpretiveTerm, flag1: Bool, flag2: Bool) -> InterpValue:
+  match clause:
+    case CL_A2S1_NaturalBorn{}:
+      eval_rule_a2s1_natural_born(env, term_a)
+    case CL_A3S2_JuryTrial{}:
+      eval_rule_a3s2_jury_trial(env, flag1, term_a, term_b)
+    case CL_AM18S1_Prohibition{}:
+      eval_rule_am18s1_prohibition(env, flag1, flag2, term_a)
+    case CL_AM25S3_VoluntaryTransfer{}:
+      eval_rule_am25s3_voluntary_transfer(env, flag1, term_a)
+    case _:
+      Unknown{}
