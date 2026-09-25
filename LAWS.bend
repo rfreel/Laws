@@ -1259,3 +1259,65 @@ law godel_two_step_valid_when_self_amendment_ok:
 
 law godel_two_step_invalid_when_self_amendment_not_ok:
   {C.godel_two_step(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, False{}) == False{} : Bool}
+
+# Amendment reachability (math-frontier wave 2): Gödel's loophole as bounded
+# model checking over the 8-state abstract ConstState system. All claims are
+# about the ABSTRACT model (see the abstraction bound documented in
+# laws.bend), at the stated step bounds — not about the real Constitution.
+# Canonical votes: 290/435, 67/100, 38/50 meet every Art. V threshold exactly;
+# max votes (435/435, 100/100, 50/50) are the attacker's best case.
+
+# (a) Dictatorship CState{False,False,False} reachable in exactly 2 steps
+# iff the caller holds self-amendment valid. Both values as boundary laws.
+law reach_two_step_dictatorship_when_self_ok:
+  {C.amendment_step(C.amendment_step(C.const_init(), C.ArticleVProcedure{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}), C.OrdinaryAmendment{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == C.CState{False{}, False{}, False{}} : C.ConstState}
+
+law reach_two_step_no_dictatorship_when_self_not_ok:
+  {C.amendment_step(C.amendment_step(C.const_init(), C.ArticleVProcedure{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, False{}), C.OrdinaryAmendment{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+# (b) Not reachable in 1 step: no single target clears all three flags, even
+# with thresholds met and self-amendment held valid (best case for attack).
+law reach_one_step_articleV_cannot_reach:
+  {C.amendment_step(C.const_init(), C.ArticleVProcedure{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == C.CState{False{}, True{}, False{}} : C.ConstState}
+
+law reach_one_step_ordinary_cannot_reach:
+  {C.amendment_step(C.const_init(), C.OrdinaryAmendment{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_one_step_suffrage_cannot_reach:
+  {C.amendment_step(C.const_init(), C.EqualSuffrageDeprivation{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == C.CState{True{}, True{}, True{}} : C.ConstState}
+
+# Boundary pair: an invalid amendment (289/435 misses two-thirds) is a no-op.
+law reach_one_step_invalid_ordinary_noop:
+  {C.amendment_step(C.const_init(), C.OrdinaryAmendment{}, 289n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == C.CState{True{}, True{}, True{}} : C.ConstState}
+
+# (c) With self_amendment_ok=False, dictatorship is unreachable. Transition
+# lemmas at max votes (the attacker's best case: thresholds are monotone in
+# yes-votes, so max votes dominate every vote configuration) show the set
+# {all-intact, rights-cleared} is closed under every target; the 3-step
+# chains pin the documented bound explicitly.
+law reach_articleV_noop_max_votes_when_self_not_ok:
+  {C.amendment_step(C.const_init(), C.ArticleVProcedure{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, True{}, True{}} : C.ConstState}
+
+law reach_articleV_noop_rights_cleared_when_self_not_ok:
+  {C.amendment_step(C.CState{True{}, False{}, True{}}, C.ArticleVProcedure{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_suffrage_noop_max_votes_when_self_not_ok:
+  {C.amendment_step(C.const_init(), C.EqualSuffrageDeprivation{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, True{}, True{}} : C.ConstState}
+
+law reach_suffrage_noop_rights_cleared_when_self_not_ok:
+  {C.amendment_step(C.CState{True{}, False{}, True{}}, C.EqualSuffrageDeprivation{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_ordinary_step_max_votes_when_self_not_ok:
+  {C.amendment_step(C.const_init(), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_ordinary_idempotent_when_self_not_ok:
+  {C.amendment_step(C.CState{True{}, False{}, True{}}, C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_three_step_all_ordinary_blocked:
+  {C.amendment_step(C.amendment_step(C.amendment_step(C.const_init(), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_three_step_articleV_sandwich_blocked:
+  {C.amendment_step(C.amendment_step(C.amendment_step(C.const_init(), C.ArticleVProcedure{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.ArticleVProcedure{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}
+
+law reach_three_step_suffrage_chain_blocked:
+  {C.amendment_step(C.amendment_step(C.amendment_step(C.const_init(), C.EqualSuffrageDeprivation{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.OrdinaryAmendment{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}), C.EqualSuffrageDeprivation{}, 435n, C.ChamberCount{435n, 435n}, 100n, C.ChamberCount{100n, 100n}, 50n, C.StatesCount{50n}, True{}, False{}) == C.CState{True{}, False{}, True{}} : C.ConstState}

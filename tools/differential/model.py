@@ -339,6 +339,83 @@ def godel_two_step(
     return step1 and step2
 
 
+def const_init() -> Data:
+    # The as-ratified starting point: everything intact.
+    return Data("CState", (True, True, True))
+
+
+def apply_ordinary(p: bool, r: bool, s: bool, valid: bool) -> Data:
+    # A valid ordinary amendment is the archetypal rights-eroding step in
+    # the abstract model: it clears rights_intact and touches nothing else.
+    if valid:
+        return Data("CState", (p, False, s))
+    return Data("CState", (p, r, s))
+
+
+def apply_articleV(p: bool, r: bool, s: bool, valid: bool) -> Data:
+    # A valid amendment to the amendment rule rewrites Article V, deleting
+    # the entrenchment proviso AND capturing the rule: both flags fall.
+    if valid:
+        return Data("CState", (False, r, False))
+    return Data("CState", (p, r, s))
+
+
+def amendment_step(
+    state: Data,
+    target: Data,
+    house_yes: int,
+    house: Data,
+    senate_yes: int,
+    senate: Data,
+    ratifying: int,
+    states: Data,
+    affected_consent: bool,
+    self_amendment_ok: bool,
+) -> Data:
+    # One amendment step over the abstract 8-state ConstState system.
+    # Invalid amendments leave the state unchanged. A consensual
+    # EqualSuffrageDeprivation complies with the proviso, so no abstract
+    # flag changes.
+    p, r, s = state.fields
+    if target.name == "OrdinaryAmendment":
+        return apply_ordinary(
+            p,
+            r,
+            s,
+            amendment_valid(
+                target,
+                house_yes,
+                house,
+                senate_yes,
+                senate,
+                ratifying,
+                states,
+                affected_consent,
+                self_amendment_ok,
+            ),
+        )
+    if target.name == "EqualSuffrageDeprivation":
+        return Data("CState", (p, r, s))
+    if target.name == "ArticleVProcedure":
+        return apply_articleV(
+            p,
+            r,
+            s,
+            amendment_valid(
+                target,
+                house_yes,
+                house,
+                senate_yes,
+                senate,
+                ratifying,
+                states,
+                affected_consent,
+                self_amendment_ok,
+            ),
+        )
+    raise ValueError(f"unknown AmendmentTarget {target!r}")
+
+
 def bill_becomes_law(
     passed_house: bool,
     passed_senate: bool,

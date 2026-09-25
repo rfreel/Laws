@@ -3356,3 +3356,66 @@ def godel_two_step(h1_yes: Nat, h1: ChamberCount, s1_yes: Nat, s1: ChamberCount,
   Bool.and(
     amendment_valid(ArticleVProcedure{}, h1_yes, h1, s1_yes, s1, r1, st1, True{}, self_amendment_ok),
     amendment_valid(OrdinaryAmendment{}, h2_yes, h2, s2_yes, s2, r2, st2, True{}, True{}))
+
+# ---------------------------------------------------------------------------
+# Amendment reachability (math-frontier wave 2): Gödel's loophole as a
+# bounded model-checking query.
+#
+# ABSTRACT MODEL — read this before citing any reachability result.
+# ConstState tracks only what Gödel-style amendment sequences touch:
+#   proviso_intact   — the Art. V entrenchment proviso (equal Senate suffrage)
+#                      is still operative text;
+#   rights_intact    — substantive rights guarantees are still operative;
+#   self_rule_intact — the amendment rule itself still demands supermajorities
+#                      (it has not been rewritten/captured).
+# What the abstraction OMITS (so reachability here does NOT establish about
+# the real Constitution): amendment subject matter beyond these three flags,
+# the convention path, judicial review, politics, enforcement, and every open
+# interpretive term. An OrdinaryAmendment is treated as the archetypal
+# rights-eroding amendment: the model OVER-approximates the attacker's power.
+# That direction is deliberate. Unreachability results are then strong (they
+# hold even against a stronger-than-real attacker); reachability results are
+# existential (one model-permitted attack path exists, not a prediction).
+# State space: 2^3 = 8 states. Every reachability claim below is about this
+# 8-state abstract transition system, at the stated step bound.
+
+type ConstState is Data:
+  CState{proviso_intact: Bool, rights_intact: Bool, self_rule_intact: Bool}
+
+# The as-ratified starting point: everything intact.
+def const_init() -> ConstState:
+  CState{True{}, True{}, True{}}
+
+# Effect helpers take the already-computed validity bit as a parameter.
+# (Bend 2.0.27 cannot match on a computed value; matching on a parameter is
+# the sanctioned restructure. Each flag is used at most once per branch.)
+
+# A valid ordinary amendment is the archetypal rights-eroding step here: it
+# clears rights_intact and touches nothing else.
+def apply_ordinary(p: Bool, r: Bool, s: Bool, valid: Bool) -> ConstState:
+  match valid:
+    case True{}: CState{p, False{}, s}
+    case False{}: CState{p, r, s}
+
+# A valid amendment to the amendment rule itself (the Gödel step): it rewrites
+# Article V, deleting the entrenchment proviso AND capturing the rule (e.g.
+# lowering future thresholds). Both rule-integrity flags fall together.
+def apply_articleV(p: Bool, r: Bool, s: Bool, valid: Bool) -> ConstState:
+  match valid:
+    case True{}: CState{False{}, r, False{}}
+    case False{}: CState{p, r, s}
+
+# One amendment step. Invalid amendments leave the state unchanged; valid ones
+# flip the flags their target archetype touches. A consensual
+# EqualSuffrageDeprivation complies with the proviso, so the proviso text
+# remains and no abstract flag changes.
+def amendment_step(state: ConstState, target: AmendmentTarget, house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount, ratifying: Nat, states: StatesCount, affected_consent: Bool, self_amendment_ok: Bool) -> ConstState:
+  match state:
+    case CState{proviso_intact, rights_intact, self_rule_intact}:
+      match target:
+        case OrdinaryAmendment{}:
+          apply_ordinary(proviso_intact, rights_intact, self_rule_intact, amendment_valid(OrdinaryAmendment{}, house_yes, house, senate_yes, senate, ratifying, states, affected_consent, self_amendment_ok))
+        case EqualSuffrageDeprivation{}:
+          CState{proviso_intact, rights_intact, self_rule_intact}
+        case ArticleVProcedure{}:
+          apply_articleV(proviso_intact, rights_intact, self_rule_intact, amendment_valid(ArticleVProcedure{}, house_yes, house, senate_yes, senate, ratifying, states, affected_consent, self_amendment_ok))
