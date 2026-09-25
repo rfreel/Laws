@@ -3450,3 +3450,74 @@ def ltl_le(y1: Nat, y2: Nat) -> Bool:
 # A clause's text is expired at t iff it is not unexpired at t.
 def clause_expired(c: Clause, t: TimePoint) -> Bool:
   Bool.not(clause_unexpired(c, t))
+
+# === Banzhaf spot-check: 3-voter weighted game [3,2,1], quota 4 ===
+#
+# Hand-computed swing counts: A=3, B=1, C=1. These defs pin the Banzhaf
+# criticality logic (in a winning coalition whose removal loses) inside the
+# proof gate. The large-scale indices in tools/voting_power/ are analysis,
+# not machine-checked claims; only this tiny game is proven.
+#
+# Linearity note: criticality consults each voter's membership more than
+# once, so the params are +reusable (Bool is Data).
+
+def banzhaf3_bool_nat(b: Bool) -> Nat:
+  match b:
+    case True{}:
+      1n
+    case False{}:
+      0n
+
+# Weight sum of coalition (a, b, c) with weights A=3, B=2, C=1.
+def banzhaf3_sum(a: Bool, b: Bool, c: Bool) -> Nat:
+  Nat.add(
+    Nat.add(Nat.mul(banzhaf3_bool_nat(a), 3n), Nat.mul(banzhaf3_bool_nat(b), 2n)),
+    banzhaf3_bool_nat(c))
+
+def banzhaf3_wins(a: Bool, b: Bool, c: Bool) -> Bool:
+  Nat.is_le(4n, banzhaf3_sum(a, b, c))
+
+# Voter criticality: in the coalition, wins with them, loses without them.
+def banzhaf3_critical_a(+a: Bool, +b: Bool, +c: Bool) -> Bool:
+  Bool.and(a, Bool.and(banzhaf3_wins(a, b, c), Bool.not(banzhaf3_wins(False{}, b, c))))
+
+def banzhaf3_critical_b(+a: Bool, +b: Bool, +c: Bool) -> Bool:
+  Bool.and(b, Bool.and(banzhaf3_wins(a, b, c), Bool.not(banzhaf3_wins(a, False{}, c))))
+
+def banzhaf3_critical_c(+a: Bool, +b: Bool, +c: Bool) -> Bool:
+  Bool.and(c, Bool.and(banzhaf3_wins(a, b, c), Bool.not(banzhaf3_wins(a, b, False{}))))
+
+# Swing counts: enumerate the four coalitions containing the voter.
+def banzhaf3_swings_a() -> Nat:
+  Nat.add(
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_a(True{}, False{}, False{})),
+            banzhaf3_bool_nat(banzhaf3_critical_a(True{}, False{}, True{}))),
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_a(True{}, True{}, False{})),
+            banzhaf3_bool_nat(banzhaf3_critical_a(True{}, True{}, True{}))))
+
+def banzhaf3_swings_b() -> Nat:
+  Nat.add(
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_b(False{}, True{}, False{})),
+            banzhaf3_bool_nat(banzhaf3_critical_b(False{}, True{}, True{}))),
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_b(True{}, True{}, False{})),
+            banzhaf3_bool_nat(banzhaf3_critical_b(True{}, True{}, True{}))))
+
+def banzhaf3_swings_c() -> Nat:
+  Nat.add(
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_c(False{}, False{}, True{})),
+            banzhaf3_bool_nat(banzhaf3_critical_c(False{}, True{}, True{}))),
+    Nat.add(banzhaf3_bool_nat(banzhaf3_critical_c(True{}, False{}, True{})),
+            banzhaf3_bool_nat(banzhaf3_critical_c(True{}, True{}, True{}))))
+
+# Nat equality via two is_le (== is not available in expression position).
+def banzhaf3_nat_eq(+x: Nat, +y: Nat) -> Bool:
+  Bool.and(Nat.is_le(x, y), Nat.is_le(y, x))
+
+def banzhaf3_a_swings_are_3() -> Bool:
+  banzhaf3_nat_eq(banzhaf3_swings_a(), 3n)
+
+def banzhaf3_b_swings_are_1() -> Bool:
+  banzhaf3_nat_eq(banzhaf3_swings_b(), 1n)
+
+def banzhaf3_c_swings_are_1() -> Bool:
+  banzhaf3_nat_eq(banzhaf3_swings_c(), 1n)

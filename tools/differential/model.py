@@ -29,6 +29,7 @@ Value representation
 
 from __future__ import annotations
 
+import itertools
 import re
 from pathlib import Path
 
@@ -1431,6 +1432,37 @@ def eval_clause_under_env(
     if name == "CL_AM25S3_VoluntaryTransfer":
         return eval_rule_am25s3_voluntary_transfer(env, flag1, term_a)
     return _UNKNOWN
+
+
+# --------------------------------------------------------------------------
+# Banzhaf spot-check: 3-voter weighted game [3,2,1], quota 4.
+# Independent brute-force mirror of the Bend defs in laws.bend
+# (banzhaf3_swings_a/b/c). Hand-computed swing counts: A=3, B=1, C=1.
+# --------------------------------------------------------------------------
+
+def _banzhaf3_swings():
+    weights = (3, 2, 1)
+    quota = 4
+    swings = [0, 0, 0]
+    for bits in itertools.product((False, True), repeat=3):
+        total = sum(w * b for w, b in zip(weights, bits))
+        if total >= quota:
+            for i, (w, b) in enumerate(zip(weights, bits)):
+                if b and total - w < quota:
+                    swings[i] += 1
+    return swings
+
+
+def banzhaf3_a_swings_are_3():
+    return _banzhaf3_swings()[0] == 3
+
+
+def banzhaf3_b_swings_are_1():
+    return _banzhaf3_swings()[1] == 1
+
+
+def banzhaf3_c_swings_are_1():
+    return _banzhaf3_swings()[2] == 1
 
 
 # --------------------------------------------------------------------------

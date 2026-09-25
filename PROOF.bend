@@ -1756,4 +1756,11 @@ def Laws.ltl_am18_never_operative_again_s3_2026():
   {==}
 
 def Laws.ltl_am18_never_operative_again_s3_2100():
+def Laws.banzhaf3_a_swings_3():
+  {==}
+
+def Laws.banzhaf3_b_swings_1():
+  {==}
+
+def Laws.banzhaf3_c_swings_1():
   {==}

@@ -1474,3 +1474,13 @@ law ltl_am18_never_operative_again_s3_2026:
   {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n})) == False{} : Bool}
 law ltl_am18_never_operative_again_s3_2100:
   {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n})) == False{} : Bool}
+# Banzhaf spot-check laws: 3-voter weighted game [3,2,1], quota 4.
+# Hand-computed swing counts A=3, B=1, C=1 (see tools/voting_power/README.md).
+law banzhaf3_a_swings_3:
+  {C.banzhaf3_a_swings_are_3() == True{} : Bool}
+
+law banzhaf3_b_swings_1:
+  {C.banzhaf3_b_swings_are_1() == True{} : Bool}
+
+law banzhaf3_c_swings_1:
+  {C.banzhaf3_c_swings_are_1() == True{} : Bool}
