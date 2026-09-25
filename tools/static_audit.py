@@ -8,6 +8,14 @@ proof = (root / "PROOF.bend").read_text()
 laws = (root / "LAWS.bend").read_text()
 errors = []
 
+SKIP_DIR_NAMES = {".bend-prefix", ".git", "__pycache__", "node_modules"}
+
+def iter_bend_files():
+    for p in root.rglob("*.bend"):
+        if any(part in SKIP_DIR_NAMES for part in p.parts):
+            continue
+        yield p
+
 for block in inv["source_blocks"]:
     if f"  {block}{{}}" not in src:
         errors.append(f"missing SourceBlock constructor: {block}")
@@ -20,7 +28,7 @@ for term in inv["core_interpretive_terms"]:
         errors.append(f"missing InterpretiveTerm constructor: {term}")
 
 for pat in (r"@unsafe", r"\?TODO", r"(?m)^\s*def\s+[A-Za-z0-9_.]+\?"):
-    for p in root.rglob("*.bend"):
+    for p in iter_bend_files():
         if re.search(pat, p.read_text()):
             errors.append(f"proof escape {pat!r} in {p.relative_to(root)}")
 

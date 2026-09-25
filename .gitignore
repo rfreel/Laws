@@ -1,0 +1,23 @@
+# Local Bend install prefix
+.bend-prefix/
+
+# Downloaded / extracted Bend artifacts
+*.tar.gz
+/tmp/
+bend-install.*/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*~
