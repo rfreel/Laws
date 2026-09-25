@@ -4,153 +4,153 @@ import ./laws.bend as C
 
 def Laws.source_indices_bounded(block):
   match block:
-    case Preamble{}:
+    case C.Preamble{}:
       {==}
-    case A1S1{}:
+    case C.A1S1{}:
       {==}
-    case A1S2{}:
+    case C.A1S2{}:
       {==}
-    case A1S3{}:
+    case C.A1S3{}:
       {==}
-    case A1S4{}:
+    case C.A1S4{}:
       {==}
-    case A1S5{}:
+    case C.A1S5{}:
       {==}
-    case A1S6{}:
+    case C.A1S6{}:
       {==}
-    case A1S7{}:
+    case C.A1S7{}:
       {==}
-    case A1S8{}:
+    case C.A1S8{}:
       {==}
-    case A1S9{}:
+    case C.A1S9{}:
       {==}
-    case A1S10{}:
+    case C.A1S10{}:
       {==}
-    case A2S1{}:
+    case C.A2S1{}:
       {==}
-    case A2S2{}:
+    case C.A2S2{}:
       {==}
-    case A2S3{}:
+    case C.A2S3{}:
       {==}
-    case A2S4{}:
+    case C.A2S4{}:
       {==}
-    case A3S1{}:
+    case C.A3S1{}:
       {==}
-    case A3S2{}:
+    case C.A3S2{}:
       {==}
-    case A3S3{}:
+    case C.A3S3{}:
       {==}
-    case A4S1{}:
+    case C.A4S1{}:
       {==}
-    case A4S2{}:
+    case C.A4S2{}:
       {==}
-    case A4S3{}:
+    case C.A4S3{}:
       {==}
-    case A4S4{}:
+    case C.A4S4{}:
       {==}
-    case A5{}:
+    case C.A5{}:
       {==}
-    case A6{}:
+    case C.A6{}:
       {==}
-    case A7{}:
+    case C.A7{}:
       {==}
-    case AM1{}:
+    case C.AM1{}:
       {==}
-    case AM2{}:
+    case C.AM2{}:
       {==}
-    case AM3{}:
+    case C.AM3{}:
       {==}
-    case AM4{}:
+    case C.AM4{}:
       {==}
-    case AM5{}:
+    case C.AM5{}:
       {==}
-    case AM6{}:
+    case C.AM6{}:
       {==}
-    case AM7{}:
+    case C.AM7{}:
       {==}
-    case AM8{}:
+    case C.AM8{}:
       {==}
-    case AM9{}:
+    case C.AM9{}:
       {==}
-    case AM10{}:
+    case C.AM10{}:
       {==}
-    case AM11{}:
+    case C.AM11{}:
       {==}
-    case AM12{}:
+    case C.AM12{}:
       {==}
-    case AM13S1{}:
+    case C.AM13S1{}:
       {==}
-    case AM13S2{}:
+    case C.AM13S2{}:
       {==}
-    case AM14S1{}:
+    case C.AM14S1{}:
       {==}
-    case AM14S2{}:
+    case C.AM14S2{}:
       {==}
-    case AM14S3{}:
+    case C.AM14S3{}:
       {==}
-    case AM14S4{}:
+    case C.AM14S4{}:
       {==}
-    case AM14S5{}:
+    case C.AM14S5{}:
       {==}
-    case AM15S1{}:
+    case C.AM15S1{}:
       {==}
-    case AM15S2{}:
+    case C.AM15S2{}:
       {==}
-    case AM16{}:
+    case C.AM16{}:
       {==}
-    case AM17{}:
+    case C.AM17{}:
       {==}
-    case AM18S1{}:
+    case C.AM18S1{}:
       {==}
-    case AM18S2{}:
+    case C.AM18S2{}:
       {==}
-    case AM18S3{}:
+    case C.AM18S3{}:
       {==}
-    case AM19{}:
+    case C.AM19{}:
       {==}
-    case AM20S1{}:
+    case C.AM20S1{}:
       {==}
-    case AM20S2{}:
+    case C.AM20S2{}:
       {==}
-    case AM20S3{}:
+    case C.AM20S3{}:
       {==}
-    case AM20S4{}:
+    case C.AM20S4{}:
       {==}
-    case AM20S5{}:
+    case C.AM20S5{}:
       {==}
-    case AM20S6{}:
+    case C.AM20S6{}:
       {==}
-    case AM21S1{}:
+    case C.AM21S1{}:
       {==}
-    case AM21S2{}:
+    case C.AM21S2{}:
       {==}
-    case AM21S3{}:
+    case C.AM21S3{}:
       {==}
-    case AM22S1{}:
+    case C.AM22S1{}:
       {==}
-    case AM22S2{}:
+    case C.AM22S2{}:
       {==}
-    case AM23S1{}:
+    case C.AM23S1{}:
       {==}
-    case AM23S2{}:
+    case C.AM23S2{}:
       {==}
-    case AM24S1{}:
+    case C.AM24S1{}:
       {==}
-    case AM24S2{}:
+    case C.AM24S2{}:
       {==}
-    case AM25S1{}:
+    case C.AM25S1{}:
       {==}
-    case AM25S2{}:
+    case C.AM25S2{}:
       {==}
-    case AM25S3{}:
+    case C.AM25S3{}:
       {==}
-    case AM25S4{}:
+    case C.AM25S4{}:
       {==}
-    case AM26S1{}:
+    case C.AM26S1{}:
       {==}
-    case AM26S2{}:
+    case C.AM26S2{}:
       {==}
-    case AM27{}:
+    case C.AM27{}:
       {==}
 
 def Laws.representative_minimum_passes():
