@@ -1516,3 +1516,48 @@ def Laws.godel_two_step_valid_when_self_amendment_ok():
 
 def Laws.godel_two_step_invalid_when_self_amendment_not_ok():
   {==}
+
+def Laws.reach_two_step_dictatorship_when_self_ok():
+  {==}
+
+def Laws.reach_two_step_no_dictatorship_when_self_not_ok():
+  {==}
+
+def Laws.reach_one_step_articleV_cannot_reach():
+  {==}
+
+def Laws.reach_one_step_ordinary_cannot_reach():
+  {==}
+
+def Laws.reach_one_step_suffrage_cannot_reach():
+  {==}
+
+def Laws.reach_one_step_invalid_ordinary_noop():
+  {==}
+
+def Laws.reach_articleV_noop_max_votes_when_self_not_ok():
+  {==}
+
+def Laws.reach_articleV_noop_rights_cleared_when_self_not_ok():
+  {==}
+
+def Laws.reach_suffrage_noop_max_votes_when_self_not_ok():
+  {==}
+
+def Laws.reach_suffrage_noop_rights_cleared_when_self_not_ok():
+  {==}
+
+def Laws.reach_ordinary_step_max_votes_when_self_not_ok():
+  {==}
+
+def Laws.reach_ordinary_idempotent_when_self_not_ok():
+  {==}
+
+def Laws.reach_three_step_all_ordinary_blocked():
+  {==}
+
+def Laws.reach_three_step_articleV_sandwich_blocked():
+  {==}
+
+def Laws.reach_three_step_suffrage_chain_blocked():
+  {==}
