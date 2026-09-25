@@ -1560,6 +1560,8 @@ def Laws.reach_three_step_articleV_sandwich_blocked():
   {==}
 
 def Laws.reach_three_step_suffrage_chain_blocked():
+  {==}
+
 def Laws.ltl_am18_expired_persists_s1_1933_1934():
   {==}
 
@@ -1756,6 +1758,8 @@ def Laws.ltl_am18_never_operative_again_s3_2026():
   {==}
 
 def Laws.ltl_am18_never_operative_again_s3_2100():
+  {==}
+
 def Laws.banzhaf3_a_swings_3():
   {==}
 

@@ -24,3 +24,10 @@
 - [x] Cross-check every normalized clause against the authoritative transcript with a separately maintained source map.
 - [x] Add mutation tests that intentionally break each high-value procedure and require proof/check failure.
 - [x] Add a second independent implementation of threshold/reference semantics for differential testing.
+
+## Math frontier (v0.3.0) — 2026-09-25
+- [x] Model amendment targets: AmendmentTarget (ordinary / suffrage-deprivation / amendment-to-Article-V) with amendment_permissible; the Article V proviso ("no State, without its Consent, shall be deprived of its equal Suffrage in the Senate") is now encoded; self-amendment validity stays an explicit caller input (Gödel's two-step as a machine-checked conditional theorem, exhibit-not-close).
+- [x] Temporal-logic properties as bounded machine-checked laws: repeal monotonicity (AM18), commencement monotonicity, non-return (A1S9 post-1808, AM18 post-1934); ex post facto property skipped and documented (would require inventing a conduct timeline).
+- [x] Banzhaf voting-power analysis (tools/voting_power/): DP-based indices for Senate, House, Electoral College (2024 apportionment), contingent House election; algorithm logic pinned in the proof gate on a hand-computed 3-voter game; equiprobable-coalition assumption documented.
+- [x] Amendment reachability as bounded model checking: abstract 8-state constitution model with amendment_step transitions; dictatorship reachable in 2 steps iff self-amendment held valid, unreachable in 1 step, unreachable (k<=3) when denied; tools/reachability/COMPLEXITY.md with honest decidability bounds.
+- [x] Merge all frontier branches + CI bend-install fix (125a92c) into release branch; full gate green (450/450 laws, 18/18 mutants killed).
