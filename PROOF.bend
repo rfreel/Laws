@@ -679,3 +679,33 @@ def Laws.eval_clause_term_free_env_inert():
 
 def Laws.eval_clause_term_free_env_inert_other_env():
   {==}
+
+def Laws.impeachment_66_of_100_fails():
+  {==}
+
+def Laws.denominator_present_selects_present():
+  {==}
+
+def Laws.denominator_membership_selects_membership():
+  {==}
+
+def Laws.denominator_states_two_thirds_pass():
+  {==}
+
+def Laws.denominator_states_two_thirds_fail():
+  {==}
+
+def Laws.denominator_quorum_met():
+  {==}
+
+def Laws.denominator_quorum_not_met():
+  {==}
+
+def Laws.denominator_appointed_electors_whole_number():
+  {==}
+
+def Laws.impeachment_basis_is_present_members():
+  {==}
+
+def Laws.article_v_basis_is_membership():
+  {==}

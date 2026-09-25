@@ -404,14 +404,73 @@ def source_index(block: SourceBlock) -> Nat:
 def source_index_in_range(block: SourceBlock) -> Bool:
   Nat.is_lt(source_index(block), source_count())
 
-def majority(yes: Nat, total: Nat) -> Bool:
-  Nat.is_lt(total, Nat.mul(2n, yes))
+# === Denominator policies (TASKS.md item 4) ===
+#
+# The transcript distinguishes four denominator bases for thresholds. The basis
+# is now part of every threshold call shape: primitives take (yes, bundle,
+# basis) and select the denominator internally, so a caller cannot silently
+# pass the wrong basis — the commitment lives in signatures, not test code.
+# Bare-Nat threshold calls no longer exist.
 
-def two_thirds(yes: Nat, total: Nat) -> Bool:
-  Nat.is_le(Nat.mul(2n, total), Nat.mul(3n, yes))
+type DenominatorBasis is Data:
+  # "two thirds of the Members present" (A1S3 impeachment), "two thirds of the
+  # Senators present" (A2S2 treaties).
+  PresentMembers{}
+  # "two thirds of both Houses" (Art. V proposal), "two thirds of that House"
+  # (A1S7 veto override), "a Majority of each [House]" (A1S5 quorum).
+  FullMembership{}
+  # "a majority of the whole number of Electors" (AM12). For a voting body the
+  # whole number is its membership; reserved for elector-vote modeling.
+  AppointedElectors{}
+  # "two thirds of the several States" (Art. V), "a majority of all the states"
+  # (AM12 House choice). Used with StatesCount; never with a chamber bundle.
+  States{}
 
-def three_fourths(yes: Nat, total: Nat) -> Bool:
-  Nat.is_le(Nat.mul(3n, total), Nat.mul(4n, yes))
+# The counts the transcript distinguishes for a chamber vote.
+type ChamberCount is Data:
+  ChamberCount{present: Nat, membership: Nat}
+
+# The counts for a vote of the states.
+type StatesCount is Data:
+  StatesCount{states: Nat}
+
+# Select the denominator the transcript's basis demands from a chamber bundle.
+def chamber_basis_count(counts: ChamberCount, basis: DenominatorBasis) -> Nat:
+  match counts:
+    case ChamberCount{present, membership}:
+      match basis:
+        case PresentMembers{}:
+          present
+        case _:
+          # FullMembership: the whole House. AppointedElectors resolves to
+          # membership as well (the whole number of a body is its membership).
+          # States never occurs with a chamber bundle — state votes take
+          # StatesCount and fix their basis internally — so this arm keeps the
+          # selector total without inventing a meaning.
+          membership
+
+def two_thirds(yes: Nat, counts: ChamberCount, basis: DenominatorBasis) -> Bool:
+  Nat.is_le(Nat.mul(2n, chamber_basis_count(counts, basis)), Nat.mul(3n, yes))
+
+def majority(yes: Nat, counts: ChamberCount, basis: DenominatorBasis) -> Bool:
+  Nat.is_lt(chamber_basis_count(counts, basis), Nat.mul(2n, yes))
+
+def states_two_thirds(yes: Nat, counts: StatesCount) -> Bool:
+  match counts:
+    case StatesCount{states}:
+      Nat.is_le(Nat.mul(2n, states), Nat.mul(3n, yes))
+
+def states_three_fourths(yes: Nat, counts: StatesCount) -> Bool:
+  match counts:
+    case StatesCount{states}:
+      Nat.is_le(Nat.mul(3n, states), Nat.mul(4n, yes))
+
+# A1S5: "a Majority of each [House] shall constitute a Quorum" — a majority of
+# the House's membership must be present.
+def quorum_met(counts: ChamberCount) -> Bool:
+  match counts:
+    case ChamberCount{present, membership}:
+      Nat.is_lt(membership, Nat.mul(2n, present))
 
 def representative_eligible(age: Nat, citizen_years: Nat, inhabitant: Bool) -> Bool:
   Bool.and(Nat.is_le(25n, age), Bool.and(Nat.is_le(7n, citizen_years), inhabitant))
@@ -422,20 +481,28 @@ def senator_eligible(age: Nat, citizen_years: Nat, inhabitant: Bool) -> Bool:
 def president_eligible(age: Nat, resident_years: Nat, natural_born: Bool) -> Bool:
   Bool.and(Nat.is_le(35n, age), Bool.and(Nat.is_le(14n, resident_years), natural_born))
 
-def impeachment_conviction(senate_yes: Nat, senate_present: Nat) -> Bool:
-  two_thirds(senate_yes, senate_present)
+def impeachment_conviction(senate_yes: Nat, counts: ChamberCount) -> Bool:
+  # A1S3: "no Person shall be convicted without the Concurrence of two thirds
+  # of the Members present" — the present basis is fixed by the signature.
+  two_thirds(senate_yes, counts, PresentMembers{})
 
-def treaty_approved(senate_yes: Nat, senate_present: Nat) -> Bool:
-  two_thirds(senate_yes, senate_present)
+def treaty_approved(senate_yes: Nat, counts: ChamberCount) -> Bool:
+  # A2S2: treaties by "the Advice and Consent of the Senate ... provided two
+  # thirds of the Senators present concur" — the present basis is fixed.
+  two_thirds(senate_yes, counts, PresentMembers{})
 
-def article_v_congress_proposal(house_yes: Nat, house_basis: Nat, senate_yes: Nat, senate_basis: Nat) -> Bool:
-  Bool.and(two_thirds(house_yes, house_basis), two_thirds(senate_yes, senate_basis))
+def article_v_congress_proposal(house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount) -> Bool:
+  # Art. V: "two thirds of both Houses" — of the Houses themselves, i.e. full
+  # membership, not of those present. The membership basis is fixed.
+  Bool.and(two_thirds(house_yes, house, FullMembership{}), two_thirds(senate_yes, senate, FullMembership{}))
 
-def article_v_state_application(applications: Nat, state_count: Nat) -> Bool:
-  two_thirds(applications, state_count)
+def article_v_state_application(applications: Nat, counts: StatesCount) -> Bool:
+  # Art. V: "two thirds of the several States".
+  states_two_thirds(applications, counts)
 
-def article_v_ratification(ratifying_states: Nat, state_count: Nat) -> Bool:
-  three_fourths(ratifying_states, state_count)
+def article_v_ratification(ratifying_states: Nat, counts: StatesCount) -> Bool:
+  # Art. V: "three fourths of the several States".
+  states_three_fourths(ratifying_states, counts)
 
 def bill_becomes_law(
   passed_house: Bool,
@@ -444,14 +511,16 @@ def bill_becomes_law(
   signed: Bool,
   vetoed: Bool,
   house_override_yes: Nat,
-  house_override_basis: Nat,
+  house: ChamberCount,
   senate_override_yes: Nat,
-  senate_override_basis: Nat,
+  senate: ChamberCount,
   ten_days_elapsed_excluding_sundays: Bool,
   adjournment_prevents_return: Bool
 ) -> Bool:
   base = Bool.and(passed_house, Bool.and(passed_senate, presented))
-  override_path = Bool.and(vetoed, Bool.and(two_thirds(house_override_yes, house_override_basis), two_thirds(senate_override_yes, senate_override_basis)))
+  # A1S7: override requires "two thirds of that House" — of the House itself,
+  # i.e. full membership. The membership basis is fixed by the signature.
+  override_path = Bool.and(vetoed, Bool.and(two_thirds(house_override_yes, house, FullMembership{}), two_thirds(senate_override_yes, senate, FullMembership{})))
   lapse_path = Bool.and(ten_days_elapsed_excluding_sundays, Bool.not(adjournment_prevents_return))
   Bool.and(base, Bool.or(signed, Bool.or(override_path, lapse_path)))
 
@@ -906,9 +975,10 @@ def rule_a1s2_apportionment_cap(reps: Nat, state_pop: Nat) -> Bool:
 def rule_a1s3_qualifications(age: Nat, citizen_years: Nat, inhabitant: Bool) -> Bool:
   senator_eligible(age, citizen_years, inhabitant)
 
-# A1S3: the Senate tries impeachments; conviction needs two thirds present.
-def rule_a1s3_senate_trial(senate_yes: Nat, senate_present: Nat) -> Bool:
-  impeachment_conviction(senate_yes, senate_present)
+# A1S3: the Senate tries impeachments; conviction needs two thirds of the
+# Members present (basis fixed inside impeachment_conviction).
+def rule_a1s3_senate_trial(senate_yes: Nat, counts: ChamberCount) -> Bool:
+  impeachment_conviction(senate_yes, counts)
 
 # A1S3: the Vice President votes only when the Senate is equally divided.
 def rule_a1s3_vp_tiebreak(yes_votes: Nat, no_votes: Nat) -> Bool:
@@ -923,6 +993,8 @@ def rule_a1s4_annual_assembly(assembled: Bool) -> Bool:
   assembled
 
 # A1S7: presentment; a bill becomes law by signature, override, or lapse.
+# Override counts are chamber bundles; the membership basis is fixed inside
+# bill_becomes_law ("two thirds of that House").
 def rule_a1s7_presentment(
   passed_house: Bool,
   passed_senate: Bool,
@@ -930,16 +1002,16 @@ def rule_a1s7_presentment(
   signed: Bool,
   vetoed: Bool,
   house_override_yes: Nat,
-  house_override_basis: Nat,
+  house: ChamberCount,
   senate_override_yes: Nat,
-  senate_override_basis: Nat,
+  senate: ChamberCount,
   ten_days_elapsed: Bool,
   adjournment_prevents_return: Bool
 ) -> Bool:
   bill_becomes_law(
     passed_house, passed_senate, presented, signed, vetoed,
-    house_override_yes, house_override_basis, senate_override_yes,
-    senate_override_basis, ten_days_elapsed, adjournment_prevents_return)
+    house_override_yes, house, senate_override_yes,
+    senate, ten_days_elapsed, adjournment_prevents_return)
 
 # A1S7: revenue bills originate in the House.
 def rule_a1s7_revenue_origination(revenue_bill: Bool, originated_house: Bool) -> Bool:
@@ -982,21 +1054,23 @@ def rule_a3s2_jury_trial(
     Bool.and(interpretive_term_is_speedy(speedy_term), speedy_met),
     Bool.and(interpretive_term_is_impartial(impartial_term), impartial_met)))
 
-# A5: Congress proposes amendments by two thirds of both houses.
-def rule_a5_congress_proposal(house_yes: Nat, house_basis: Nat, senate_yes: Nat, senate_basis: Nat) -> Bool:
-  article_v_congress_proposal(house_yes, house_basis, senate_yes, senate_basis)
+# A5: Congress proposes amendments by two thirds of both houses (full
+# membership basis, fixed inside article_v_congress_proposal).
+def rule_a5_congress_proposal(house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount) -> Bool:
+  article_v_congress_proposal(house_yes, house, senate_yes, senate)
 
 # A5: a convention is called on application of two thirds of the states.
-def rule_a5_convention_application(applications: Nat, state_count: Nat) -> Bool:
-  article_v_state_application(applications, state_count)
+def rule_a5_convention_application(applications: Nat, counts: StatesCount) -> Bool:
+  article_v_state_application(applications, counts)
 
 # A5: ratification by three fourths of the states.
-def rule_a5_ratification(ratifying_states: Nat, state_count: Nat) -> Bool:
-  article_v_ratification(ratifying_states, state_count)
+def rule_a5_ratification(ratifying_states: Nat, counts: StatesCount) -> Bool:
+  article_v_ratification(ratifying_states, counts)
 
-# AM12: a majority of the whole number of electors appoints the President.
-def rule_am12_electoral_majority(votes: Nat, electors: Nat) -> Bool:
-  majority(votes, electors)
+# AM12: a majority of the whole number of electors appoints the President. The
+# whole number appointed is the body's membership (present == membership here).
+def rule_am12_electoral_majority(votes: Nat, +electors: Nat) -> Bool:
+  majority(votes, ChamberCount{electors, electors}, AppointedElectors{})
 
 # AM12: electors vote by ballot, distinctly for President and Vice-President.
 def rule_am12_distinct_ballots(ballots_distinct: Bool) -> Bool:
@@ -1078,9 +1152,10 @@ def rule_am25s1_succession(vacancy: Bool) -> Bool:
   vacancy
 
 # AM25S2: the President nominates a Vice President, confirmed by a majority
-# of both houses.
-def rule_am25s2_vp_confirmation(house_yes: Nat, house_basis: Nat, senate_yes: Nat, senate_basis: Nat) -> Bool:
-  Bool.and(majority(house_yes, house_basis), majority(senate_yes, senate_basis))
+# of both houses. "Of both Houses" without "present": full membership basis,
+# fixed by the signature.
+def rule_am25s2_vp_confirmation(house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount) -> Bool:
+  Bool.and(majority(house_yes, house, FullMembership{}), majority(senate_yes, senate, FullMembership{}))
 
 # AM25S3: on the President's written declaration of inability, the Vice
 # President acts; "unable" is an opaque term input.
@@ -1088,8 +1163,9 @@ def rule_am25s3_voluntary_transfer(declaration: Bool, unable_term: InterpretiveT
   Bool.and(declaration, Bool.and(interpretive_term_is_unable_to_discharge(unable_term), unable_satisfied))
 
 # AM25S4: Congress decides a contested inability by two thirds of both houses.
-def rule_am25s4_congress_decision(house_yes: Nat, house_basis: Nat, senate_yes: Nat, senate_basis: Nat) -> Bool:
-  Bool.and(two_thirds(house_yes, house_basis), two_thirds(senate_yes, senate_basis))
+# "Of both Houses": full membership basis, fixed by the signature.
+def rule_am25s4_congress_decision(house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount) -> Bool:
+  Bool.and(two_thirds(house_yes, house, FullMembership{}), two_thirds(senate_yes, senate, FullMembership{}))
 
 # AM26S1: the right to vote of citizens 18 or older shall not be denied on
 # account of age.

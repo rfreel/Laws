@@ -24,31 +24,34 @@ law president_age_below_fails:
   {C.president_eligible(34n, 14n, True{}) == False{} : Bool}
 
 law article_v_34_of_50_applications_pass:
-  {C.article_v_state_application(34n, 50n) == True{} : Bool}
+  {C.article_v_state_application(34n, C.StatesCount{50n}) == True{} : Bool}
 
 law article_v_33_of_50_applications_fail:
-  {C.article_v_state_application(33n, 50n) == False{} : Bool}
+  {C.article_v_state_application(33n, C.StatesCount{50n}) == False{} : Bool}
 
 law article_v_38_of_50_ratifications_pass:
-  {C.article_v_ratification(38n, 50n) == True{} : Bool}
+  {C.article_v_ratification(38n, C.StatesCount{50n}) == True{} : Bool}
 
 law article_v_37_of_50_ratifications_fail:
-  {C.article_v_ratification(37n, 50n) == False{} : Bool}
+  {C.article_v_ratification(37n, C.StatesCount{50n}) == False{} : Bool}
 
 law article_v_full_congress_boundary_passes:
-  {C.article_v_congress_proposal(290n, 435n, 67n, 100n) == True{} : Bool}
+  {C.article_v_congress_proposal(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law article_v_house_below_boundary_fails:
-  {C.article_v_congress_proposal(289n, 435n, 67n, 100n) == False{} : Bool}
+  {C.article_v_congress_proposal(289n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law treaty_67_of_100_passes:
-  {C.treaty_approved(67n, 100n) == True{} : Bool}
+  {C.treaty_approved(67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law treaty_66_of_100_fails:
-  {C.treaty_approved(66n, 100n) == False{} : Bool}
+  {C.treaty_approved(66n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law impeachment_67_of_100_passes:
-  {C.impeachment_conviction(67n, 100n) == True{} : Bool}
+  {C.impeachment_conviction(67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
+
+law impeachment_66_of_100_fails:
+  {C.impeachment_conviction(66n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law treason_two_witnesses_suffice:
   {C.treason_conviction_evidence(True{}, False{}) == True{} : Bool}
@@ -78,16 +81,16 @@ law amendment_18_sections_marked_repealed:
   {C.amendment_18_repealed(C.AM18S1{}) == True{} : Bool}
 
 law signed_bill_path:
-  {C.bill_becomes_law(True{}, True{}, True{}, True{}, False{}, 0n, 1n, 0n, 1n, False{}, False{}) == True{} : Bool}
+  {C.bill_becomes_law(True{}, True{}, True{}, True{}, False{}, 0n, C.ChamberCount{1n, 1n}, 0n, C.ChamberCount{1n, 1n}, False{}, False{}) == True{} : Bool}
 
 law veto_override_path:
-  {C.bill_becomes_law(True{}, True{}, True{}, False{}, True{}, 290n, 435n, 67n, 100n, False{}, False{}) == True{} : Bool}
+  {C.bill_becomes_law(True{}, True{}, True{}, False{}, True{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, False{}, False{}) == True{} : Bool}
 
 law pocket_veto_path_fails:
-  {C.bill_becomes_law(True{}, True{}, True{}, False{}, False{}, 0n, 1n, 0n, 1n, True{}, True{}) == False{} : Bool}
+  {C.bill_becomes_law(True{}, True{}, True{}, False{}, False{}, 0n, C.ChamberCount{1n, 1n}, 0n, C.ChamberCount{1n, 1n}, True{}, True{}) == False{} : Bool}
 
 law ten_day_nonreturn_path_passes:
-  {C.bill_becomes_law(True{}, True{}, True{}, False{}, False{}, 0n, 1n, 0n, 1n, True{}, False{}) == True{} : Bool}
+  {C.bill_becomes_law(True{}, True{}, True{}, False{}, False{}, 0n, C.ChamberCount{1n, 1n}, 0n, C.ChamberCount{1n, 1n}, True{}, False{}) == True{} : Bool}
 
 # --- Clause layer laws (TASKS.md remaining item 1): one boundary law per rule ---
 
@@ -129,10 +132,10 @@ law a1s3_qualifications_fail:
   {C.rule_a1s3_qualifications(29n, 9n, True{}) == False{} : Bool}
 
 law a1s3_senate_trial_convicts:
-  {C.rule_a1s3_senate_trial(67n, 100n) == True{} : Bool}
+  {C.rule_a1s3_senate_trial(67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law a1s3_senate_trial_acquits:
-  {C.rule_a1s3_senate_trial(66n, 100n) == False{} : Bool}
+  {C.rule_a1s3_senate_trial(66n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law a1s3_vp_tiebreak_tie:
   {C.rule_a1s3_vp_tiebreak(50n, 50n) == True{} : Bool}
@@ -158,10 +161,10 @@ law a1s4_annual_assembly_missed:
 
 # A1S7
 law a1s7_presentment_signed:
-  {C.rule_a1s7_presentment(True{}, True{}, True{}, True{}, False{}, 0n, 1n, 0n, 1n, False{}, False{}) == True{} : Bool}
+  {C.rule_a1s7_presentment(True{}, True{}, True{}, True{}, False{}, 0n, C.ChamberCount{1n, 1n}, 0n, C.ChamberCount{1n, 1n}, False{}, False{}) == True{} : Bool}
 
 law a1s7_presentment_pocket_veto:
-  {C.rule_a1s7_presentment(True{}, True{}, True{}, False{}, False{}, 0n, 1n, 0n, 1n, True{}, True{}) == False{} : Bool}
+  {C.rule_a1s7_presentment(True{}, True{}, True{}, False{}, False{}, 0n, C.ChamberCount{1n, 1n}, 0n, C.ChamberCount{1n, 1n}, True{}, True{}) == False{} : Bool}
 
 law a1s7_revenue_origination_house:
   {C.rule_a1s7_revenue_origination(True{}, True{}) == True{} : Bool}
@@ -221,22 +224,22 @@ law a3s2_jury_trial_wrong_term:
 
 # A5
 law a5_congress_proposal_pass:
-  {C.rule_a5_congress_proposal(290n, 435n, 67n, 100n) == True{} : Bool}
+  {C.rule_a5_congress_proposal(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law a5_congress_proposal_fail:
-  {C.rule_a5_congress_proposal(289n, 435n, 67n, 100n) == False{} : Bool}
+  {C.rule_a5_congress_proposal(289n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law a5_convention_application_pass:
-  {C.rule_a5_convention_application(34n, 50n) == True{} : Bool}
+  {C.rule_a5_convention_application(34n, C.StatesCount{50n}) == True{} : Bool}
 
 law a5_convention_application_fail:
-  {C.rule_a5_convention_application(33n, 50n) == False{} : Bool}
+  {C.rule_a5_convention_application(33n, C.StatesCount{50n}) == False{} : Bool}
 
 law a5_ratification_pass:
-  {C.rule_a5_ratification(38n, 50n) == True{} : Bool}
+  {C.rule_a5_ratification(38n, C.StatesCount{50n}) == True{} : Bool}
 
 law a5_ratification_fail:
-  {C.rule_a5_ratification(37n, 50n) == False{} : Bool}
+  {C.rule_a5_ratification(37n, C.StatesCount{50n}) == False{} : Bool}
 
 # AM12
 law am12_electoral_majority_pass:
@@ -375,10 +378,10 @@ law am25s1_succession_occupied:
   {C.rule_am25s1_succession(False{}) == False{} : Bool}
 
 law am25s2_vp_confirmation_pass:
-  {C.rule_am25s2_vp_confirmation(218n, 435n, 51n, 100n) == True{} : Bool}
+  {C.rule_am25s2_vp_confirmation(218n, C.ChamberCount{435n, 435n}, 51n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law am25s2_vp_confirmation_fail:
-  {C.rule_am25s2_vp_confirmation(217n, 435n, 51n, 100n) == False{} : Bool}
+  {C.rule_am25s2_vp_confirmation(217n, C.ChamberCount{435n, 435n}, 51n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 law am25s3_voluntary_transfer_declared:
   {C.rule_am25s3_voluntary_transfer(True{}, C.UnableToDischarge{}, True{}) == True{} : Bool}
@@ -387,10 +390,10 @@ law am25s3_voluntary_transfer_wrong_term:
   {C.rule_am25s3_voluntary_transfer(True{}, C.DueProcess{}, True{}) == False{} : Bool}
 
 law am25s4_congress_decision_pass:
-  {C.rule_am25s4_congress_decision(290n, 435n, 67n, 100n) == True{} : Bool}
+  {C.rule_am25s4_congress_decision(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
 
 law am25s4_congress_decision_fail:
-  {C.rule_am25s4_congress_decision(289n, 435n, 67n, 100n) == False{} : Bool}
+  {C.rule_am25s4_congress_decision(289n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
 
 # AM26S1
 law am26s1_vote_age_18:
@@ -466,3 +469,42 @@ law eval_clause_term_free_env_inert:
 
 law eval_clause_term_free_env_inert_other_env:
   {C.eval_clause_under_env(C.CL_A1S2_Qualifications{}, C.interp_env_empty(), C.Speedy{}, C.Impartial{}, False{}, False{}) == C.Unknown{} : C.InterpValue}
+
+# --- Denominator policies (TASKS.md item 4): the basis selector picks the field ---
+
+# Same yes-count, different basis, different verdict: the selector reads
+# `present` under PresentMembers ...
+law denominator_present_selects_present:
+  {C.two_thirds(60n, C.ChamberCount{90n, 100n}, C.PresentMembers{}) == True{} : Bool}
+
+# ... and `membership` under FullMembership.
+law denominator_membership_selects_membership:
+  {C.two_thirds(60n, C.ChamberCount{90n, 100n}, C.FullMembership{}) == False{} : Bool}
+
+# State votes take the states bundle: 34 of 50 is two thirds of the states.
+law denominator_states_two_thirds_pass:
+  {C.states_two_thirds(34n, C.StatesCount{50n}) == True{} : Bool}
+
+law denominator_states_two_thirds_fail:
+  {C.states_two_thirds(33n, C.StatesCount{50n}) == False{} : Bool}
+
+# A1S5 quorum: a majority of the membership present.
+law denominator_quorum_met:
+  {C.quorum_met(C.ChamberCount{218n, 435n}) == True{} : Bool}
+
+law denominator_quorum_not_met:
+  {C.quorum_met(C.ChamberCount{217n, 435n}) == False{} : Bool}
+
+# AM12: a majority of the whole number of electors (538 appointed).
+law denominator_appointed_electors_whole_number:
+  {C.majority(270n, C.ChamberCount{538n, 538n}, C.AppointedElectors{}) == True{} : Bool}
+
+# The present basis is fixed by impeachment_conviction's signature: 60 of 90
+# present convicts even though 60 is short of two thirds of the 100-member body.
+law impeachment_basis_is_present_members:
+  {C.impeachment_conviction(60n, C.ChamberCount{90n, 100n}) == True{} : Bool}
+
+# The membership basis is fixed by article_v_congress_proposal's signature: 250
+# clears two thirds of the 300 present but not of the 435-member House.
+law article_v_basis_is_membership:
+  {C.article_v_congress_proposal(250n, C.ChamberCount{300n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
