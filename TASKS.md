@@ -31,3 +31,9 @@
 - [x] Banzhaf voting-power analysis (tools/voting_power/): DP-based indices for Senate, House, Electoral College (2024 apportionment), contingent House election; algorithm logic pinned in the proof gate on a hand-computed 3-voter game; equiprobable-coalition assumption documented.
 - [x] Amendment reachability as bounded model checking: abstract 8-state constitution model with amendment_step transitions; dictatorship reachable in 2 steps iff self-amendment held valid, unreachable in 1 step, unreachable (k<=3) when denied; tools/reachability/COMPLEXITY.md with honest decidability bounds.
 - [x] Merge all frontier branches + CI bend-install fix (125a92c) into release branch; full gate green (450/450 laws, 18/18 mutants killed).
+
+## Deontic layer (v0.4.0) — 2026-09-25
+- [x] Deontic force/subject/action tags: DeonticForce (Prohibition/Duty/Permission), DeonticSubject (Congress/StateGovernments/FederalGovernment/Anyone), 44 transcript-grounded DeonticActions; clause_deontic tags 44/133 clauses, rest Untagged with documented reasons.
+- [x] deontic_conflict predicate: same action + opposing forces + overlapping subjects; conservative overlap rule (Anyone overlaps all; Congress/FederalGovernment disjoint), pinned by law.
+- [x] Corpus consistency: tools/deontic/check.py checks all 8778 clause pairs at 2026 — 0 conflicts; generated balanced Bool.and tree over 861 operative pairs wired into check.sh; 32 new laws (predicate boundaries, tag spot-checks, near-miss integrations incl. AM18/AM21).
+- [x] Consistency holds relative to the minimal tag table only; untagged clauses out of scope; 2026 snapshot; nothing doctrinal (documented in tools/deontic/README.md).
