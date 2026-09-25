@@ -1238,3 +1238,24 @@ law temporal_a1s9_rule_active_1807:
 
 law temporal_a1s9_rule_expired_1808:
   {C.rule_a1s9_migration_restriction(C.Year{1808n}) == False{} : Bool}
+
+# Amendment targets and the Gödel exhibit (math-frontier wave 1A).
+# Boundary pairs: the proviso bites exactly at the consent edge, and the
+# two-step is valid exactly when the caller holds self-amendment valid.
+law godel_suffrage_deprivation_no_consent_fails:
+  {C.amendment_valid(C.EqualSuffrageDeprivation{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, False{}, True{}) == False{} : Bool}
+
+law godel_suffrage_deprivation_consent_passes:
+  {C.amendment_valid(C.EqualSuffrageDeprivation{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == True{} : Bool}
+
+law godel_self_amendment_ok_true_passes:
+  {C.amendment_valid(C.ArticleVProcedure{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, True{}) == True{} : Bool}
+
+law godel_self_amendment_ok_false_fails:
+  {C.amendment_valid(C.ArticleVProcedure{}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}, False{}) == False{} : Bool}
+
+law godel_two_step_valid_when_self_amendment_ok:
+  {C.godel_two_step(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, True{}) == True{} : Bool}
+
+law godel_two_step_invalid_when_self_amendment_not_ok:
+  {C.godel_two_step(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, 290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}, 38n, C.StatesCount{50n}, False{}) == False{} : Bool}

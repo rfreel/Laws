@@ -1498,3 +1498,21 @@ def Laws.temporal_a1s9_rule_active_1807():
 
 def Laws.temporal_a1s9_rule_expired_1808():
   {==}
+
+def Laws.godel_suffrage_deprivation_no_consent_fails():
+  {==}
+
+def Laws.godel_suffrage_deprivation_consent_passes():
+  {==}
+
+def Laws.godel_self_amendment_ok_true_passes():
+  {==}
+
+def Laws.godel_self_amendment_ok_false_fails():
+  {==}
+
+def Laws.godel_two_step_valid_when_self_amendment_ok():
+  {==}
+
+def Laws.godel_two_step_invalid_when_self_amendment_not_ok():
+  {==}

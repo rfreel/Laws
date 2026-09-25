@@ -3289,3 +3289,70 @@ def term_commencement_jan20(t: TimePoint) -> Bool:
   match t:
     case Year{year}:
       Nat.is_le(1933n, year)
+# === Amendment targets and the Gödel exhibit (math-frontier wave 1A) ===
+#
+# Article V's text states vote thresholds but almost nothing about *what* an
+# amendment may target — except one proviso: "no State, without its Consent,
+# shall be deprived of its equal Suffrage in the Senate." The model previously
+# checked only the numbers, so an amendment deleting the Bill of Rights and an
+# amendment fixing a typo were the same function call. This section adds the
+# target dimension.
+#
+# Design decision (exhibit, don't close): the text is silent on whether
+# Article V can amend *itself* — the Gödel self-amendment question. A "strict"
+# model would hardcode self-amendment as invalid, but that invents law the
+# text does not state. Instead the open question stays an explicit caller
+# input (`self_amendment_ok`), the same record-don't-invent discipline as
+# InterpretiveTerm. The payoff is a conditional theorem: Gödel's two-step
+# (amend Article V to delete the proviso, then amend anything) is exhibited
+# as a machine-checked statement *conditional on the caller's interpretive
+# judgment* — the executable form of an independence result. What the model
+# does NOT establish: whether self-amendment is "really" valid. That remains
+# the caller's judgment, by construction.
+
+type AmendmentTarget is Data:
+  OrdinaryAmendment{}
+  # Triggers the Art. V proviso (equal Senate suffrage).
+  EqualSuffrageDeprivation{}
+  # An amendment to the amendment rule itself — the Gödel site.
+  ArticleVProcedure{}
+
+# Target permissibility, independent of vote counts. The two Bool inputs are
+# caller-supplied legal facts/judgments, not model inventions.
+def amendment_permissible(target: AmendmentTarget, affected_consent: Bool, self_amendment_ok: Bool) -> Bool:
+  match target:
+    case OrdinaryAmendment{}:
+      # The text bars no ordinary subject matter.
+      True{}
+    case EqualSuffrageDeprivation{}:
+      # Art. V: "no State, without its Consent, shall be deprived of its equal
+      # Suffrage in the Senate." Valid only with that State's consent.
+      affected_consent
+    case ArticleVProcedure{}:
+      # The text neither permits nor forbids amending the amendment rule.
+      # The caller's interpretive judgment decides; the model records it.
+      self_amendment_ok
+
+# Full validity on the congressional-proposal / state-ratification path:
+# proposal thresholds AND ratification thresholds AND target permissibility.
+# (The convention-application path is not composed here; that is a documented
+# path choice, not a claim about the convention route.)
+def amendment_valid(target: AmendmentTarget, house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount, ratifying: Nat, states: StatesCount, affected_consent: Bool, self_amendment_ok: Bool) -> Bool:
+  Bool.and(
+    Bool.and(
+      article_v_congress_proposal(house_yes, house, senate_yes, senate),
+      article_v_ratification(ratifying, states)),
+    amendment_permissible(target, affected_consent, self_amendment_ok))
+
+# Gödel's two-step as a composed predicate. Step 1 amends Article V itself
+# (e.g. deleting the suffrage proviso); step 2 is stated against the
+# post-step-1 legal landscape, where the proviso no longer exists, hence its
+# OrdinaryAmendment target. The outer conjunction keeps the whole sequence
+# conditional on step 1: if step 1 is invalid, the sequence is invalid no
+# matter what step 2's hypothetical says. A Bool predicate can express the
+# verdict dependency, not the counterfactual world-branching; the comment
+# above is the honest statement of what the formula means.
+def godel_two_step(h1_yes: Nat, h1: ChamberCount, s1_yes: Nat, s1: ChamberCount, r1: Nat, st1: StatesCount, h2_yes: Nat, h2: ChamberCount, s2_yes: Nat, s2: ChamberCount, r2: Nat, st2: StatesCount, self_amendment_ok: Bool) -> Bool:
+  Bool.and(
+    amendment_valid(ArticleVProcedure{}, h1_yes, h1, s1_yes, s1, r1, st1, True{}, self_amendment_ok),
+    amendment_valid(OrdinaryAmendment{}, h2_yes, h2, s2_yes, s2, r2, st2, True{}, True{}))

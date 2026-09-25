@@ -259,6 +259,86 @@ def article_v_ratification(ratifying_states: int, counts: Data) -> bool:
     return states_three_fourths(ratifying_states, counts)
 
 
+def amendment_permissible(
+    target: Data, affected_consent: bool, self_amendment_ok: bool
+) -> bool:
+    # Target permissibility, independent of vote counts. Art. V's proviso:
+    # "no State, without its Consent, shall be deprived of its equal
+    # Suffrage in the Senate." The text is silent on amending the amendment
+    # rule itself, so that question stays a caller-supplied judgment.
+    if target.name == "OrdinaryAmendment":
+        return True
+    if target.name == "EqualSuffrageDeprivation":
+        return affected_consent
+    if target.name == "ArticleVProcedure":
+        return self_amendment_ok
+    raise ValueError(f"unknown AmendmentTarget {target!r}")
+
+
+def amendment_valid(
+    target: Data,
+    house_yes: int,
+    house: Data,
+    senate_yes: int,
+    senate: Data,
+    ratifying: int,
+    states: Data,
+    affected_consent: bool,
+    self_amendment_ok: bool,
+) -> bool:
+    # Congressional-proposal / state-ratification path (not the convention
+    # path): proposal thresholds AND ratification thresholds AND target
+    # permissibility.
+    return (
+        article_v_congress_proposal(house_yes, house, senate_yes, senate)
+        and article_v_ratification(ratifying, states)
+        and amendment_permissible(target, affected_consent, self_amendment_ok)
+    )
+
+
+def godel_two_step(
+    h1_yes: int,
+    h1: Data,
+    s1_yes: int,
+    s1: Data,
+    r1: int,
+    st1: Data,
+    h2_yes: int,
+    h2: Data,
+    s2_yes: int,
+    s2: Data,
+    r2: int,
+    st2: Data,
+    self_amendment_ok: bool,
+) -> bool:
+    # Step 1 amends Article V itself; step 2 is stated against the post-step-1
+    # landscape where the proviso is deleted. The conjunction keeps the whole
+    # sequence conditional on step 1's validity.
+    step1 = amendment_valid(
+        Data("ArticleVProcedure", ()),
+        h1_yes,
+        h1,
+        s1_yes,
+        s1,
+        r1,
+        st1,
+        True,
+        self_amendment_ok,
+    )
+    step2 = amendment_valid(
+        Data("OrdinaryAmendment", ()),
+        h2_yes,
+        h2,
+        s2_yes,
+        s2,
+        r2,
+        st2,
+        True,
+        True,
+    )
+    return step1 and step2
+
+
 def bill_becomes_law(
     passed_house: bool,
     passed_senate: bool,
