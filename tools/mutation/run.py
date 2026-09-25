@@ -23,6 +23,9 @@ ROOT = Path(__file__).resolve().parents[2]
 BEND_BIN = Path.home() / ".bend" / "bin"
 
 ENV = dict(os.environ, BEND_NO_TELEMETRY="1",
+           # Mutants are evaluated against the inner gate only; running the
+           # mutation suite inside every mutant's check.sh would recurse.
+           LAWS_SKIP_MUTATION="1",
            PATH=f"{BEND_BIN}:{os.environ.get('PATH', '')}")
 
 COPY_IGNORE = {".git", ".bend-prefix", "__pycache__"}

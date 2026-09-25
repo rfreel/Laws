@@ -1492,3 +1492,9 @@ def Laws.temporal_term_jan20_1933():
 
 def Laws.temporal_term_jan20_1932():
   {==}
+
+def Laws.temporal_a1s9_rule_active_1807():
+  {==}
+
+def Laws.temporal_a1s9_rule_expired_1808():
+  {==}

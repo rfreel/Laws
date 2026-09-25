@@ -17,10 +17,10 @@
 - [x] Pin Bend release artifact and SHA-256 in CI.
 
 ## Remaining after first verified green gate
-- [ ] Expand each source block into clause-level typed Condition -> Effect rules.
-- [ ] Add an interpretation environment and evaluator for explicit InterpretiveTerm inputs.
-- [ ] Add temporal activation for pre-1808, ratification-deadline, repeal, and succession provisions.
-- [ ] Add explicit denominator policies where the text distinguishes present members, membership, appointed electors, or states.
-- [ ] Cross-check every normalized clause against the authoritative transcript with a separately maintained source map.
-- [ ] Add mutation tests that intentionally break each high-value procedure and require proof/check failure.
-- [ ] Add a second independent implementation of threshold/reference semantics for differential testing.
+- [x] Expand each source block into clause-level typed Condition -> Effect rules.
+- [x] Add an interpretation environment and evaluator for explicit InterpretiveTerm inputs.
+- [x] Add temporal activation for pre-1808, ratification-deadline, repeal, and succession provisions.
+- [x] Add explicit denominator policies where the text distinguishes present members, membership, appointed electors, or states.
+- [x] Cross-check every normalized clause against the authoritative transcript with a separately maintained source map.
+- [x] Add mutation tests that intentionally break each high-value procedure and require proof/check failure.
+- [x] Add a second independent implementation of threshold/reference semantics for differential testing.

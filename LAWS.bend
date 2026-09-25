@@ -1229,3 +1229,12 @@ law temporal_term_jan20_1933:
 
 law temporal_term_jan20_1932:
   {C.term_commencement_jan20(C.Year{1932n}) == False{} : Bool}
+
+# Mutation-survivor fix (wave 4): pin the named A1S9 rule's own 1808 boundary.
+# clause_unexpired carries an independent copy of this boundary; these laws tie
+# the rule itself to the same edge so the two cannot drift apart undetected.
+law temporal_a1s9_rule_active_1807:
+  {C.rule_a1s9_migration_restriction(C.Year{1807n}) == True{} : Bool}
+
+law temporal_a1s9_rule_expired_1808:
+  {C.rule_a1s9_migration_restriction(C.Year{1808n}) == False{} : Bool}
