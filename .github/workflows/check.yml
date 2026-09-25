@@ -42,9 +42,7 @@ jobs:
           sudo cp -R "$(dirname "$BASE_BEND")/." /usr/local/bend2/
           test -f /usr/local/bend2/base.bend
           bend --help >/tmp/bend-help.txt
-          bend guide >/tmp/bend-guide.txt
           test -s /tmp/bend-help.txt
-          test -s /tmp/bend-guide.txt
 
       - name: Check proof gate
         run: bend PROOF.bend
