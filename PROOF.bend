@@ -1768,3 +1768,114 @@ def Laws.banzhaf3_b_swings_1():
 
 def Laws.banzhaf3_c_swings_1():
   {==}
+
+# === Deontic layer proofs ===
+
+def Laws.deontic_prohibition_vs_duty_conflicts():
+  {==}
+
+def Laws.deontic_duty_vs_prohibition_conflicts():
+  {==}
+
+def Laws.deontic_prohibition_vs_permission_conflicts():
+  {==}
+
+def Laws.deontic_prohibition_vs_prohibition_no_conflict():
+  {==}
+
+def Laws.deontic_duty_vs_permission_no_conflict():
+  {==}
+
+def Laws.deontic_different_actions_no_conflict():
+  {==}
+
+def Laws.deontic_untagged_left_no_conflict():
+  {==}
+
+def Laws.deontic_untagged_right_no_conflict():
+  {==}
+
+def Laws.deontic_disjoint_subjects_no_conflict():
+  {==}
+
+def Laws.deontic_anyone_overlaps_states():
+  {==}
+
+def Laws.deontic_congress_federal_no_overlap():
+  {==}
+
+
+
+
+
+
+
+
+
+
+
+
+def Laws.deontic_untagged_fugitive_labor():
+  {==}
+
+def Laws.deontic_untagged_take_care():
+  {==}
+
+def Laws.deontic_untagged_grand_jury():
+  {==}
+
+def Laws.deontic_inoperative_am18s1_2026():
+  {==}
+
+def Laws.deontic_expired_migration_2026():
+  {==}
+
+def Laws.deontic_operative_am1_2026():
+  {==}
+
+def Laws.deontic_no_conflict_am18_am21_2026():
+  {==}
+
+def Laws.deontic_no_conflict_direct_tax_vs_income_tax():
+  {==}
+
+def Laws.deontic_no_conflict_voting_rights_cluster():
+  {==}
+
+def Laws.corpus_deontically_consistent_2026():
+  {==}
+
+# --- Deontic tag spot-check proofs ---
+
+def Laws.deontic_tag_am1_expression():
+  {==}
+
+def Laws.deontic_tag_am2_arms():
+  {==}
+
+def Laws.deontic_tag_am13_abolition():
+  {==}
+
+def Laws.deontic_tag_am14_due_process():
+  {==}
+
+def Laws.deontic_tag_am15_vote_race():
+  {==}
+
+def Laws.deontic_tag_am22_term_limit():
+  {==}
+
+def Laws.deontic_tag_am18_prohibition():
+  {==}
+
+def Laws.deontic_tag_a1s9_export_tax():
+  {==}
+
+def Laws.deontic_tag_a4s4_republican_form():
+  {==}
+
+def Laws.deontic_tag_a6_oaths():
+  {==}
+
+def Laws.deontic_tag_am16_income_tax():
+  {==}

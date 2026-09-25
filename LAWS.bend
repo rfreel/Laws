@@ -1484,3 +1484,114 @@ law banzhaf3_b_swings_1:
 
 law banzhaf3_c_swings_1:
   {C.banzhaf3_c_swings_are_1() == True{} : Bool}
+
+# === Deontic layer laws ===
+
+law deontic_prohibition_vs_duty_conflicts:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Duty{}, C.Congress{}, C.AbridgeExpression{}}) == True{} : Bool}
+
+law deontic_duty_vs_prohibition_conflicts:
+  {C.deontic_conflict(C.Tagged{C.Duty{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}) == True{} : Bool}
+
+law deontic_prohibition_vs_permission_conflicts:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Permission{}, C.Congress{}, C.AbridgeExpression{}}) == True{} : Bool}
+
+law deontic_prohibition_vs_prohibition_no_conflict:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}) == False{} : Bool}
+
+law deontic_duty_vs_permission_no_conflict:
+  {C.deontic_conflict(C.Tagged{C.Duty{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Permission{}, C.Congress{}, C.AbridgeExpression{}}) == False{} : Bool}
+
+law deontic_different_actions_no_conflict:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Duty{}, C.Congress{}, C.EstablishReligion{}}) == False{} : Bool}
+
+law deontic_untagged_left_no_conflict:
+  {C.deontic_conflict(C.Untagged{}, C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}) == False{} : Bool}
+
+law deontic_untagged_right_no_conflict:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Untagged{}) == False{} : Bool}
+
+law deontic_disjoint_subjects_no_conflict:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Duty{}, C.StateGovernments{}, C.AbridgeExpression{}}) == False{} : Bool}
+
+law deontic_anyone_overlaps_states:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Anyone{}, C.AbridgeExpression{}}, C.Tagged{C.Duty{}, C.StateGovernments{}, C.AbridgeExpression{}}) == True{} : Bool}
+
+law deontic_congress_federal_no_overlap:
+  {C.deontic_conflict(C.Tagged{C.Prohibition{}, C.Congress{}, C.AbridgeExpression{}}, C.Tagged{C.Duty{}, C.FederalGovernment{}, C.AbridgeExpression{}}) == False{} : Bool}
+
+
+
+
+
+
+
+
+
+
+
+
+law deontic_untagged_fugitive_labor:
+  {C.deontic_tag_is_untagged(C.clause_deontic(C.CL_A4S2_FugitiveLabor{})) == True{} : Bool}
+
+law deontic_untagged_take_care:
+  {C.deontic_tag_is_untagged(C.clause_deontic(C.CL_A2S3_TakeCare{})) == True{} : Bool}
+
+law deontic_untagged_grand_jury:
+  {C.deontic_tag_is_untagged(C.clause_deontic(C.CL_AM5_GrandJury{})) == True{} : Bool}
+
+law deontic_inoperative_am18s1_2026:
+  {C.clause_operative_at_2026(C.CL_AM18S1_Prohibition{}) == False{} : Bool}
+
+law deontic_expired_migration_2026:
+  {C.clause_operative_at_2026(C.CL_A1S9_MigrationRestriction{}) == False{} : Bool}
+
+law deontic_operative_am1_2026:
+  {C.clause_operative_at_2026(C.CL_AM1_ExpressionAssembly{}) == True{} : Bool}
+
+law deontic_no_conflict_am18_am21_2026:
+  {C.deontic_conflict(C.clause_deontic(C.CL_AM18S1_Prohibition{}), C.clause_deontic(C.CL_AM21S2_Transportation{})) == False{} : Bool}
+
+law deontic_no_conflict_direct_tax_vs_income_tax:
+  {C.deontic_conflict(C.clause_deontic(C.CL_A1S9_DirectTax{}), C.clause_deontic(C.CL_AM16_IncomeTax{})) == False{} : Bool}
+
+law deontic_no_conflict_voting_rights_cluster:
+  {C.deontic_conflict(C.clause_deontic(C.CL_AM15S1_VoteRace{}), C.clause_deontic(C.CL_AM19_VoteSex{})) == False{} : Bool}
+
+law corpus_deontically_consistent_2026:
+  {C.corpus_pairs_consistent_2026() == True{} : Bool}
+
+# --- Deontic tag spot-checks (regenerated: exact code match) ---
+
+law deontic_tag_am1_expression:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM1_ExpressionAssembly{}), 1n, 1n, 1n) == True{} : Bool}
+
+law deontic_tag_am2_arms:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM2_KeepBearArms{}), 1n, 3n, 3n) == True{} : Bool}
+
+law deontic_tag_am13_abolition:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM13S1_Abolition{}), 1n, 4n, 12n) == True{} : Bool}
+
+law deontic_tag_am14_due_process:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM14S1_DueProcessEqualProtection{}), 1n, 2n, 13n) == True{} : Bool}
+
+law deontic_tag_am15_vote_race:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM15S1_VoteRace{}), 1n, 4n, 15n) == True{} : Bool}
+
+law deontic_tag_am22_term_limit:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM22S1_TermLimit{}), 1n, 4n, 19n) == True{} : Bool}
+
+law deontic_tag_am18_prohibition:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM18S1_Prohibition{}), 1n, 4n, 20n) == True{} : Bool}
+
+law deontic_tag_a1s9_export_tax:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_A1S9_ExportTax{}), 1n, 1n, 22n) == True{} : Bool}
+
+law deontic_tag_a4s4_republican_form:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_A4S4_RepublicanForm{}), 2n, 3n, 36n) == True{} : Bool}
+
+law deontic_tag_a6_oaths:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_A6_Oaths{}), 2n, 4n, 40n) == True{} : Bool}
+
+law deontic_tag_am16_income_tax:
+  {C.deontic_tag_matches(C.clause_deontic(C.CL_AM16_IncomeTax{}), 3n, 1n, 44n) == True{} : Bool}

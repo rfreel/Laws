@@ -1493,6 +1493,218 @@ def clause_expired(clause: Data, t: Data) -> bool:
     return not clause_unexpired(clause, t)
 
 
+# --------------------------------------------------------------------------
+# Deontic layer mirrors (differential implementation).
+# The tagging table below is an independent re-encoding of the transcript's
+# operative language, written separately from laws.bend. Agreement between
+# the two implementations guards against transcription slips in either.
+# --------------------------------------------------------------------------
+
+_DEONTIC_FORCE_CODES = {"Prohibition": 1, "Duty": 2, "Permission": 3}
+_DEONTIC_SUBJECT_CODES = {
+    "Congress": 1,
+    "StateGovernments": 2,
+    "FederalGovernment": 3,
+    "Anyone": 4,
+}
+_DEONTIC_ACTION_CODES = {
+    "AbridgeExpression": 1,
+    "EstablishReligion": 2,
+    "InfringeArms": 3,
+    "QuarterSoldiers": 4,
+    "UnreasonableSearchSeizure": 5,
+    "IssueWarrantWithoutProbableCause": 6,
+    "SubjectToDoubleJeopardy": 7,
+    "DepriveLifeLibertyPropertyWithoutDueProcess": 8,
+    "TakePropertyWithoutJustCompensation": 9,
+    "RequireExcessiveBailOrFines": 10,
+    "InflictCruelUnusualPunishment": 11,
+    "EnslaveExceptAsPunishmentForCrime": 12,
+    "DenyDueProcessOrEqualProtection": 13,
+    "AbridgePrivilegesOrImmunities": 14,
+    "DenyVoteOnAccountOfRace": 15,
+    "DenyVoteOnAccountOfSex": 16,
+    "ImposePollTax": 17,
+    "DenyVoteOnAccountOfAge": 18,
+    "ElectedPresidentMoreThanTwice": 19,
+    "ManufactureSellTransportLiquor": 20,
+    "TransportLiquorInViolationOfStateLaw": 21,
+    "LayExportTax": 22,
+    "PassAttainderOrExPostFacto": 23,
+    "ProhibitMigrationImportation": 24,
+    "GrantNobility": 25,
+    "SuspendHabeasOutsideRebellionInvasion": 26,
+    "DrawMoneyWithoutAppropriation": 27,
+    "LayDirectTaxWithoutApportionment": 28,
+    "ServeInCongressWhileHoldingFederalOffice": 29,
+    "QuestionMemberForSpeechDebate": 30,
+    "ArrestMemberExceptTreasonFelonyBreach": 31,
+    "QuestionPublicDebtValidity": 32,
+    "EnterTreatyAllianceConfederation": 33,
+    "CoinMoneyEmitBillsNonSpecieTender": 34,
+    "LayImpostsWithoutCongressionalConsent": 35,
+    "GuaranteeRepublicanForm": 36,
+    "ProtectStatesFromInvasionAndDomesticViolence": 37,
+    "DeliverUpFugitiveFromJustice": 38,
+    "AssembleAtLeastAnnually": 39,
+    "TakeOathToSupportConstitution": 40,
+    "EnsureSpeedyPublicTrial": 41,
+    "EnsureAssistanceOfCounsel": 42,
+    "PreserveCivilJuryTrial": 43,
+    "LayCollectIncomeTax": 44,
+}
+
+# Clause constructor -> (force, subject, action). Minimal-tag bar: tag only
+# where the operative force is explicit and the subject/action are nameable
+# without interpretive invention. See the laws.bend header for the documented
+# judgment calls (passive-voice convention, Anyone-coarsening, rights-as-duty).
+_DEONTIC_TAGS: dict[str, tuple[str, str, str]] = {
+    "CL_AM1_ExpressionAssembly": ("Prohibition", "Congress", "AbridgeExpression"),
+    "CL_AM1_Religion": ("Prohibition", "Congress", "EstablishReligion"),
+    "CL_AM2_KeepBearArms": ("Prohibition", "FederalGovernment", "InfringeArms"),
+    "CL_AM3_Quartering": ("Prohibition", "FederalGovernment", "QuarterSoldiers"),
+    "CL_AM4_UnreasonableSearch": ("Prohibition", "FederalGovernment", "UnreasonableSearchSeizure"),
+    "CL_AM4_Warrants": ("Prohibition", "FederalGovernment", "IssueWarrantWithoutProbableCause"),
+    "CL_AM5_DoubleJeopardy": ("Prohibition", "FederalGovernment", "SubjectToDoubleJeopardy"),
+    "CL_AM5_DueProcess": ("Prohibition", "FederalGovernment", "DepriveLifeLibertyPropertyWithoutDueProcess"),
+    "CL_AM5_Takings": ("Prohibition", "FederalGovernment", "TakePropertyWithoutJustCompensation"),
+    "CL_AM6_SpeedyImpartialTrial": ("Duty", "FederalGovernment", "EnsureSpeedyPublicTrial"),
+    "CL_AM6_Counsel": ("Duty", "FederalGovernment", "EnsureAssistanceOfCounsel"),
+    "CL_AM7_CivilJury": ("Duty", "FederalGovernment", "PreserveCivilJuryTrial"),
+    "CL_AM8_ExcessiveBailFines": ("Prohibition", "FederalGovernment", "RequireExcessiveBailOrFines"),
+    "CL_AM8_CruelUnusual": ("Prohibition", "FederalGovernment", "InflictCruelUnusualPunishment"),
+    "CL_AM13S1_Abolition": ("Prohibition", "Anyone", "EnslaveExceptAsPunishmentForCrime"),
+    "CL_AM14S1_DueProcessEqualProtection": ("Prohibition", "StateGovernments", "DenyDueProcessOrEqualProtection"),
+    "CL_AM14S1_PrivilegesImmunities": ("Prohibition", "StateGovernments", "AbridgePrivilegesOrImmunities"),
+    "CL_AM14S4_PublicDebt": ("Prohibition", "Anyone", "QuestionPublicDebtValidity"),
+    "CL_AM15S1_VoteRace": ("Prohibition", "Anyone", "DenyVoteOnAccountOfRace"),
+    "CL_AM19_VoteSex": ("Prohibition", "Anyone", "DenyVoteOnAccountOfSex"),
+    "CL_AM24S1_PollTax": ("Prohibition", "Anyone", "ImposePollTax"),
+    "CL_AM26S1_VoteAge": ("Prohibition", "Anyone", "DenyVoteOnAccountOfAge"),
+    "CL_AM22S1_TermLimit": ("Prohibition", "Anyone", "ElectedPresidentMoreThanTwice"),
+    "CL_AM18S1_Prohibition": ("Prohibition", "Anyone", "ManufactureSellTransportLiquor"),
+    "CL_AM21S2_Transportation": ("Prohibition", "Anyone", "TransportLiquorInViolationOfStateLaw"),
+    "CL_AM16_IncomeTax": ("Permission", "Congress", "LayCollectIncomeTax"),
+    "CL_A1S4_AnnualAssembly": ("Duty", "Congress", "AssembleAtLeastAnnually"),
+    "CL_A1S6_Incompatibility": ("Prohibition", "Anyone", "ServeInCongressWhileHoldingFederalOffice"),
+    "CL_A1S6_SpeechDebate": ("Prohibition", "Anyone", "QuestionMemberForSpeechDebate"),
+    "CL_A1S6_ArrestPrivilege": ("Prohibition", "Anyone", "ArrestMemberExceptTreasonFelonyBreach"),
+    "CL_A1S9_ExportTax": ("Prohibition", "Congress", "LayExportTax"),
+    "CL_A1S9_Attainder": ("Prohibition", "Congress", "PassAttainderOrExPostFacto"),
+    "CL_A1S9_MigrationRestriction": ("Prohibition", "Congress", "ProhibitMigrationImportation"),
+    "CL_A1S9_TitlesNobility": ("Prohibition", "FederalGovernment", "GrantNobility"),
+    "CL_A1S9_HabeasCorpus": ("Prohibition", "FederalGovernment", "SuspendHabeasOutsideRebellionInvasion"),
+    "CL_A1S9_Appropriations": ("Prohibition", "FederalGovernment", "DrawMoneyWithoutAppropriation"),
+    "CL_A1S9_DirectTax": ("Prohibition", "Congress", "LayDirectTaxWithoutApportionment"),
+    "CL_A1S10_TreatyAlliance": ("Prohibition", "StateGovernments", "EnterTreatyAllianceConfederation"),
+    "CL_A1S10_CoinTender": ("Prohibition", "StateGovernments", "CoinMoneyEmitBillsNonSpecieTender"),
+    "CL_A1S10_Imposts": ("Prohibition", "StateGovernments", "LayImpostsWithoutCongressionalConsent"),
+    "CL_A4S2_Extradition": ("Duty", "StateGovernments", "DeliverUpFugitiveFromJustice"),
+    "CL_A4S4_RepublicanForm": ("Duty", "FederalGovernment", "GuaranteeRepublicanForm"),
+    "CL_A4S4_Protection": ("Duty", "FederalGovernment", "ProtectStatesFromInvasionAndDomesticViolence"),
+    "CL_A6_Oaths": ("Duty", "Anyone", "TakeOathToSupportConstitution"),
+}
+
+
+def deontic_force_code(f: Data) -> int:
+    return _DEONTIC_FORCE_CODES[f.name]
+
+
+def deontic_subject_code(s: Data) -> int:
+    return _DEONTIC_SUBJECT_CODES[s.name]
+
+
+def deontic_action_code(a: Data) -> int:
+    return _DEONTIC_ACTION_CODES[a.name]
+
+
+def deontic_tag_code(t: Data) -> int:
+    if t.name == "Untagged":
+        return 0
+    (force, subject, action) = t.fields
+    return (
+        deontic_force_code(force) * 10000
+        + deontic_subject_code(subject) * 100
+        + deontic_action_code(action)
+    )
+
+
+def deontic_tag_matches(t: Data, f: int, s: int, a: int) -> bool:
+    if t.name == "Untagged":
+        return False
+    (force, subject, action) = t.fields
+    return (
+        deontic_force_code(force) == f
+        and deontic_subject_code(subject) == s
+        and deontic_action_code(action) == a
+    )
+
+
+def deontic_tag_is_untagged(t: Data) -> bool:
+    return t.name == "Untagged"
+
+
+def clause_deontic(clause: Data) -> Data:
+    tag = _DEONTIC_TAGS.get(clause.name)
+    if tag is None:
+        return Data("Untagged", ())
+    force, subject, action = tag
+    return Data("Tagged", (Data(force, ()), Data(subject, ()), Data(action, ())))
+
+
+def deontic_subject_overlap(a: Data, b: Data) -> bool:
+    # Anyone overlaps everything; otherwise only identical subjects overlap.
+    # Conservative: Congress and FederalGovernment do not overlap (mirrors laws.bend).
+    if a.name == "Anyone" or b.name == "Anyone":
+        return True
+    return a.name == b.name
+
+
+def deontic_force_opposes(f1: Data, f2: Data) -> bool:
+    return ("Prohibition" in (f1.name, f2.name)) and (f1.name != f2.name)
+
+
+def deontic_conflict(t1: Data, t2: Data) -> bool:
+    if t1.name == "Untagged" or t2.name == "Untagged":
+        return False
+    (f1, s1, a1) = t1.fields
+    (f2, s2, a2) = t2.fields
+    return (
+        deontic_action_code(a1) == deontic_action_code(a2)
+        and deontic_force_opposes(f1, f2)
+        and deontic_subject_overlap(s1, s2)
+    )
+
+
+def clause_operative_at_2026(clause: Data) -> bool:
+    t = Data("Year", (2026,))
+    return (
+        clause_in_force(clause)
+        and clause_commenced(clause, t)
+        and clause_unexpired(clause, t)
+    )
+
+
+def corpus_pairs_consistent_2026() -> bool:
+    # Independent exhaustive check: every unordered pair of tagged clauses
+    # operative at 2026 must be conflict-free. The operative set is derived
+    # from the model's own temporal functions, not from the generator.
+    operative = [
+        name
+        for name in CLAUSES
+        if name in _DEONTIC_TAGS
+        and clause_operative_at_2026(Data(name, ()))
+    ]
+    tags = [clause_deontic(Data(name, ())) for name in operative]
+    for i in range(len(tags)):
+        for j in range(i + 1, len(tags)):
+            if deontic_conflict(tags[i], tags[j]):
+                return False
+    return True
+
+
+# Registry: every public model function, for the law-statement evaluator.
+# (Kept at end of file so functions defined anywhere above are collected.)
 REGISTRY: dict[str, object] = {
     name: fn for name, fn in sorted(vars().items()) if _is_model_fn(fn)
 }
