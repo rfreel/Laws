@@ -1560,4 +1560,200 @@ def Laws.reach_three_step_articleV_sandwich_blocked():
   {==}
 
 def Laws.reach_three_step_suffrage_chain_blocked():
+def Laws.ltl_am18_expired_persists_s1_1933_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_1934_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_1934_1950():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_1934_2100():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_1950_2026():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_1808_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s1_2026_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1933_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1934_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1934_1950():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1934_2100():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1950_2026():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_1808_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s2_2026_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1933_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1934_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1934_1950():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1934_2100():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1950_2026():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_1808_1934():
+  {==}
+
+def Laws.ltl_am18_expired_persists_s3_2026_1934():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_1919_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_1920_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_1920_1933():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_1920_2100():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_1933_2026():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s1_2026_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_1919_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_1920_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_1920_1933():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_1920_2100():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_1933_2026():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s2_2026_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_1919_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_1920_1920():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_1920_1933():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_1920_2100():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_1933_2026():
+  {==}
+
+def Laws.ltl_am18_commenced_persists_s3_2026_1920():
+  {==}
+
+def Laws.ltl_ordinary_commenced_persists_1789_2026():
+  {==}
+
+def Laws.ltl_ordinary_commenced_persists_2026_1789():
+  {==}
+
+def Laws.ltl_ordinary_commenced_persists_1900_1900():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_1808():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_1808():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_1809():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_1809():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_1900():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_1900():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_1934():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_1934():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_2026():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_2026():
+  {==}
+
+def Laws.ltl_a1s9_rule_never_returns_2100():
+  {==}
+
+def Laws.ltl_a1s9_unexpired_never_returns_2100():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s1_1934():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s1_1950():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s1_2026():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s1_2100():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s2_1934():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s2_1950():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s2_2026():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s2_2100():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s3_1934():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s3_1950():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s3_2026():
+  {==}
+
+def Laws.ltl_am18_never_operative_again_s3_2100():
   {==}
