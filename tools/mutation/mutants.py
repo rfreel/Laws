@@ -130,6 +130,20 @@ MUTANTS = [
         expect=["bend"],
     ),
     dict(
+        name="expostfacto_boundary",
+        file="laws.bend", kind="replace", count=1,
+        old=("def conduct_predates_enactment(e: PunishmentEvent) -> Bool:\n"
+             "  match e:\n"
+             "    case PunishmentEvent{conduct_year, enact_year, _, _}:\n"
+             "      Nat.is_lt(conduct_year, enact_year)"),
+        new=("def conduct_predates_enactment(e: PunishmentEvent) -> Bool:\n"
+             "  match e:\n"
+             "    case PunishmentEvent{conduct_year, enact_year, _, _}:\n"
+             "      Nat.is_le(conduct_year, enact_year)"),
+        invariant="ex post facto requires conduct STRICTLY before enactment (same-year is not retroactive)",
+        expect=["bend"],
+    ),
+    dict(
         name="am18_expiry",
         file="laws.bend", kind="replace", count=3,
         old="      Nat.is_le(year, 1933n)",

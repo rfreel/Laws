@@ -1703,6 +1703,53 @@ def corpus_pairs_consistent_2026() -> bool:
     return True
 
 
+# --------------------------------------------------------------------------
+# Two-time temporal model + ex post facto (time-and-change wave, Part A)
+# --------------------------------------------------------------------------
+# Independent re-implementation of the PunishmentEvent predicates in
+# laws.bend: conduct_year < enact_year AND caller-supplied criminal flag, with
+# the punisher matched against the existing DeonticSubject constructors.
+# Criminal scope only (civil/regulatory explicitly out of scope — decided by
+# the caller's Bool, never invented here). Years are plain ints.
+
+
+def conduct_predates_enactment(e: Data) -> bool:
+    (conduct_year, enact_year, _punisher, _criminal) = e.fields
+    return conduct_year < enact_year
+
+
+def punishment_is_criminal(e: Data) -> bool:
+    (_conduct_year, _enact_year, _punisher, criminal) = e.fields
+    return criminal
+
+
+def punisher_is_congress(e: Data) -> bool:
+    (_conduct_year, _enact_year, punisher, _criminal) = e.fields
+    return punisher.name == "Congress"
+
+
+def punisher_is_states(e: Data) -> bool:
+    (_conduct_year, _enact_year, punisher, _criminal) = e.fields
+    return punisher.name == "StateGovernments"
+
+
+def is_ex_post_facto(e: Data) -> bool:
+    return conduct_predates_enactment(e) and punishment_is_criminal(e)
+
+
+def congress_ex_post_facto_prohibited(e: Data) -> bool:
+    return is_ex_post_facto(e) and punisher_is_congress(e)
+
+
+def states_ex_post_facto_prohibited(e: Data) -> bool:
+    return is_ex_post_facto(e) and punisher_is_states(e)
+
+
+def ex_post_facto_verdict_after_repeal(e: Data, repeal_year: int) -> bool:
+    (_conduct_year, enact_year, _punisher, _criminal) = e.fields
+    return enact_year < repeal_year and is_ex_post_facto(e)
+
+
 # Registry: every public model function, for the law-statement evaluator.
 # (Kept at end of file so functions defined anywhere above are collected.)
 REGISTRY: dict[str, object] = {

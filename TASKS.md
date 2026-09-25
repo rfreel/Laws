@@ -37,3 +37,10 @@
 - [x] deontic_conflict predicate: same action + opposing forces + overlapping subjects; conservative overlap rule (Anyone overlaps all; Congress/FederalGovernment disjoint), pinned by law.
 - [x] Corpus consistency: tools/deontic/check.py checks all 8778 clause pairs at 2026 — 0 conflicts; generated balanced Bool.and tree over 861 operative pairs wired into check.sh; 32 new laws (predicate boundaries, tag spot-checks, near-miss integrations incl. AM18/AM21).
 - [x] Consistency holds relative to the minimal tag table only; untagged clauses out of scope; 2026 snapshot; nothing doctrinal (documented in tools/deontic/README.md).
+
+## Time and change (v0.5.0 wave), Part A — 2026-09-25
+- [x] Two-time temporal model: PunishmentEvent{conduct_year, enact_year, punisher, criminal} (plain Nat years, year granularity, no sub-year claims); is_ex_post_facto = conduct_year < enact_year AND criminal, built from one-sided predicates conjoined at the law level (skill rule 1); "punishes" carried by the event type.
+- [x] Ex post facto prohibitions for both textual clauses: A1S9C3 via congress_ex_post_facto_prohibited (tagged clause CL_A1S9_Attainder); A1S10C1 via states_ex_post_facto_prohibited (no existing A1S10 constructor covers it — identified by StateGovernments{} subject, no constructor invented).
+- [x] 13 new laws with boundary pairs (same-year not retroactive, later conduct not, non-criminal scope boundary not, wrong-subject both ways) + repeal-then-punish ordering pin (verdict stable across a post-enactment repeal year, both directions).
+- [x] Criminal-only scope: civil/regulatory explicitly out of scope via the caller-supplied criminal Bool (conditional theorems both ways, skill rule 7); no Calder v. Bull categories, nothing doctrinal beyond the text (documented in tools/temporal/README.md).
+- [x] Independent Python model for all new defs; differential agrees on all 495 laws, 0 skipped; new expostfacto_boundary mutant (is_lt -> is_le) killed by bend.

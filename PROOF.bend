@@ -1879,3 +1879,44 @@ def Laws.deontic_tag_a6_oaths():
 
 def Laws.deontic_tag_am16_income_tax():
   {==}
+
+# --- Two-time temporal model + ex post facto proofs (time-and-change wave, Part A) ---
+
+def Laws.expostfacto_retroactive_criminal_is():
+  {==}
+
+def Laws.expostfacto_same_year_not():
+  {==}
+
+def Laws.expostfacto_conduct_after_enactment_not():
+  {==}
+
+def Laws.expostfacto_noncriminal_scope_boundary_not():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_applies():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_wrong_subject():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_same_year_not():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_noncriminal_not():
+  {==}
+
+def Laws.expostfacto_states_prohibition_applies():
+  {==}
+
+def Laws.expostfacto_states_prohibition_wrong_subject():
+  {==}
+
+def Laws.expostfacto_states_prohibition_same_year_not():
+  {==}
+
+def Laws.expostfacto_verdict_stable_across_repeal():
+  {==}
+
+def Laws.expostfacto_verdict_stable_across_repeal_negative():
+  {==}

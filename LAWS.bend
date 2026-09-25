@@ -1595,3 +1595,58 @@ law deontic_tag_a6_oaths:
 
 law deontic_tag_am16_income_tax:
   {C.deontic_tag_matches(C.clause_deontic(C.CL_AM16_IncomeTax{}), 3n, 1n, 44n) == True{} : Bool}
+
+# --- Two-time temporal model + ex post facto (time-and-change wave, Part A) ---
+# The ex post facto relation: conduct_year < enact_year AND criminal (caller-supplied).
+# Boundary pairs at the exact boundary: same-year is NOT ex post facto; later
+# conduct is NOT; non-criminal is NOT (criminal-only scope, caller decides).
+
+law expostfacto_retroactive_criminal_is:
+  {C.is_ex_post_facto(C.PunishmentEvent{1790n, 1795n, C.Congress{}, True{}}) == True{} : Bool}
+
+law expostfacto_same_year_not:
+  {C.is_ex_post_facto(C.PunishmentEvent{1795n, 1795n, C.Congress{}, True{}}) == False{} : Bool}
+
+law expostfacto_conduct_after_enactment_not:
+  {C.is_ex_post_facto(C.PunishmentEvent{1800n, 1795n, C.Congress{}, True{}}) == False{} : Bool}
+
+law expostfacto_noncriminal_scope_boundary_not:
+  {C.is_ex_post_facto(C.PunishmentEvent{1790n, 1795n, C.Congress{}, False{}}) == False{} : Bool}
+
+# A1S9C3: "No Bill of Attainder or ex post facto Law shall be passed." (Congress)
+# Tagged clause: CL_A1S9_Attainder. Conditional both ways over the caller inputs.
+
+law expostfacto_congress_prohibition_applies:
+  {C.congress_ex_post_facto_prohibited(C.PunishmentEvent{1790n, 1795n, C.Congress{}, True{}}) == True{} : Bool}
+
+law expostfacto_congress_prohibition_wrong_subject:
+  {C.congress_ex_post_facto_prohibited(C.PunishmentEvent{1790n, 1795n, C.StateGovernments{}, True{}}) == False{} : Bool}
+
+law expostfacto_congress_prohibition_same_year_not:
+  {C.congress_ex_post_facto_prohibited(C.PunishmentEvent{1795n, 1795n, C.Congress{}, True{}}) == False{} : Bool}
+
+law expostfacto_congress_prohibition_noncriminal_not:
+  {C.congress_ex_post_facto_prohibited(C.PunishmentEvent{1790n, 1795n, C.Congress{}, False{}}) == False{} : Bool}
+
+# A1S10C1: "No State shall ... pass any ... ex post facto Law." (states)
+# No existing Clause constructor covers this half of A1S10; identified by
+# subject StateGovernments{} (no constructor invented).
+
+law expostfacto_states_prohibition_applies:
+  {C.states_ex_post_facto_prohibited(C.PunishmentEvent{1790n, 1795n, C.StateGovernments{}, True{}}) == True{} : Bool}
+
+law expostfacto_states_prohibition_wrong_subject:
+  {C.states_ex_post_facto_prohibited(C.PunishmentEvent{1790n, 1795n, C.Congress{}, True{}}) == False{} : Bool}
+
+law expostfacto_states_prohibition_same_year_not:
+  {C.states_ex_post_facto_prohibited(C.PunishmentEvent{1795n, 1795n, C.StateGovernments{}, True{}}) == False{} : Bool}
+
+# Repeal-then-punish ordering pin: the verdict is a function of
+# (conduct_year, enact_year, criminal) only. A post-enactment repeal year
+# (caller-supplied literal) cannot flip it either way.
+
+law expostfacto_verdict_stable_across_repeal:
+  {C.ex_post_facto_verdict_after_repeal(C.PunishmentEvent{1800n, 1810n, C.Congress{}, True{}}, 1820n) == True{} : Bool}
+
+law expostfacto_verdict_stable_across_repeal_negative:
+  {C.ex_post_facto_verdict_after_repeal(C.PunishmentEvent{1810n, 1810n, C.Congress{}, True{}}, 1820n) == False{} : Bool}

@@ -3431,13 +3431,14 @@ def amendment_step(state: ConstState, target: AmendmentTarget, house_yes: Nat, h
 # properties are composed at the LAW level (where literals repeat freely), not
 # inside helpers. The helpers below are all single-use.
 #
-# Property 4 note (ex post facto): SKIPPED, by design. The model's
-# rule_a1s9_attainder(passed) takes only a caller-supplied Bool recording
-# whether such a bill passed; it has no conduct-time vs enactment-time
-# parameters, and the Ex Post Facto Clause is precisely a relation between
-# those two times ("no ... ex post facto Law shall be passed"). Stating a
-# temporal property would require inventing a criminal-conduct timeline the
-# formalization does not model. The prohibition stays a non-temporal rule.
+# Property 4 note (ex post facto): MODELED in the time-and-change wave, Part A
+# (see the "Two-time temporal model + ex post facto" section near the end of
+# this file, and tools/temporal/README.md). The v0.3.0 skip is kept for the
+# record: rule_a1s9_attainder(passed) still takes only a caller-supplied Bool
+# recording whether such a bill passed and stays a non-temporal rule — the
+# temporal relation lives in the new PunishmentEvent predicates, whose
+# criminal-conduct timeline arrives as explicit caller inputs (years + the
+# criminal flag), not invented content.
 
 # Material implication: the workhorse for "once P, always P" over ordered pairs.
 def ltl_implies(a: Bool, b: Bool) -> Bool:
@@ -3871,6 +3872,96 @@ def deontic_conflict(t1: DeonticTag, t2: DeonticTag) -> Bool:
 def clause_operative_at_2026(+c: Clause) -> Bool:
   Bool.and(clause_in_force(c),
     Bool.and(clause_commenced(c, Year{2026n}), clause_unexpired(c, Year{2026n})))
+
+# === Two-time temporal model + ex post facto (time-and-change wave, Part A) ===
+#
+# v0.3.0 explicitly skipped this ("Property 4 note" above): the model had only
+# clause-text times (commenced/unexpired) and no conduct-time vs
+# enactment-time semantics. This section adds BOTH times as plain Nat years.
+#
+# Year granularity throughout; no sub-year claims anywhere (same documented
+# bound as the temporal section: every temporal provision in the text is
+# year-dated).
+#
+# CRIMINAL PUNISHMENT ONLY. The `criminal` field is caller-supplied; civil /
+# regulatory / administrative consequences are explicitly out of scope. The
+# model decides nothing about them — the text's prohibition is read here only
+# for criminal punishment, and the caller decides which side of that line a
+# real case falls on (conditional theorems both ways, skill rule 7).
+#
+# NOT encoded: the Calder v. Bull categories or any other doctrine. This
+# layer states only the bare temporal relation the two textual clauses share
+# (conduct predates enactment + criminal), and establishes nothing doctrinal
+# beyond the text.
+#
+# The "punishes" conjunct is carried by the event type: is_ex_post_facto is
+# defined only over PunishmentEvent. A caller who labels a non-punishment a
+# PunishmentEvent has supplied a false premise — the same discipline as every
+# caller-supplied Bool in this repo.
+#
+# Linearity design (skill rule 1): a variable can't serve both a comparison
+# and a construction, so years stay plain Nat (no Year{..} construction here)
+# and the compound relation is built from one-sided predicates, conjoined
+# over the reusable event (+e).
+
+type PunishmentEvent is Data:
+  PunishmentEvent{conduct_year: Nat, enact_year: Nat, punisher: DeonticSubject, criminal: Bool}
+
+# One-sided: the governed conduct predates the law's enactment.
+def conduct_predates_enactment(e: PunishmentEvent) -> Bool:
+  match e:
+    case PunishmentEvent{conduct_year, enact_year, _, _}:
+      Nat.is_lt(conduct_year, enact_year)
+
+# One-sided: the caller marks this punishment as criminal (scope gate).
+def punishment_is_criminal(e: PunishmentEvent) -> Bool:
+  match e:
+    case PunishmentEvent{_, _, _, criminal}:
+      criminal
+
+# Subject one-sided predicates: reuse the existing DeonticSubject constructors
+# (module-global names — no new constructors introduced).
+def punisher_is_congress(e: PunishmentEvent) -> Bool:
+  match e:
+    case PunishmentEvent{_, _, punisher, _}:
+      match punisher:
+        case Congress{}: True{}
+        case _: False{}
+
+def punisher_is_states(e: PunishmentEvent) -> Bool:
+  match e:
+    case PunishmentEvent{_, _, punisher, _}:
+      match punisher:
+        case StateGovernments{}: True{}
+        case _: False{}
+
+# The ex post facto relation: conduct predates enactment AND the punishment is
+# criminal. ("Punishes" holds by the event type.)
+def is_ex_post_facto(+e: PunishmentEvent) -> Bool:
+  Bool.and(conduct_predates_enactment(e), punishment_is_criminal(e))
+
+# A1S9C3: "No Bill of Attainder or ex post facto Law shall be passed."
+# Tagged clause: CL_A1S9_Attainder (Prohibition / Congress / PassAttainderOrExPostFacto).
+def congress_ex_post_facto_prohibited(+e: PunishmentEvent) -> Bool:
+  Bool.and(is_ex_post_facto(e), punisher_is_congress(e))
+
+# A1S10C1: "No State shall ... pass any ... ex post facto Law."
+# No existing Clause constructor covers this half of A1S10 (the four A1S10
+# constructors tag treaty/coin/imposts/war only), so per the no-invention rule
+# the clause is identified by subject: StateGovernments{}.
+def states_ex_post_facto_prohibited(+e: PunishmentEvent) -> Bool:
+  Bool.and(is_ex_post_facto(e), punisher_is_states(e))
+
+# Repeal pin: the verdict is a function of (conduct_year, enact_year, criminal)
+# ONLY. The caller supplies the repeal year; the def asserts the modeled
+# scenario — repeal strictly after enactment — and returns the verdict
+# unchanged. A repeal cannot flip the verdict inside this model; the model
+# says nothing about post-repeal punishability (textually silent, no doctrine
+# invented).
+def ex_post_facto_verdict_after_repeal(+e: PunishmentEvent, repeal_year: Nat) -> Bool:
+  match e:
+    case PunishmentEvent{_, enact_year, _, _}:
+      Bool.and(Nat.is_lt(enact_year, repeal_year), is_ex_post_facto(e))
 
 # === BEGIN GENERATED deontic pairs (tools/deontic/gen_pairs.py) ===
 # Do not hand-edit: regenerate with `python3 tools/deontic/gen_pairs.py`.
