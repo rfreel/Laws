@@ -1498,3 +1498,12 @@ def Laws.temporal_a1s9_rule_active_1807():
 
 def Laws.temporal_a1s9_rule_expired_1808():
   {==}
+
+def Laws.banzhaf3_a_swings_3():
+  {==}
+
+def Laws.banzhaf3_b_swings_1():
+  {==}
+
+def Laws.banzhaf3_c_swings_1():
+  {==}

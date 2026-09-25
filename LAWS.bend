@@ -1238,3 +1238,14 @@ law temporal_a1s9_rule_active_1807:
 
 law temporal_a1s9_rule_expired_1808:
   {C.rule_a1s9_migration_restriction(C.Year{1808n}) == False{} : Bool}
+
+# Banzhaf spot-check laws: 3-voter weighted game [3,2,1], quota 4.
+# Hand-computed swing counts A=3, B=1, C=1 (see tools/voting_power/README.md).
+law banzhaf3_a_swings_3:
+  {C.banzhaf3_a_swings_are_3() == True{} : Bool}
+
+law banzhaf3_b_swings_1:
+  {C.banzhaf3_b_swings_are_1() == True{} : Bool}
+
+law banzhaf3_c_swings_1:
+  {C.banzhaf3_c_swings_are_1() == True{} : Bool}
