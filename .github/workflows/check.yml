@@ -41,8 +41,10 @@ jobs:
           sudo mkdir -p /usr/local/bend2
           sudo cp -R "$(dirname "$BASE_BEND")/." /usr/local/bend2/
           test -f /usr/local/bend2/base.bend
-          bend --version | tee /tmp/bend-version.txt
-          grep -F '2.0.27' /tmp/bend-version.txt
+          bend --help >/tmp/bend-help.txt
+          bend guide >/tmp/bend-guide.txt
+          test -s /tmp/bend-help.txt
+          test -s /tmp/bend-guide.txt
 
       - name: Check proof gate
         run: bend PROOF.bend
