@@ -1650,3 +1650,11 @@ law expostfacto_verdict_stable_across_repeal:
 
 law expostfacto_verdict_stable_across_repeal_negative:
   {C.ex_post_facto_verdict_after_repeal(C.PunishmentEvent{1810n, 1810n, C.Congress{}, True{}}, 1820n) == False{} : Bool}
+
+# Reachability gate (v0.5.0 wave): the generated balanced claim tree in
+# laws.bend (tools/reachability/gen_chains.py) evaluates True. The headline
+# reachability statements already carry individual laws above
+# (reach_two_step_*, reach_one_step_*, reach_three_step_*); this law pins
+# the generated conjunction itself, mirroring corpus_deontically_consistent_2026.
+law reachability_gate:
+  {C.reachability_gate() == True{} : Bool}

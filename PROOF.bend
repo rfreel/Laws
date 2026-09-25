@@ -1920,3 +1920,8 @@ def Laws.expostfacto_verdict_stable_across_repeal():
 
 def Laws.expostfacto_verdict_stable_across_repeal_negative():
   {==}
+
+# Reachability gate proof (v0.5.0 wave, Part B)
+def Laws.reachability_gate():
+  {==}
+  {==}

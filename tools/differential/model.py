@@ -417,6 +417,104 @@ def amendment_step(
     raise ValueError(f"unknown AmendmentTarget {target!r}")
 
 
+def const_state_code(state: Data) -> int:
+    # Nat code for a ConstState, bit order proviso*4 + rights*2 + self_rule;
+    # dictatorship CState{False,False,False} is code 0. Must agree with
+    # laws.bend const_state_bits/const_state_code (asserted by
+    # tools/reachability/check.py over all 8 states).
+    p, r, s = state.fields
+    return (4 if p else 0) + (2 if r else 0) + (1 if s else 0)
+
+
+def _max_vote_step_args():
+    # The attacker's max-vote configuration shared by the chain helpers.
+    return (
+        435,
+        Data("ChamberCount", (435, 435)),
+        100,
+        Data("ChamberCount", (100, 100)),
+        50,
+        Data("StatesCount", (50,)),
+        True,
+    )
+
+
+def reach_chain_2(t1: Data, ok1: bool, t2: Data, ok2: bool) -> Data:
+    # Max-vote two-step chain from const_init(); mirrors laws.bend
+    # reach_chain_2 (one explicit caller Bool per step).
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+    return amendment_step(
+        amendment_step(const_init(), t1, hv, house, sv, senate, rv, states, consent, ok1),
+        t2,
+        hv,
+        house,
+        sv,
+        senate,
+        rv,
+        states,
+        consent,
+        ok2,
+    )
+
+
+def reach_chain_3(
+    t1: Data, ok1: bool, t2: Data, ok2: bool, t3: Data, ok3: bool
+) -> Data:
+    # Max-vote three-step chain from const_init(); mirrors laws.bend
+    # reach_chain_3.
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+    return amendment_step(
+        amendment_step(
+            amendment_step(const_init(), t1, hv, house, sv, senate, rv, states, consent, ok1),
+            t2,
+            hv,
+            house,
+            sv,
+            senate,
+            rv,
+            states,
+            consent,
+            ok2,
+        ),
+        t3,
+        hv,
+        house,
+        sv,
+        senate,
+        rv,
+        states,
+        consent,
+        ok3,
+    )
+
+
+def reachability_gate() -> bool:
+    # Faithful re-implementation of the generated Bend def of the same name:
+    # the conjunction of the 8 key reachability claims at max votes.
+    # (Per the project's division of labor, this checks the *statements*
+    # against the second implementation; bend PROOF.bend checks the model.)
+    artV = Data("ArticleVProcedure", ())
+    ordin = Data("OrdinaryAmendment", ())
+    suffr = Data("EqualSuffrageDeprivation", ())
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+
+    def step1(target: Data, self_ok: bool) -> Data:
+        return amendment_step(
+            const_init(), target, hv, house, sv, senate, rv, states, consent, self_ok
+        )
+
+    return (
+        const_state_code(reach_chain_2(artV, True, ordin, True)) == 0
+        and const_state_code(reach_chain_2(artV, False, ordin, False)) == 5
+        and const_state_code(step1(artV, True)) == 2
+        and const_state_code(step1(ordin, True)) == 5
+        and const_state_code(step1(suffr, True)) == 7
+        and const_state_code(reach_chain_3(ordin, False, ordin, False, ordin, False)) == 5
+        and const_state_code(reach_chain_3(artV, False, ordin, False, artV, False)) == 5
+        and const_state_code(reach_chain_3(suffr, False, ordin, False, suffr, False)) == 5
+    )
+
+
 def bill_becomes_law(
     passed_house: bool,
     passed_senate: bool,
