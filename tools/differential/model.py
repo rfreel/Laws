@@ -417,6 +417,104 @@ def amendment_step(
     raise ValueError(f"unknown AmendmentTarget {target!r}")
 
 
+def const_state_code(state: Data) -> int:
+    # Nat code for a ConstState, bit order proviso*4 + rights*2 + self_rule;
+    # dictatorship CState{False,False,False} is code 0. Must agree with
+    # laws.bend const_state_bits/const_state_code (asserted by
+    # tools/reachability/check.py over all 8 states).
+    p, r, s = state.fields
+    return (4 if p else 0) + (2 if r else 0) + (1 if s else 0)
+
+
+def _max_vote_step_args():
+    # The attacker's max-vote configuration shared by the chain helpers.
+    return (
+        435,
+        Data("ChamberCount", (435, 435)),
+        100,
+        Data("ChamberCount", (100, 100)),
+        50,
+        Data("StatesCount", (50,)),
+        True,
+    )
+
+
+def reach_chain_2(t1: Data, ok1: bool, t2: Data, ok2: bool) -> Data:
+    # Max-vote two-step chain from const_init(); mirrors laws.bend
+    # reach_chain_2 (one explicit caller Bool per step).
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+    return amendment_step(
+        amendment_step(const_init(), t1, hv, house, sv, senate, rv, states, consent, ok1),
+        t2,
+        hv,
+        house,
+        sv,
+        senate,
+        rv,
+        states,
+        consent,
+        ok2,
+    )
+
+
+def reach_chain_3(
+    t1: Data, ok1: bool, t2: Data, ok2: bool, t3: Data, ok3: bool
+) -> Data:
+    # Max-vote three-step chain from const_init(); mirrors laws.bend
+    # reach_chain_3.
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+    return amendment_step(
+        amendment_step(
+            amendment_step(const_init(), t1, hv, house, sv, senate, rv, states, consent, ok1),
+            t2,
+            hv,
+            house,
+            sv,
+            senate,
+            rv,
+            states,
+            consent,
+            ok2,
+        ),
+        t3,
+        hv,
+        house,
+        sv,
+        senate,
+        rv,
+        states,
+        consent,
+        ok3,
+    )
+
+
+def reachability_gate() -> bool:
+    # Faithful re-implementation of the generated Bend def of the same name:
+    # the conjunction of the 8 key reachability claims at max votes.
+    # (Per the project's division of labor, this checks the *statements*
+    # against the second implementation; bend PROOF.bend checks the model.)
+    artV = Data("ArticleVProcedure", ())
+    ordin = Data("OrdinaryAmendment", ())
+    suffr = Data("EqualSuffrageDeprivation", ())
+    hv, house, sv, senate, rv, states, consent = _max_vote_step_args()
+
+    def step1(target: Data, self_ok: bool) -> Data:
+        return amendment_step(
+            const_init(), target, hv, house, sv, senate, rv, states, consent, self_ok
+        )
+
+    return (
+        const_state_code(reach_chain_2(artV, True, ordin, True)) == 0
+        and const_state_code(reach_chain_2(artV, False, ordin, False)) == 5
+        and const_state_code(step1(artV, True)) == 2
+        and const_state_code(step1(ordin, True)) == 5
+        and const_state_code(step1(suffr, True)) == 7
+        and const_state_code(reach_chain_3(ordin, False, ordin, False, ordin, False)) == 5
+        and const_state_code(reach_chain_3(artV, False, ordin, False, artV, False)) == 5
+        and const_state_code(reach_chain_3(suffr, False, ordin, False, suffr, False)) == 5
+    )
+
+
 def bill_becomes_law(
     passed_house: bool,
     passed_senate: bool,
@@ -1685,6 +1783,21 @@ def clause_operative_at_2026(clause: Data) -> bool:
     )
 
 
+def clause_operative_at(clause: Data, year: int) -> bool:
+    # Generalizes clause_operative_at_2026 to any year (mirrors laws.bend).
+    t = Data("Year", (year,))
+    return (
+        clause_in_force(clause)
+        and clause_commenced(clause, t)
+        and clause_unexpired(clause, t)
+    )
+
+
+def deontic_conflict_at_year(t1: Data, t2: Data, op1: bool, op2: bool) -> bool:
+    # Timeless tag conflict gated by both clauses' operative flags.
+    return op1 and op2 and deontic_conflict(t1, t2)
+
+
 def corpus_pairs_consistent_2026() -> bool:
     # Independent exhaustive check: every unordered pair of tagged clauses
     # operative at 2026 must be conflict-free. The operative set is derived
@@ -1701,6 +1814,53 @@ def corpus_pairs_consistent_2026() -> bool:
             if deontic_conflict(tags[i], tags[j]):
                 return False
     return True
+
+
+# --------------------------------------------------------------------------
+# Two-time temporal model + ex post facto (time-and-change wave, Part A)
+# --------------------------------------------------------------------------
+# Independent re-implementation of the PunishmentEvent predicates in
+# laws.bend: conduct_year < enact_year AND caller-supplied criminal flag, with
+# the punisher matched against the existing DeonticSubject constructors.
+# Criminal scope only (civil/regulatory explicitly out of scope — decided by
+# the caller's Bool, never invented here). Years are plain ints.
+
+
+def conduct_predates_enactment(e: Data) -> bool:
+    (conduct_year, enact_year, _punisher, _criminal) = e.fields
+    return conduct_year < enact_year
+
+
+def punishment_is_criminal(e: Data) -> bool:
+    (_conduct_year, _enact_year, _punisher, criminal) = e.fields
+    return criminal
+
+
+def punisher_is_congress(e: Data) -> bool:
+    (_conduct_year, _enact_year, punisher, _criminal) = e.fields
+    return punisher.name == "Congress"
+
+
+def punisher_is_states(e: Data) -> bool:
+    (_conduct_year, _enact_year, punisher, _criminal) = e.fields
+    return punisher.name == "StateGovernments"
+
+
+def is_ex_post_facto(e: Data) -> bool:
+    return conduct_predates_enactment(e) and punishment_is_criminal(e)
+
+
+def congress_ex_post_facto_prohibited(e: Data) -> bool:
+    return is_ex_post_facto(e) and punisher_is_congress(e)
+
+
+def states_ex_post_facto_prohibited(e: Data) -> bool:
+    return is_ex_post_facto(e) and punisher_is_states(e)
+
+
+def ex_post_facto_verdict_after_repeal(e: Data, repeal_year: int) -> bool:
+    (_conduct_year, enact_year, _punisher, _criminal) = e.fields
+    return enact_year < repeal_year and is_ex_post_facto(e)
 
 
 # Registry: every public model function, for the law-statement evaluator.

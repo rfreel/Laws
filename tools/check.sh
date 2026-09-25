@@ -41,6 +41,12 @@ python3 tools/differential/run.py
 echo "==> deontic exhaustive pair check (8778 pairs at 2026)"
 python3 tools/deontic/check.py
 
+echo "==> reachability exhaustive chain check (8-state abstract model)"
+python3 tools/reachability/check.py
+
+echo "==> reachability generated block freshness"
+python3 tools/reachability/gen_chains.py --check
+
 if [[ "${LAWS_SKIP_MUTATION:-0}" != "1" ]]; then
   echo "==> mutation suite (every mutant must be killed)"
   python3 tools/mutation/run.py

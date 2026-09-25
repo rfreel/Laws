@@ -1879,3 +1879,80 @@ def Laws.deontic_tag_a6_oaths():
 
 def Laws.deontic_tag_am16_income_tax():
   {==}
+
+# --- Two-time temporal model + ex post facto proofs (time-and-change wave, Part A) ---
+
+def Laws.expostfacto_retroactive_criminal_is():
+  {==}
+
+def Laws.expostfacto_same_year_not():
+  {==}
+
+def Laws.expostfacto_conduct_after_enactment_not():
+  {==}
+
+def Laws.expostfacto_noncriminal_scope_boundary_not():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_applies():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_wrong_subject():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_same_year_not():
+  {==}
+
+def Laws.expostfacto_congress_prohibition_noncriminal_not():
+  {==}
+
+def Laws.expostfacto_states_prohibition_applies():
+  {==}
+
+def Laws.expostfacto_states_prohibition_wrong_subject():
+  {==}
+
+def Laws.expostfacto_states_prohibition_same_year_not():
+  {==}
+
+def Laws.expostfacto_verdict_stable_across_repeal():
+  {==}
+
+def Laws.expostfacto_verdict_stable_across_repeal_negative():
+  {==}
+
+# Reachability gate proof (v0.5.0 wave, Part B)
+def Laws.reachability_gate():
+  {==}
+
+# --- Deontic x temporal interaction proofs (v0.5.0 wave, Part C) ---
+
+def Laws.deontic_temporal_repeal_dissolves_conflict():
+  {==}
+
+def Laws.deontic_temporal_pre_repeal_conflict():
+  {==}
+
+def Laws.deontic_temporal_expired_clause_no_conflict():
+  {==}
+
+def Laws.deontic_temporal_unexpired_clause_conflicts():
+  {==}
+
+def Laws.deontic_temporal_same_force_disjoint_no_conflict():
+  {==}
+
+def Laws.deontic_temporal_same_force_shared_year_no_conflict():
+  {==}
+
+def Laws.deontic_temporal_duty_expires_before_prohibition_no_conflict():
+  {==}
+
+def Laws.deontic_temporal_prohibition_after_duty_expires_no_conflict():
+  {==}
+
+def Laws.deontic_temporal_duty_prohibition_overlap_conflicts():
+  {==}
+
+def Laws.deontic_temporal_duty_prohibition_post_window_no_conflict():
+  {==}
