@@ -1595,3 +1595,11 @@ law deontic_tag_a6_oaths:
 
 law deontic_tag_am16_income_tax:
   {C.deontic_tag_matches(C.clause_deontic(C.CL_AM16_IncomeTax{}), 3n, 1n, 44n) == True{} : Bool}
+
+# Reachability gate (v0.5.0 wave): the generated balanced claim tree in
+# laws.bend (tools/reachability/gen_chains.py) evaluates True. The headline
+# reachability statements already carry individual laws above
+# (reach_two_step_*, reach_one_step_*, reach_three_step_*); this law pins
+# the generated conjunction itself, mirroring corpus_deontically_consistent_2026.
+law reachability_gate:
+  {C.reachability_gate() == True{} : Bool}

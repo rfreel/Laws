@@ -1879,3 +1879,6 @@ def Laws.deontic_tag_a6_oaths():
 
 def Laws.deontic_tag_am16_income_tax():
   {==}
+
+def Laws.reachability_gate():
+  {==}
