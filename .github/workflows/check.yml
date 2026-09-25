@@ -17,30 +17,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -R -n -E '@unsafe|\?TODO|^[[:space:]]*def[[:space:]]+[A-Za-z0-9_.]+\?' --include='*.bend' .; then
+          if grep -R -n -E '@unsafe|\?TODO|^[[:space:]]*def[[:space:]]+[A-Za-z0-9_.]+\?' \
+            --include='*.bend' \
+            --exclude-dir='.bend-prefix' \
+            --exclude-dir='.git' \
+            --exclude-dir='__pycache__' \
+            .; then
             echo 'unsafe Bend proof escape detected' >&2
             exit 1
           fi
           grep -F 'import ./LAWS.bend as Laws' PROOF.bend >/dev/null
 
-      - name: Install pinned Bend 2.0.27
+      - name: Install pinned Bend
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL --retry 3 \
-            -o /tmp/bend.tar.gz \
-            https://github.com/bendlang/bend/releases/download/v2.0.27/bend-2.0.27-linux-x64.tar.gz
-          echo '58adc86af6605ed0c48f7d84e4c23028f78893ce4a867a20a4f004b11582687b  /tmp/bend.tar.gz' | sha256sum -c -
-          mkdir -p /tmp/bend-release
-          tar -xzf /tmp/bend.tar.gz -C /tmp/bend-release
-          BEND_BIN="$(find /tmp/bend-release -type f -name bend -perm -111 | head -n 1)"
-          BASE_BEND="$(find /tmp/bend-release -type f -path '*/bend2/base.bend' | head -n 1)"
-          test -n "$BEND_BIN"
-          test -n "$BASE_BEND"
-          sudo install -m 0755 "$BEND_BIN" /usr/local/bin/bend
-          sudo mkdir -p /usr/local/bend2
-          sudo cp -R "$(dirname "$BASE_BEND")/." /usr/local/bend2/
-          test -f /usr/local/bend2/base.bend
+          sudo bash tools/install_bend.sh
           bend --help >/tmp/bend-help.txt
           test -s /tmp/bend-help.txt
 
