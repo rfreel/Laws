@@ -4056,3 +4056,36 @@ def corpus_pairs_consistent_2026() -> Bool:
 def reachability_gate() -> Bool:
   Bool.and(Bool.and(Bool.and(Nat.is_eq(const_state_code(reach_chain_2(ArticleVProcedure{}, True{}, OrdinaryAmendment{}, True{})), 0n), Nat.is_eq(const_state_code(reach_chain_2(ArticleVProcedure{}, False{}, OrdinaryAmendment{}, False{})), 5n)), Bool.and(Nat.is_eq(const_state_code(amendment_step(const_init(), ArticleVProcedure{}, 435n, ChamberCount{435n, 435n}, 100n, ChamberCount{100n, 100n}, 50n, StatesCount{50n}, True{}, True{})), 2n), Nat.is_eq(const_state_code(amendment_step(const_init(), OrdinaryAmendment{}, 435n, ChamberCount{435n, 435n}, 100n, ChamberCount{100n, 100n}, 50n, StatesCount{50n}, True{}, True{})), 5n))), Bool.and(Bool.and(Nat.is_eq(const_state_code(amendment_step(const_init(), EqualSuffrageDeprivation{}, 435n, ChamberCount{435n, 435n}, 100n, ChamberCount{100n, 100n}, 50n, StatesCount{50n}, True{}, True{})), 7n), Nat.is_eq(const_state_code(reach_chain_3(OrdinaryAmendment{}, False{}, OrdinaryAmendment{}, False{}, OrdinaryAmendment{}, False{})), 5n)), Bool.and(Nat.is_eq(const_state_code(reach_chain_3(ArticleVProcedure{}, False{}, OrdinaryAmendment{}, False{}, ArticleVProcedure{}, False{})), 5n), Nat.is_eq(const_state_code(reach_chain_3(EqualSuffrageDeprivation{}, False{}, OrdinaryAmendment{}, False{}, EqualSuffrageDeprivation{}, False{})), 5n))))
 # === END GENERATED reachability chains ===
+
+# === deontic x temporal interaction (v0.5.0 wave, Part C) ===
+#
+# `deontic_conflict` is timeless: it compares tags, not years. These defs pin
+# the corpus's temporal scoping of that comparison: a conflict the tags report
+# is a real deontic-temporal conflict only when both clauses are operative in
+# the same year. `clause_operative_at` generalizes `clause_operative_at_2026`
+# to any year (years as Nat; no sub-year claims); `deontic_conflict_at_year`
+# takes the two operative flags as caller-computed Bool (skill rule 2), so the
+# laws below state one-sided window readings at the law level.
+#
+# Claim boundaries (restated; also see the header above clause_deontic):
+# - The deontic layer is the minimal tag table. Untagged clauses carry no tag
+#   and are out of scope of every law below.
+# - The corpus contains no same-action Prohibition/Permission or
+#   Prohibition/Duty pair, and no duty clause with a temporal window. Laws
+#   that need one probe the conflict predicate with a CONSTRUCTED tag over a
+#   real action (cf. LAWS.bend line ~1491 precedent) — a formal probe of the
+#   predicate's temporal logic, not a claim about any clause's text. Where a
+#   counterfactual clause's operativeness is needed it is stipulated as a Bool
+#   literal with the interval stated in the comment.
+# - `clause_in_force` is the timeless 2026-snapshot mark: the three AM18
+#   clauses are marked not-in-force because AM21 repealed them, so
+#   `clause_operative_at(CL_AM18S1_Prohibition{}, y)` is False for every y.
+#   The year-scoped operative WINDOW of a repealed clause is
+#   commenced ∧ unexpired; `clause_unexpired` records the repeal ("expired
+#   from 1934 at year granularity", AM21 ratified 1933-12-05).
+def clause_operative_at(+c: Clause, +year: Nat) -> Bool:
+  Bool.and(clause_in_force(c),
+    Bool.and(clause_commenced(c, Year{year}), clause_unexpired(c, Year{year})))
+
+def deontic_conflict_at_year(t1: DeonticTag, t2: DeonticTag, op1: Bool, op2: Bool) -> Bool:
+  Bool.and(op1, Bool.and(op2, deontic_conflict(t1, t2)))

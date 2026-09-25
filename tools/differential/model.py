@@ -1783,6 +1783,21 @@ def clause_operative_at_2026(clause: Data) -> bool:
     )
 
 
+def clause_operative_at(clause: Data, year: int) -> bool:
+    # Generalizes clause_operative_at_2026 to any year (mirrors laws.bend).
+    t = Data("Year", (year,))
+    return (
+        clause_in_force(clause)
+        and clause_commenced(clause, t)
+        and clause_unexpired(clause, t)
+    )
+
+
+def deontic_conflict_at_year(t1: Data, t2: Data, op1: bool, op2: bool) -> bool:
+    # Timeless tag conflict gated by both clauses' operative flags.
+    return op1 and op2 and deontic_conflict(t1, t2)
+
+
 def corpus_pairs_consistent_2026() -> bool:
     # Independent exhaustive check: every unordered pair of tagged clauses
     # operative at 2026 must be conflict-free. The operative set is derived
