@@ -1595,3 +1595,75 @@ law deontic_tag_a6_oaths:
 
 law deontic_tag_am16_income_tax:
   {C.deontic_tag_matches(C.clause_deontic(C.CL_AM16_IncomeTax{}), 3n, 1n, 44n) == True{} : Bool}
+
+# --- Deontic x temporal interaction spot laws (v0.5.0 wave, Part C) ---
+#
+# Each principle is a boundary pair pinned at literal years. `deontic_conflict`
+# is timeless; these laws pin when a tag-level conflict is a REAL conflict:
+# only when both clauses are operative in the same year.
+#
+# Bound (restated from laws.bend): untagged clauses are out of scope. The
+# corpus has no same-action Prohibition/Permission or Prohibition/Duty pair
+# and no duty with a temporal window, so those laws use CONSTRUCTED tags over
+# real actions (line-1491 precedent) — formal probes of the predicate, not
+# claims about clause text. Counterfactual operativeness is stipulated as a
+# Bool literal with the interval stated per law.
+#
+# Pair 1 — repeal dissolves the apparent conflict. AM18S1's prohibition window
+# is [1920,1934): commenced 1920 (AM18S3), unexpired through 1933 (AM21
+# ratified 1933-12-05; "expired from 1934 at year granularity"). A permission
+# over the same action (ManufactureSellTransportLiquor, Anyone) granted at
+# t >= 1934 meets no operative prohibition; at 1933 = t2-1, still inside the
+# window, the tags DO conflict. (`clause_in_force` is the timeless repeal
+# mark, so the window is stated as commenced ∧ unexpired at the law level.)
+law deontic_temporal_repeal_dissolves_conflict:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_AM18S1_Prohibition{}), C.Tagged{C.Permission{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1934n})), True{}) == False{} : Bool}
+
+law deontic_temporal_pre_repeal_conflict:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_AM18S1_Prohibition{}), C.Tagged{C.Permission{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1933n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1933n})), True{}) == True{} : Bool}
+
+# Pair 2 — expired clause cannot participate. CL_A1S9_MigrationRestriction is
+# tagged (Prohibition, Congress, ProhibitMigrationImportation) but its text
+# expires at 1808 ("prior to the Year one thousand eight hundred and eight"):
+# operative at 1807, inoperative at 1808, hence conflict-capable at 1807 and
+# not at 1808. (The 2026 snapshot is already pinned by
+# deontic_expired_migration_2026.)
+law deontic_temporal_expired_clause_no_conflict:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_A1S9_MigrationRestriction{}), C.Tagged{C.Permission{}, C.Congress{}, C.ProhibitMigrationImportation{}}, C.clause_operative_at(C.CL_A1S9_MigrationRestriction{}, 1808n), True{}) == False{} : Bool}
+
+law deontic_temporal_unexpired_clause_conflicts:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_A1S9_MigrationRestriction{}), C.Tagged{C.Permission{}, C.Congress{}, C.ProhibitMigrationImportation{}}, C.clause_operative_at(C.CL_A1S9_MigrationRestriction{}, 1807n), True{}) == True{} : Bool}
+
+# Pair 3 — same force at disjoint times: no conflict at any single time point.
+# Two prohibitions over the same action and subject never oppose, so the pair
+# is conflict-free both at a year covered by only one interval (1925, second
+# prohibition stipulated inoperative — its interval is disjoint from 1925)
+# and at a year covered by both (stipulated operative). A shared operative
+# year is necessary for conflict (pairs 1, 2, 5) but not sufficient.
+law deontic_temporal_same_force_disjoint_no_conflict:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_AM18S1_Prohibition{}), C.Tagged{C.Prohibition{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1925n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1925n})), False{}) == False{} : Bool}
+
+law deontic_temporal_same_force_shared_year_no_conflict:
+  {C.deontic_conflict_at_year(C.clause_deontic(C.CL_AM18S1_Prohibition{}), C.Tagged{C.Prohibition{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1925n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1925n})), True{}) == False{} : Bool}
+
+# Pair 4 — prohibition vs duty where the duty expires before the prohibition
+# begins: no overlap, no conflict at any single time point. Counterfactual
+# duty (Duty, Anyone, ManufactureSellTransportLiquor) stipulated operative on
+# [1900,1920): at 1910 the duty is operative and AM18's window has not opened;
+# at 1925 the duty has expired and AM18's window is open. Both years pin False.
+law deontic_temporal_duty_expires_before_prohibition_no_conflict:
+  {C.deontic_conflict_at_year(C.Tagged{C.Duty{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, C.clause_deontic(C.CL_AM18S1_Prohibition{}), True{}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1910n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1910n}))) == False{} : Bool}
+
+law deontic_temporal_prohibition_after_duty_expires_no_conflict:
+  {C.deontic_conflict_at_year(C.Tagged{C.Duty{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, C.clause_deontic(C.CL_AM18S1_Prohibition{}), False{}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1925n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1925n}))) == False{} : Bool}
+
+# Pair 5 — positive case (guards against over-generalizing the
+# repeal-dissolves rule): prohibition vs duty overlapping in time over the
+# same action DOES conflict. Counterfactual duty stipulated operative on
+# [1920,1940): at 1925 both windows are open and the tags conflict; at 1935
+# the duty is still operative but AM18's window has closed, so no conflict.
+law deontic_temporal_duty_prohibition_overlap_conflicts:
+  {C.deontic_conflict_at_year(C.Tagged{C.Duty{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, C.clause_deontic(C.CL_AM18S1_Prohibition{}), True{}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1925n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1925n}))) == True{} : Bool}
+
+law deontic_temporal_duty_prohibition_post_window_no_conflict:
+  {C.deontic_conflict_at_year(C.Tagged{C.Duty{}, C.Anyone{}, C.ManufactureSellTransportLiquor{}}, C.clause_deontic(C.CL_AM18S1_Prohibition{}), True{}, Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1935n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1935n}))) == False{} : Bool}
