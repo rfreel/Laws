@@ -34,8 +34,13 @@ jobs:
           mkdir -p /tmp/bend-release
           tar -xzf /tmp/bend.tar.gz -C /tmp/bend-release
           BEND_BIN="$(find /tmp/bend-release -type f -name bend -perm -111 | head -n 1)"
+          BASE_BEND="$(find /tmp/bend-release -type f -path '*/bend2/base.bend' | head -n 1)"
           test -n "$BEND_BIN"
+          test -n "$BASE_BEND"
           sudo install -m 0755 "$BEND_BIN" /usr/local/bin/bend
+          sudo mkdir -p /usr/local/bend2
+          sudo cp -R "$(dirname "$BASE_BEND")/." /usr/local/bend2/
+          test -f /usr/local/bend2/base.bend
           bend --version | tee /tmp/bend-version.txt
           grep -F '2.0.27' /tmp/bend-version.txt
 
