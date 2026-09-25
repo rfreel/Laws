@@ -1130,3 +1130,102 @@ law am27_timing_pass:
 
 law am27_timing_fail:
   {C.rule_am27_timing(True{}, False{}) == False{} : Bool}
+
+# --- Temporal activation (TASKS.md item 3) ---
+#
+# Linearity note: Bend 2.0.27 consumes every variable exactly once, so a
+# closed interval such as AM18's [1920, 1933] cannot be tested with two
+# comparisons on one year variable. The temporal API therefore exposes both
+# sides separately — `clause_commenced` (has the text taken effect by t?) and
+# `clause_unexpired` (has the text lapsed by t?) — each one-sided and directly
+# checkable. The full "operative at t" reading is their conjunction, stated
+# explicitly in the window laws below.
+
+# A1S9 migration/importation bar on Congress: operative strictly before 1808.
+law temporal_a1s9_unexpired_1807:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1807n}) == True{} : Bool}
+
+law temporal_a1s9_expired_1808:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1808n}) == False{} : Bool}
+
+# The clause rule and the temporal predicate agree (wiring coherence).
+law temporal_a1s9_rule_coherent_1807:
+  {C.rule_a1s9_migration_restriction(C.Year{1807n}) == C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1807n}) : Bool}
+
+# Original-text clause: commenced from the start, no expiry in the text.
+law temporal_a1s9_commenced_1807:
+  {C.clause_commenced(C.CL_A1S9_MigrationRestriction{}, C.Year{1807n}) == True{} : Bool}
+
+# AM18: commenced 1920 (effective one year after 1919 ratification, AM18S3).
+law temporal_am18_commenced_1920:
+  {C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}) == True{} : Bool}
+
+law temporal_am18_uncommenced_1919:
+  {C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1919n}) == False{} : Bool}
+
+# AM18: unexpired through 1933; repealed by AM21 (ratified 1933-12-05), so
+# expired from 1934 at year granularity.
+law temporal_am18_unexpired_1933:
+  {C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1933n}) == True{} : Bool}
+
+law temporal_am18_expired_1934:
+  {C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}) == False{} : Bool}
+
+# The operative window 1920-1933 is the conjunction of both sides.
+law temporal_am18_window_1932:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1932n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1932n})) == True{} : Bool}
+
+law temporal_am18_window_1919:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1919n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1919n})) == False{} : Bool}
+
+law temporal_am18_window_1934:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1934n})) == False{} : Bool}
+
+# Combined reading: the timeless repeal mark dominates, so AM18 is never
+# "effective" in the present-day sense, even inside its historical window.
+law temporal_am18_effective_never_1932:
+  {Bool.and(C.clause_in_force(C.CL_AM18S1_Prohibition{}), Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1932n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1932n}))) == False{} : Bool}
+
+# A clause with no temporal provision is commenced and unexpired at any time.
+law temporal_ordinary_clause_commenced_1807:
+  {C.clause_commenced(C.CL_AM26S1_VoteAge{}, C.Year{1807n}) == True{} : Bool}
+
+law temporal_ordinary_clause_unexpired_2026:
+  {C.clause_unexpired(C.CL_AM26S1_VoteAge{}, C.Year{2026n}) == True{} : Bool}
+
+# Ratification deadlines: the text is silent, so the corpus default is none.
+law temporal_deadline_silent_am18:
+  {C.ratification_deadline_for(C.AM18S1{}) == C.NoDeadlineInText{} : C.RatificationDeadline}
+
+law temporal_deadline_silent_a5:
+  {C.ratification_deadline_for(C.A5{}) == C.NoDeadlineInText{} : C.RatificationDeadline}
+
+# Explicit deadlines (caller-supplied, e.g. from proposing resolutions).
+law temporal_ratification_timely_7yr:
+  {C.ratification_timely(1917n, 1919n, C.YearsAfterProposal{7n}) == True{} : Bool}
+
+law temporal_ratification_untimely_7yr:
+  {C.ratification_timely(1917n, 1925n, C.YearsAfterProposal{7n}) == False{} : Bool}
+
+law temporal_ratification_no_deadline_always_timely:
+  {C.ratification_timely(1917n, 1992n, C.NoDeadlineInText{}) == True{} : Bool}
+
+# Succession: AM25 activates in 1967.
+law temporal_succession_vacancy_1968:
+  {C.succession_rule_effective(True{}, C.Year{1968n}) == True{} : Bool}
+
+law temporal_succession_vacancy_1966:
+  {C.succession_rule_effective(True{}, C.Year{1966n}) == False{} : Bool}
+
+law temporal_acting_president_inability_1968:
+  {C.acting_president_serves(True{}, C.Year{1968n}) == True{} : Bool}
+
+law temporal_acting_president_inability_1966:
+  {C.acting_president_serves(True{}, C.Year{1966n}) == False{} : Bool}
+
+# AM20S1 term commencement activates in 1933.
+law temporal_term_jan20_1933:
+  {C.term_commencement_jan20(C.Year{1933n}) == True{} : Bool}
+
+law temporal_term_jan20_1932:
+  {C.term_commencement_jan20(C.Year{1932n}) == False{} : Bool}

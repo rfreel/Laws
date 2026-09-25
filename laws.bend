@@ -711,6 +711,8 @@ type Clause is Data:
   CL_AM24S2_Enforcement{}
   CL_AM26S2_Enforcement{}
   CL_AM27_CompensationTiming{}
+  # A1S9's migration/importation restriction (temporal: operative before 1808).
+  CL_A1S9_MigrationRestriction{}
 
 def clause_source(c: Clause) -> SourceBlock:
   match c:
@@ -978,6 +980,8 @@ def clause_source(c: Clause) -> SourceBlock:
       AM26S2{}
     case CL_AM27_CompensationTiming{}:
       AM27{}
+    case CL_A1S9_MigrationRestriction{}:
+      A1S9{}
 
 def clause_index(c: Clause) -> Nat:
   match c:
@@ -1245,6 +1249,8 @@ def clause_index(c: Clause) -> Nat:
       130n
     case CL_AM27_CompensationTiming{}:
       131n
+    case CL_A1S9_MigrationRestriction{}:
+      132n
 
 def clause_effect(c: Clause) -> ClauseEffect:
   match c:
@@ -1512,9 +1518,12 @@ def clause_effect(c: Clause) -> ClauseEffect:
       FederalPower{}
     case CL_AM27_CompensationTiming{}:
       LegislativeProcedure{}
+    case CL_A1S9_MigrationRestriction{}:
+      # A restriction on Congress's power: a FederalPower-scope clause.
+      FederalPower{}
 
 def clause_count() -> Nat:
-  132n
+  133n
 
 def clause_index_in_range(c: Clause) -> Bool:
   Nat.is_lt(clause_index(c), clause_count())
@@ -3136,3 +3145,147 @@ def rule_am26s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> 
 # election of Representatives intervenes.
 def rule_am27_timing(varying_law: Bool, election_intervened: Bool) -> Bool:
   Bool.or(Bool.not(varying_law), election_intervened)
+# === Temporal activation (TASKS.md item 3) ===
+#
+# TimePoint uses YEAR granularity. This is a documented modeling choice, not a
+# limitation: every temporal provision in the constitutional text is year-dated
+# ("the Year one thousand eight hundred and eight"; ratification and repeal
+# years). Sub-year events (e.g. AM21 ratified 1933-12-05) resolve to the year
+# in which they occurred; the boundary-year choice is documented per
+# provision. Finer granularity would not change any verdict the text expresses.
+#
+# Linearity design note: Bend 2.0.27 consumes every variable exactly once, so
+# a closed interval such as AM18's [1920, 1933] cannot be tested with two
+# comparisons on one year variable. The temporal API therefore exposes both
+# sides separately — `clause_commenced` (has the text taken effect by t?) and
+# `clause_unexpired` (has the text lapsed by t?) — each one-sided and directly
+# checkable. The full "operative at t" reading is their conjunction, stated at
+# the law level where constructor arguments may be repeated freely.
+#
+# Scope judgment call: these predicates answer whether a clause's TEXT is
+# temporally operative at t. Clauses with no temporal provision in the text are
+# always commenced and unexpired — the layer does NOT gate ordinary clauses on
+# amendment ratification dates (that would import 27 external dates and a
+# bigger claim than the task's four provisions: pre-1808, ratification
+# deadlines, repeal, succession).
+
+type TimePoint is Data:
+  Year{year: Nat}
+
+# A1S9: "The Migration or Importation of such Persons as any of the States now
+# existing shall think proper to admit, shall not be prohibited by the Congress
+# prior to the Year one thousand eight hundred and eight, but a Tax or duty may
+# be imposed on such Importation, not exceeding ten dollars for each Person."
+# (National Archives constitution transcript.) The bar on Congress operates
+# strictly before 1808; from 1808 Congress may prohibit. True exactly when the
+# restriction is operative.
+def rule_a1s9_migration_restriction(t: TimePoint) -> Bool:
+  match t:
+    case Year{year}:
+      Nat.is_lt(year, 1808n)
+
+# Has the clause's text COMMENCED operation by t (in effect from)?
+def clause_commenced(c: Clause, t: TimePoint) -> Bool:
+  match c:
+    case CL_AM18S1_Prohibition{}:
+      # AM18S3: "after one year from the ratification" (ratified 1919) -> 1920.
+      match t:
+        case Year{year}:
+          Nat.is_le(1920n, year)
+    case CL_AM18S2_ConcurrentPower{}:
+      match t:
+        case Year{year}:
+          Nat.is_le(1920n, year)
+    case CL_AM18S3_EffectiveDate{}:
+      match t:
+        case Year{year}:
+          Nat.is_le(1920n, year)
+    case _:
+      # Original text and all other amendments: the layer does not gate
+      # ordinary clauses on ratification dates (see scope note above).
+      True{}
+
+# Has the clause's text NOT YET EXPIRED by t (not lapsed / not repealed by time)?
+def clause_unexpired(c: Clause, t: TimePoint) -> Bool:
+  match c:
+    case CL_A1S9_MigrationRestriction{}:
+      match t:
+        case Year{year}:
+          Nat.is_lt(year, 1808n)
+    case CL_AM18S1_Prohibition{}:
+      # Repealed by AM21 ("The eighteenth article of amendment ... is hereby
+      # repealed"), ratified 1933-12-05 (National Archives amendments
+      # transcript): expired from 1934 at year granularity.
+      match t:
+        case Year{year}:
+          Nat.is_le(year, 1933n)
+    case CL_AM18S2_ConcurrentPower{}:
+      match t:
+        case Year{year}:
+          Nat.is_le(year, 1933n)
+    case CL_AM18S3_EffectiveDate{}:
+      match t:
+        case Year{year}:
+          Nat.is_le(year, 1933n)
+    case _:
+      True{}
+
+# --- Ratification deadlines ---
+#
+# Honesty note: the 7-year ratification deadlines (AM18, AM20, AM21, AM22) live
+# in the proposing CONGRESSIONAL RESOLUTIONS, not in the amendment texts. The
+# modeled corpus (the constitutional text) states no deadline for any block,
+# so `ratification_deadline_for` is honestly `NoDeadlineInText{}` everywhere
+# and deadlines arrive as explicit caller-supplied inputs — the same
+# record-don't-invent discipline as InterpretiveTerm. Test data such as
+# `YearsAfterProposal{7n}` is caller context, not an assertion of
+# constitutional text.
+
+type RatificationDeadline is Data:
+  NoDeadlineInText{}
+  YearsAfterProposal{n: Nat}
+
+def ratification_deadline_for(block: SourceBlock) -> RatificationDeadline:
+  # The amendment texts state no deadline; resolutions did. Silent corpus ->
+  # silent default for every block.
+  match block:
+    case _:
+      NoDeadlineInText{}
+
+def ratification_timely(proposed_year: Nat, ratified_year: Nat, deadline: RatificationDeadline) -> Bool:
+  match deadline:
+    case NoDeadlineInText{}:
+      True{}
+    case YearsAfterProposal{n}:
+      Nat.is_le(ratified_year, Nat.add(proposed_year, n))
+
+# --- Succession, time-indexed (AM20, AM25) ---
+#
+# AM25S1 (ratified 1967-02-10): "the Vice President shall become President" on
+# vacancy. Before 1967, A2S1's devolution clause governed ("the Same shall
+# devolve on the Vice President"). AM25S3/S4: the VP serves as Acting President
+# on inability (1967+).
+
+def vp_becomes_president_on_vacancy(vacancy: Bool, t: TimePoint) -> Bool:
+  match t:
+    case Year{year}:
+      Bool.and(vacancy, Nat.is_le(1967n, year))
+
+def acting_president_serves(inability_declared: Bool, t: TimePoint) -> Bool:
+  match t:
+    case Year{year}:
+      Bool.and(inability_declared, Nat.is_le(1967n, year))
+
+# Reuses the existing AM25S1 clause rule; gates it on AM25's activation.
+def succession_rule_effective(vacancy: Bool, t: TimePoint) -> Bool:
+  match t:
+    case Year{year}:
+      Bool.and(rule_am25s1_succession(vacancy), Nat.is_le(1967n, year))
+
+# AM20S1 (ratified 1933-01-23): presidential terms end at noon, January 20.
+# The pre-1933 March 4 date was statutory, not constitutional text, so the
+# model records only AM20's activation, not a competing textual rule.
+def term_commencement_jan20(t: TimePoint) -> Bool:
+  match t:
+    case Year{year}:
+      Nat.is_le(1933n, year)

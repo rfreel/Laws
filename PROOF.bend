@@ -503,6 +503,8 @@ def Laws.clause_indices_bounded(c):
       {==}
     case C.CL_AM27_CompensationTiming{}:
       {==}
+    case C.CL_A1S9_MigrationRestriction{}:
+      {==}
 
 def Laws.preamble_purpose_affirmed_pass():
   {==}
@@ -1414,4 +1416,79 @@ def Laws.am27_timing_pass():
   {==}
 
 def Laws.am27_timing_fail():
+  {==}
+
+def Laws.temporal_a1s9_unexpired_1807():
+  {==}
+
+def Laws.temporal_a1s9_expired_1808():
+  {==}
+
+def Laws.temporal_a1s9_rule_coherent_1807():
+  {==}
+
+def Laws.temporal_a1s9_commenced_1807():
+  {==}
+
+def Laws.temporal_am18_commenced_1920():
+  {==}
+
+def Laws.temporal_am18_uncommenced_1919():
+  {==}
+
+def Laws.temporal_am18_unexpired_1933():
+  {==}
+
+def Laws.temporal_am18_expired_1934():
+  {==}
+
+def Laws.temporal_am18_window_1932():
+  {==}
+
+def Laws.temporal_am18_window_1919():
+  {==}
+
+def Laws.temporal_am18_window_1934():
+  {==}
+
+def Laws.temporal_am18_effective_never_1932():
+  {==}
+
+def Laws.temporal_ordinary_clause_commenced_1807():
+  {==}
+
+def Laws.temporal_ordinary_clause_unexpired_2026():
+  {==}
+
+def Laws.temporal_deadline_silent_am18():
+  {==}
+
+def Laws.temporal_deadline_silent_a5():
+  {==}
+
+def Laws.temporal_ratification_timely_7yr():
+  {==}
+
+def Laws.temporal_ratification_untimely_7yr():
+  {==}
+
+def Laws.temporal_ratification_no_deadline_always_timely():
+  {==}
+
+def Laws.temporal_succession_vacancy_1968():
+  {==}
+
+def Laws.temporal_succession_vacancy_1966():
+  {==}
+
+def Laws.temporal_acting_president_inability_1968():
+  {==}
+
+def Laws.temporal_acting_president_inability_1966():
+  {==}
+
+def Laws.temporal_term_jan20_1933():
+  {==}
+
+def Laws.temporal_term_jan20_1932():
   {==}
