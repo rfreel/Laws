@@ -35,4 +35,15 @@ fi
 echo "==> bend PROOF.bend ($(command -v bend))"
 bend PROOF.bend
 
+echo "==> differential model vs LAWS.bend"
+python3 tools/differential/run.py
+
+echo "==> deontic exhaustive pair check (8778 pairs at 2026)"
+python3 tools/deontic/check.py
+
+if [[ "${LAWS_SKIP_MUTATION:-0}" != "1" ]]; then
+  echo "==> mutation suite (every mutant must be killed)"
+  python3 tools/mutation/run.py
+fi
+
 echo "check ok"
