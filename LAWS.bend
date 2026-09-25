@@ -1238,3 +1238,156 @@ law temporal_a1s9_rule_active_1807:
 
 law temporal_a1s9_rule_expired_1808:
   {C.rule_a1s9_migration_restriction(C.Year{1808n}) == False{} : Bool}
+# --- Temporal-logic properties (LTL-style, explicitly bounded) ---
+#
+# Property 1 -- repeal monotonicity (AM18): (y1 <= y2) -> (expired(y1) -> expired(y2)).
+# Checked for 7 pairs per clause over 1808-2100: (1933,1934) pins the repeal edge,
+# (2026,1934) exercises the vacuous y1>y2 guard, (1808,1934) the pre-window case.
+# Does NOT establish: anything about unlisted pairs, or sub-year timing.
+
+law ltl_am18_expired_persists_s1_1933_1934:
+  {C.ltl_implies(C.ltl_le(1933n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1933n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_1934_1934:
+  {C.ltl_implies(C.ltl_le(1934n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_1934_1950:
+  {C.ltl_implies(C.ltl_le(1934n, 1950n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1950n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_1934_2100:
+  {C.ltl_implies(C.ltl_le(1934n, 2100n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_1950_2026:
+  {C.ltl_implies(C.ltl_le(1950n, 2026n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1950n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_1808_1934:
+  {C.ltl_implies(C.ltl_le(1808n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1808n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s1_2026_1934:
+  {C.ltl_implies(C.ltl_le(2026n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{2026n}), C.clause_expired(C.CL_AM18S1_Prohibition{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1933_1934:
+  {C.ltl_implies(C.ltl_le(1933n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1933n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1934_1934:
+  {C.ltl_implies(C.ltl_le(1934n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1934_1950:
+  {C.ltl_implies(C.ltl_le(1934n, 1950n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1950n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1934_2100:
+  {C.ltl_implies(C.ltl_le(1934n, 2100n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1950_2026:
+  {C.ltl_implies(C.ltl_le(1950n, 2026n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1950n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_1808_1934:
+  {C.ltl_implies(C.ltl_le(1808n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1808n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s2_2026_1934:
+  {C.ltl_implies(C.ltl_le(2026n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n}), C.clause_expired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1933_1934:
+  {C.ltl_implies(C.ltl_le(1933n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1933n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1934_1934:
+  {C.ltl_implies(C.ltl_le(1934n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1934_1950:
+  {C.ltl_implies(C.ltl_le(1934n, 1950n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1950n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1934_2100:
+  {C.ltl_implies(C.ltl_le(1934n, 2100n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1950_2026:
+  {C.ltl_implies(C.ltl_le(1950n, 2026n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1950n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_1808_1934:
+  {C.ltl_implies(C.ltl_le(1808n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1808n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}))) == True{} : Bool}
+law ltl_am18_expired_persists_s3_2026_1934:
+  {C.ltl_implies(C.ltl_le(2026n, 1934n), C.ltl_implies(C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}), C.clause_expired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}))) == True{} : Bool}
+#
+# Property 2 -- commencement monotonicity: (y1 <= y2) -> (commenced(y1) -> commenced(y2)).
+# Checked for the 3 AM18 clauses over 1919-2026 (6 pairs each, incl. the 1919/1920
+# effectiveness edge and one vacuous reversed pair) and one ordinary clause
+# (CL_A1S7_Presentment, always commenced) over 1789-2026.
+# Does NOT establish: anything about unlisted pairs or clauses.
+
+law ltl_am18_commenced_persists_s1_1919_1920:
+  {C.ltl_implies(C.ltl_le(1919n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1919n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s1_1920_1920:
+  {C.ltl_implies(C.ltl_le(1920n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s1_1920_1933:
+  {C.ltl_implies(C.ltl_le(1920n, 1933n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1933n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s1_1920_2100:
+  {C.ltl_implies(C.ltl_le(1920n, 2100n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s1_1933_2026:
+  {C.ltl_implies(C.ltl_le(1933n, 2026n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1933n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s1_2026_1920:
+  {C.ltl_implies(C.ltl_le(2026n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{2026n}), C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_1919_1920:
+  {C.ltl_implies(C.ltl_le(1919n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1919n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_1920_1920:
+  {C.ltl_implies(C.ltl_le(1920n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_1920_1933:
+  {C.ltl_implies(C.ltl_le(1920n, 1933n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1933n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_1920_2100:
+  {C.ltl_implies(C.ltl_le(1920n, 2100n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_1933_2026:
+  {C.ltl_implies(C.ltl_le(1933n, 2026n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1933n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s2_2026_1920:
+  {C.ltl_implies(C.ltl_le(2026n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n}), C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_1919_1920:
+  {C.ltl_implies(C.ltl_le(1919n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1919n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_1920_1920:
+  {C.ltl_implies(C.ltl_le(1920n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_1920_1933:
+  {C.ltl_implies(C.ltl_le(1920n, 1933n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1933n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_1920_2100:
+  {C.ltl_implies(C.ltl_le(1920n, 2100n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_1933_2026:
+  {C.ltl_implies(C.ltl_le(1933n, 2026n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1933n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_am18_commenced_persists_s3_2026_1920:
+  {C.ltl_implies(C.ltl_le(2026n, 1920n), C.ltl_implies(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}), C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1920n}))) == True{} : Bool}
+law ltl_ordinary_commenced_persists_1789_2026:
+  {C.ltl_implies(C.ltl_le(1789n, 2026n), C.ltl_implies(C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{1789n}), C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{2026n}))) == True{} : Bool}
+law ltl_ordinary_commenced_persists_2026_1789:
+  {C.ltl_implies(C.ltl_le(2026n, 1789n), C.ltl_implies(C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{2026n}), C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{1789n}))) == True{} : Bool}
+law ltl_ordinary_commenced_persists_1900_1900:
+  {C.ltl_implies(C.ltl_le(1900n, 1900n), C.ltl_implies(C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{1900n}), C.clause_commenced(C.CL_A1S7_Presentment{}, C.Year{1900n}))) == True{} : Bool}
+#
+# Property 3 -- non-return. (a) The A1S9 migration restriction never becomes operative
+# again: checked for both the named rule and clause_unexpired at 1808, 1809, 1900,
+# 1934, 2026, 2100. (b) No AM18 clause is ever operative again after 1934:
+# commenced AND unexpired == False at 1934, 1950, 2026, 2100 per clause.
+# Does NOT establish: anything about unlisted years, or sub-year timing.
+
+law ltl_a1s9_rule_never_returns_1808:
+  {C.rule_a1s9_migration_restriction(C.Year{1808n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_1808:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1808n}) == False{} : Bool}
+law ltl_a1s9_rule_never_returns_1809:
+  {C.rule_a1s9_migration_restriction(C.Year{1809n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_1809:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1809n}) == False{} : Bool}
+law ltl_a1s9_rule_never_returns_1900:
+  {C.rule_a1s9_migration_restriction(C.Year{1900n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_1900:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1900n}) == False{} : Bool}
+law ltl_a1s9_rule_never_returns_1934:
+  {C.rule_a1s9_migration_restriction(C.Year{1934n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_1934:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{1934n}) == False{} : Bool}
+law ltl_a1s9_rule_never_returns_2026:
+  {C.rule_a1s9_migration_restriction(C.Year{2026n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_2026:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{2026n}) == False{} : Bool}
+law ltl_a1s9_rule_never_returns_2100:
+  {C.rule_a1s9_migration_restriction(C.Year{2100n}) == False{} : Bool}
+law ltl_a1s9_unexpired_never_returns_2100:
+  {C.clause_unexpired(C.CL_A1S9_MigrationRestriction{}, C.Year{2100n}) == False{} : Bool}
+law ltl_am18_never_operative_again_s1_1934:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1934n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1934n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s1_1950:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{1950n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{1950n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s1_2026:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{2026n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{2026n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s1_2100:
+  {Bool.and(C.clause_commenced(C.CL_AM18S1_Prohibition{}, C.Year{2100n}), C.clause_unexpired(C.CL_AM18S1_Prohibition{}, C.Year{2100n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s2_1934:
+  {Bool.and(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n}), C.clause_unexpired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1934n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s2_1950:
+  {Bool.and(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{1950n}), C.clause_unexpired(C.CL_AM18S2_ConcurrentPower{}, C.Year{1950n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s2_2026:
+  {Bool.and(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n}), C.clause_unexpired(C.CL_AM18S2_ConcurrentPower{}, C.Year{2026n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s2_2100:
+  {Bool.and(C.clause_commenced(C.CL_AM18S2_ConcurrentPower{}, C.Year{2100n}), C.clause_unexpired(C.CL_AM18S2_ConcurrentPower{}, C.Year{2100n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s3_1934:
+  {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{1934n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s3_1950:
+  {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{1950n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{1950n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s3_2026:
+  {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{2026n})) == False{} : Bool}
+law ltl_am18_never_operative_again_s3_2100:
+  {Bool.and(C.clause_commenced(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n}), C.clause_unexpired(C.CL_AM18S3_EffectiveDate{}, C.Year{2100n})) == False{} : Bool}

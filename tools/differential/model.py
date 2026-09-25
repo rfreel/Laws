@@ -1289,6 +1289,21 @@ def _is_model_fn(obj) -> bool:
     )
 
 
+def ltl_implies(a: bool, b: bool) -> bool:
+    # Material implication: workhorse for bounded "once P, always P" properties.
+    return (not a) or b
+
+
+def ltl_le(y1: int, y2: int) -> bool:
+    # Year-ordering guard for bounded pair properties (vacuous when y1 > y2).
+    return y1 <= y2
+
+
+def clause_expired(clause: Data, t: Data) -> bool:
+    # Expired at t iff not unexpired at t.
+    return not clause_unexpired(clause, t)
+
+
 REGISTRY: dict[str, object] = {
     name: fn for name, fn in sorted(vars().items()) if _is_model_fn(fn)
 }

@@ -3289,3 +3289,34 @@ def term_commencement_jan20(t: TimePoint) -> Bool:
   match t:
     case Year{year}:
       Nat.is_le(1933n, year)
+
+# === Temporal-logic properties (LTL-style, explicitly bounded) ===
+#
+# Each property below is checked over an EXPLICIT finite set of year pairs or
+# years, named in each law in LAWS.bend. Bounds are documented per property
+# together with what they do NOT establish (nothing outside the checked
+# pairs/years). Year granularity throughout (see the temporal section note).
+#
+# Linearity note: Bend 2.0.27 uses every variable at most once, so multi-year
+# properties are composed at the LAW level (where literals repeat freely), not
+# inside helpers. The helpers below are all single-use.
+#
+# Property 4 note (ex post facto): SKIPPED, by design. The model's
+# rule_a1s9_attainder(passed) takes only a caller-supplied Bool recording
+# whether such a bill passed; it has no conduct-time vs enactment-time
+# parameters, and the Ex Post Facto Clause is precisely a relation between
+# those two times ("no ... ex post facto Law shall be passed"). Stating a
+# temporal property would require inventing a criminal-conduct timeline the
+# formalization does not model. The prohibition stays a non-temporal rule.
+
+# Material implication: the workhorse for "once P, always P" over ordered pairs.
+def ltl_implies(a: Bool, b: Bool) -> Bool:
+  Bool.or(Bool.not(a), b)
+
+# Year-ordering guard: keeps pair-properties honest when y1 > y2 (vacuous there).
+def ltl_le(y1: Nat, y2: Nat) -> Bool:
+  Nat.is_le(y1, y2)
+
+# A clause's text is expired at t iff it is not unexpired at t.
+def clause_expired(c: Clause, t: TimePoint) -> Bool:
+  Bool.not(clause_unexpired(c, t))
