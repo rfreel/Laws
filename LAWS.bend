@@ -508,3 +508,625 @@ law impeachment_basis_is_present_members:
 # clears two thirds of the 300 present but not of the 435-member House.
 law article_v_basis_is_membership:
   {C.article_v_congress_proposal(250n, C.ChamberCount{300n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
+
+# --- Clause completion wave: boundary laws for the 46 remaining blocks ---
+
+
+# A1S1
+law a1s1_vesting_pass:
+  {C.rule_a1s1_vesting(True{}) == True{} : Bool}
+
+law a1s1_vesting_fail:
+  {C.rule_a1s1_vesting(False{}) == False{} : Bool}
+
+
+# A1S5
+law a1s5_quorum_pass:
+  {C.rule_a1s5_quorum(C.ChamberCount{51n, 100n}) == True{} : Bool}
+
+law a1s5_quorum_fail:
+  {C.rule_a1s5_quorum(C.ChamberCount{50n, 100n}) == False{} : Bool}
+
+law a1s5_expulsion_pass:
+  {C.rule_a1s5_expulsion(67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
+
+law a1s5_expulsion_fail:
+  {C.rule_a1s5_expulsion(66n, C.ChamberCount{100n, 100n}) == False{} : Bool}
+
+law a1s5_yeas_nays_pass:
+  {C.rule_a1s5_yeas_nays(20n, 100n) == True{} : Bool}
+
+law a1s5_yeas_nays_fail:
+  {C.rule_a1s5_yeas_nays(19n, 100n) == False{} : Bool}
+
+law a1s5_adjournment_pass:
+  {C.rule_a1s5_adjournment(3n, False{}) == True{} : Bool}
+
+law a1s5_adjournment_fail:
+  {C.rule_a1s5_adjournment(4n, False{}) == False{} : Bool}
+
+
+# A1S6
+law a1s6_arrest_privilege_pass:
+  {C.rule_a1s6_arrest_privilege(True{}, False{}, False{}, False{}) == True{} : Bool}
+
+law a1s6_arrest_privilege_fail:
+  {C.rule_a1s6_arrest_privilege(True{}, True{}, False{}, False{}) == False{} : Bool}
+
+law a1s6_speech_debate_pass:
+  {C.rule_a1s6_speech_debate(False{}) == True{} : Bool}
+
+law a1s6_speech_debate_fail:
+  {C.rule_a1s6_speech_debate(True{}) == False{} : Bool}
+
+law a1s6_incompatible_pass:
+  {C.rule_a1s6_incompatible(True{}, False{}) == True{} : Bool}
+
+law a1s6_incompatible_fail:
+  {C.rule_a1s6_incompatible(True{}, True{}) == False{} : Bool}
+
+law a1s6_emolument_pass:
+  {C.rule_a1s6_emolument(False{}, False{}) == True{} : Bool}
+
+law a1s6_emolument_fail:
+  {C.rule_a1s6_emolument(True{}, False{}) == False{} : Bool}
+
+
+# A1S8
+law a1s8_tax_pass:
+  {C.rule_a1s8_tax(True{}, True{}) == True{} : Bool}
+
+law a1s8_tax_fail:
+  {C.rule_a1s8_tax(True{}, False{}) == False{} : Bool}
+
+law a1s8_commerce_pass:
+  {C.rule_a1s8_commerce(C.Commerce{}, True{}) == True{} : Bool}
+
+law a1s8_commerce_fail:
+  {C.rule_a1s8_commerce(C.Commerce{}, False{}) == False{} : Bool}
+
+law a1s8_naturalization_bankruptcy_pass:
+  {C.rule_a1s8_naturalization_bankruptcy(True{}) == True{} : Bool}
+
+law a1s8_naturalization_bankruptcy_fail:
+  {C.rule_a1s8_naturalization_bankruptcy(False{}) == False{} : Bool}
+
+law a1s8_coin_weights_pass:
+  {C.rule_a1s8_coin_weights(True{}) == True{} : Bool}
+
+law a1s8_coin_weights_fail:
+  {C.rule_a1s8_coin_weights(False{}) == False{} : Bool}
+
+law a1s8_declare_war_pass:
+  {C.rule_a1s8_declare_war(True{}) == True{} : Bool}
+
+law a1s8_declare_war_fail:
+  {C.rule_a1s8_declare_war(False{}) == False{} : Bool}
+
+law a1s8_necessary_proper_pass:
+  {C.rule_a1s8_necessary_proper(C.NecessaryAndProper{}, True{}) == True{} : Bool}
+
+law a1s8_necessary_proper_fail:
+  {C.rule_a1s8_necessary_proper(C.NecessaryAndProper{}, False{}) == False{} : Bool}
+
+
+# A1S9
+law a1s9_habeas_pass:
+  {C.rule_a1s9_habeas(True{}, True{}, False{}) == True{} : Bool}
+
+law a1s9_habeas_fail:
+  {C.rule_a1s9_habeas(True{}, False{}, False{}) == False{} : Bool}
+
+law a1s9_attainder_pass:
+  {C.rule_a1s9_attainder(False{}) == True{} : Bool}
+
+law a1s9_attainder_fail:
+  {C.rule_a1s9_attainder(True{}) == False{} : Bool}
+
+law a1s9_direct_tax_pass:
+  {C.rule_a1s9_direct_tax(False{}, False{}) == True{} : Bool}
+
+law a1s9_direct_tax_fail:
+  {C.rule_a1s9_direct_tax(True{}, False{}) == False{} : Bool}
+
+law a1s9_export_tax_pass:
+  {C.rule_a1s9_export_tax(False{}) == True{} : Bool}
+
+law a1s9_export_tax_fail:
+  {C.rule_a1s9_export_tax(True{}) == False{} : Bool}
+
+law a1s9_appropriations_pass:
+  {C.rule_a1s9_appropriations(False{}, False{}) == True{} : Bool}
+
+law a1s9_appropriations_fail:
+  {C.rule_a1s9_appropriations(True{}, False{}) == False{} : Bool}
+
+law a1s9_titles_pass:
+  {C.rule_a1s9_titles(False{}) == True{} : Bool}
+
+law a1s9_titles_fail:
+  {C.rule_a1s9_titles(True{}) == False{} : Bool}
+
+
+# A1S10
+law a1s10_treaty_alliance_pass:
+  {C.rule_a1s10_treaty_alliance(False{}) == True{} : Bool}
+
+law a1s10_treaty_alliance_fail:
+  {C.rule_a1s10_treaty_alliance(True{}) == False{} : Bool}
+
+law a1s10_coin_tender_pass:
+  {C.rule_a1s10_coin_tender(False{}) == True{} : Bool}
+
+law a1s10_coin_tender_fail:
+  {C.rule_a1s10_coin_tender(True{}) == False{} : Bool}
+
+law a1s10_imposts_pass:
+  {C.rule_a1s10_imposts(True{}, True{}, False{}) == True{} : Bool}
+
+law a1s10_imposts_fail:
+  {C.rule_a1s10_imposts(True{}, False{}, False{}) == False{} : Bool}
+
+law a1s10_state_war_pass:
+  {C.rule_a1s10_state_war(True{}, False{}, True{}, False{}) == True{} : Bool}
+
+law a1s10_state_war_fail:
+  {C.rule_a1s10_state_war(True{}, False{}, False{}, False{}) == False{} : Bool}
+
+
+# A2S2
+law a2s2_commander_in_chief_pass:
+  {C.rule_a2s2_commander_in_chief(True{}) == True{} : Bool}
+
+law a2s2_commander_in_chief_fail:
+  {C.rule_a2s2_commander_in_chief(False{}) == False{} : Bool}
+
+law a2s2_pardons_pass:
+  {C.rule_a2s2_pardons(True{}, False{}) == True{} : Bool}
+
+law a2s2_pardons_fail:
+  {C.rule_a2s2_pardons(True{}, True{}) == False{} : Bool}
+
+law a2s2_treaty_pass:
+  {C.rule_a2s2_treaty(67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
+
+law a2s2_treaty_fail:
+  {C.rule_a2s2_treaty(66n, C.ChamberCount{100n, 100n}) == False{} : Bool}
+
+law a2s2_appointments_pass:
+  {C.rule_a2s2_appointments(True{}, True{}) == True{} : Bool}
+
+law a2s2_appointments_fail:
+  {C.rule_a2s2_appointments(True{}, False{}) == False{} : Bool}
+
+law a2s2_recess_pass:
+  {C.rule_a2s2_recess(True{}, True{}) == True{} : Bool}
+
+law a2s2_recess_fail:
+  {C.rule_a2s2_recess(True{}, False{}) == False{} : Bool}
+
+
+# A2S3
+law a2s3_take_care_pass:
+  {C.rule_a2s3_take_care(True{}) == True{} : Bool}
+
+law a2s3_take_care_fail:
+  {C.rule_a2s3_take_care(False{}) == False{} : Bool}
+
+law a2s3_convene_pass:
+  {C.rule_a2s3_convene(C.ExtraordinaryOccasion{}, True{}) == True{} : Bool}
+
+law a2s3_convene_fail:
+  {C.rule_a2s3_convene(C.ExtraordinaryOccasion{}, False{}) == False{} : Bool}
+
+
+# A2S4
+law a2s4_removal_pass:
+  {C.rule_a2s4_removal(True{}, True{}, C.HighCrimesAndMisdemeanors{}, True{}) == True{} : Bool}
+
+law a2s4_removal_fail:
+  {C.rule_a2s4_removal(True{}, True{}, C.HighCrimesAndMisdemeanors{}, False{}) == False{} : Bool}
+
+
+# A3S1
+law a3s1_vesting_pass:
+  {C.rule_a3s1_vesting(True{}) == True{} : Bool}
+
+law a3s1_vesting_fail:
+  {C.rule_a3s1_vesting(False{}) == False{} : Bool}
+
+law a3s1_tenure_pass:
+  {C.rule_a3s1_tenure(C.GoodBehavior{}, True{}) == True{} : Bool}
+
+law a3s1_tenure_fail:
+  {C.rule_a3s1_tenure(C.GoodBehavior{}, False{}) == False{} : Bool}
+
+law a3s1_compensation_pass:
+  {C.rule_a3s1_compensation(False{}) == True{} : Bool}
+
+law a3s1_compensation_fail:
+  {C.rule_a3s1_compensation(True{}) == False{} : Bool}
+
+
+# A3S3
+law a3s3_treason_definition_pass:
+  {C.rule_a3s3_treason_definition(True{}, False{}) == True{} : Bool}
+
+law a3s3_treason_definition_fail:
+  {C.rule_a3s3_treason_definition(False{}, False{}) == False{} : Bool}
+
+law a3s3_corruption_of_blood_pass:
+  {C.rule_a3s3_corruption_of_blood(False{}) == True{} : Bool}
+
+law a3s3_corruption_of_blood_fail:
+  {C.rule_a3s3_corruption_of_blood(True{}) == False{} : Bool}
+
+
+# A4S1
+law a4s1_full_faith_credit_pass:
+  {C.rule_a4s1_full_faith_credit(True{}) == True{} : Bool}
+
+law a4s1_full_faith_credit_fail:
+  {C.rule_a4s1_full_faith_credit(False{}) == False{} : Bool}
+
+
+# A4S2
+law a4s2_privileges_immunities_pass:
+  {C.rule_a4s2_privileges_immunities(True{}) == True{} : Bool}
+
+law a4s2_privileges_immunities_fail:
+  {C.rule_a4s2_privileges_immunities(False{}) == False{} : Bool}
+
+law a4s2_extradition_pass:
+  {C.rule_a4s2_extradition(True{}, True{}, True{}) == True{} : Bool}
+
+law a4s2_extradition_fail:
+  {C.rule_a4s2_extradition(True{}, True{}, False{}) == False{} : Bool}
+
+law a4s2_fugitive_labor_pass:
+  {C.rule_a4s2_fugitive_labor(True{}) == True{} : Bool}
+
+law a4s2_fugitive_labor_fail:
+  {C.rule_a4s2_fugitive_labor(False{}) == False{} : Bool}
+
+
+# A4S3
+law a4s3_new_state_pass:
+  {C.rule_a4s3_new_state(False{}, False{}, True{}, True{}) == True{} : Bool}
+
+law a4s3_new_state_fail:
+  {C.rule_a4s3_new_state(True{}, False{}, False{}, True{}) == False{} : Bool}
+
+law a4s3_territory_pass:
+  {C.rule_a4s3_territory(True{}) == True{} : Bool}
+
+law a4s3_territory_fail:
+  {C.rule_a4s3_territory(False{}) == False{} : Bool}
+
+
+# A4S4
+law a4s4_republican_form_pass:
+  {C.rule_a4s4_republican_form(C.RepublicanForm{}, True{}) == True{} : Bool}
+
+law a4s4_republican_form_fail:
+  {C.rule_a4s4_republican_form(C.RepublicanForm{}, False{}) == False{} : Bool}
+
+law a4s4_protection_pass:
+  {C.rule_a4s4_protection(True{}, False{}, False{}) == True{} : Bool}
+
+law a4s4_protection_fail:
+  {C.rule_a4s4_protection(False{}, True{}, False{}) == False{} : Bool}
+
+
+# A6
+law a6_supremacy_pass:
+  {C.rule_a6_supremacy(True{}) == True{} : Bool}
+
+law a6_supremacy_fail:
+  {C.rule_a6_supremacy(False{}) == False{} : Bool}
+
+law a6_oaths_pass:
+  {C.rule_a6_oaths(True{}) == True{} : Bool}
+
+law a6_oaths_fail:
+  {C.rule_a6_oaths(False{}) == False{} : Bool}
+
+
+# A7
+law a7_ratification_pass:
+  {C.rule_a7_ratification(9n) == True{} : Bool}
+
+law a7_ratification_fail:
+  {C.rule_a7_ratification(8n) == False{} : Bool}
+
+
+# AM1
+law am1_religion_pass:
+  {C.rule_am1_religion(C.EstablishmentOfReligion{}, True{}, C.FreeExercise{}, True{}) == True{} : Bool}
+
+law am1_religion_fail:
+  {C.rule_am1_religion(C.EstablishmentOfReligion{}, False{}, C.FreeExercise{}, True{}) == False{} : Bool}
+
+law am1_expression_pass:
+  {C.rule_am1_expression(False{}) == True{} : Bool}
+
+law am1_expression_fail:
+  {C.rule_am1_expression(True{}) == False{} : Bool}
+
+
+# AM2
+law am2_arms_pass:
+  {C.rule_am2_arms(C.WellRegulatedMilitia{}, True{}, C.KeepAndBearArms{}, True{}) == True{} : Bool}
+
+law am2_arms_fail:
+  {C.rule_am2_arms(C.WellRegulatedMilitia{}, True{}, C.KeepAndBearArms{}, False{}) == False{} : Bool}
+
+
+# AM3
+law am3_quartering_pass:
+  {C.rule_am3_quartering(False{}, False{}, True{}) == True{} : Bool}
+
+law am3_quartering_fail:
+  {C.rule_am3_quartering(True{}, False{}, False{}) == False{} : Bool}
+
+
+# AM4
+law am4_search_pass:
+  {C.rule_am4_search(C.Unreasonable{}, False{}) == True{} : Bool}
+
+law am4_search_fail:
+  {C.rule_am4_search(C.Unreasonable{}, True{}) == False{} : Bool}
+
+law am4_warrant_pass:
+  {C.rule_am4_warrant(C.ProbableCause{}, True{}, True{}) == True{} : Bool}
+
+law am4_warrant_fail:
+  {C.rule_am4_warrant(C.ProbableCause{}, False{}, True{}) == False{} : Bool}
+
+
+# AM5
+law am5_grand_jury_pass:
+  {C.rule_am5_grand_jury(C.InfamousCrime{}, True{}, True{}) == True{} : Bool}
+
+law am5_grand_jury_fail:
+  {C.rule_am5_grand_jury(C.InfamousCrime{}, True{}, False{}) == False{} : Bool}
+
+law am5_double_jeopardy_pass:
+  {C.rule_am5_double_jeopardy(C.SameOffence{}, False{}) == True{} : Bool}
+
+law am5_double_jeopardy_fail:
+  {C.rule_am5_double_jeopardy(C.SameOffence{}, True{}) == False{} : Bool}
+
+law am5_due_process_pass:
+  {C.rule_am5_due_process(C.DueProcess{}, False{}) == True{} : Bool}
+
+law am5_due_process_fail:
+  {C.rule_am5_due_process(C.DueProcess{}, True{}) == False{} : Bool}
+
+law am5_takings_pass:
+  {C.rule_am5_takings(True{}, True{}) == True{} : Bool}
+
+law am5_takings_fail:
+  {C.rule_am5_takings(True{}, False{}) == False{} : Bool}
+
+
+# AM6
+law am6_trial_pass:
+  {C.rule_am6_trial(True{}, C.Speedy{}, True{}, C.Impartial{}, True{}) == True{} : Bool}
+
+law am6_trial_fail:
+  {C.rule_am6_trial(True{}, C.Speedy{}, False{}, C.Impartial{}, True{}) == False{} : Bool}
+
+law am6_counsel_pass:
+  {C.rule_am6_counsel(True{}) == True{} : Bool}
+
+law am6_counsel_fail:
+  {C.rule_am6_counsel(False{}) == False{} : Bool}
+
+
+# AM7
+law am7_civil_jury_pass:
+  {C.rule_am7_civil_jury(21n) == True{} : Bool}
+
+law am7_civil_jury_fail:
+  {C.rule_am7_civil_jury(20n) == False{} : Bool}
+
+law am7_reexamination_pass:
+  {C.rule_am7_reexamination(C.CommonLawSuit{}, False{}) == True{} : Bool}
+
+law am7_reexamination_fail:
+  {C.rule_am7_reexamination(C.CommonLawSuit{}, True{}) == False{} : Bool}
+
+
+# AM8
+law am8_excessive_pass:
+  {C.rule_am8_excessive(C.Excessive{}, False{}) == True{} : Bool}
+
+law am8_excessive_fail:
+  {C.rule_am8_excessive(C.Excessive{}, True{}) == False{} : Bool}
+
+law am8_cruel_unusual_pass:
+  {C.rule_am8_cruel_unusual(C.CruelAndUnusual{}, False{}) == True{} : Bool}
+
+law am8_cruel_unusual_fail:
+  {C.rule_am8_cruel_unusual(C.CruelAndUnusual{}, True{}) == False{} : Bool}
+
+
+# AM9
+law am9_retained_pass:
+  {C.rule_am9_retained(C.RetainedRight{}, False{}) == True{} : Bool}
+
+law am9_retained_fail:
+  {C.rule_am9_retained(C.RetainedRight{}, True{}) == False{} : Bool}
+
+
+# AM10
+law am10_reserved_pass:
+  {C.rule_am10_reserved(C.DelegatedPower{}, True{}) == True{} : Bool}
+
+law am10_reserved_fail:
+  {C.rule_am10_reserved(C.DelegatedPower{}, False{}) == False{} : Bool}
+
+
+# AM11
+law am11_immunity_pass:
+  {C.rule_am11_immunity(True{}, False{}) == True{} : Bool}
+
+law am11_immunity_fail:
+  {C.rule_am11_immunity(True{}, True{}) == False{} : Bool}
+
+
+# AM13S2
+law am13s2_enforcement_pass:
+  {C.rule_am13s2_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am13s2_enforcement_fail:
+  {C.rule_am13s2_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM14S1
+law am14s1_citizenship_pass:
+  {C.rule_am14s1_citizenship(True{}, True{}) == True{} : Bool}
+
+law am14s1_citizenship_fail:
+  {C.rule_am14s1_citizenship(True{}, False{}) == False{} : Bool}
+
+law am14s1_dp_ep_pass:
+  {C.rule_am14s1_dp_ep(C.DueProcess{}, True{}, C.EqualProtection{}, True{}) == True{} : Bool}
+
+law am14s1_dp_ep_fail:
+  {C.rule_am14s1_dp_ep(C.DueProcess{}, True{}, C.EqualProtection{}, False{}) == False{} : Bool}
+
+law am14s1_privileges_pass:
+  {C.rule_am14s1_privileges(C.PrivilegesOrImmunities{}, False{}) == True{} : Bool}
+
+law am14s1_privileges_fail:
+  {C.rule_am14s1_privileges(C.PrivilegesOrImmunities{}, True{}) == False{} : Bool}
+
+
+# AM14S3
+law am14s3_disability_removed_pass:
+  {C.rule_am14s3_disability_removed(290n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == True{} : Bool}
+
+law am14s3_disability_removed_fail:
+  {C.rule_am14s3_disability_removed(289n, C.ChamberCount{435n, 435n}, 67n, C.ChamberCount{100n, 100n}) == False{} : Bool}
+
+
+# AM14S4
+law am14s4_debt_pass:
+  {C.rule_am14s4_debt(C.ValidPublicDebt{}, False{}) == True{} : Bool}
+
+law am14s4_debt_fail:
+  {C.rule_am14s4_debt(C.ValidPublicDebt{}, True{}) == False{} : Bool}
+
+
+# AM14S5
+law am14s5_enforcement_pass:
+  {C.rule_am14s5_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am14s5_enforcement_fail:
+  {C.rule_am14s5_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM15S1
+law am15s1_vote_pass:
+  {C.rule_am15s1_vote(False{}) == True{} : Bool}
+
+law am15s1_vote_fail:
+  {C.rule_am15s1_vote(True{}) == False{} : Bool}
+
+
+# AM15S2
+law am15s2_enforcement_pass:
+  {C.rule_am15s2_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am15s2_enforcement_fail:
+  {C.rule_am15s2_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM19
+law am19_vote_pass:
+  {C.rule_am19_vote(False{}) == True{} : Bool}
+
+law am19_vote_fail:
+  {C.rule_am19_vote(True{}) == False{} : Bool}
+
+
+# AM20S5
+law am20s5_effective_pass:
+  {C.rule_am20s5_effective(True{}) == True{} : Bool}
+
+law am20s5_effective_fail:
+  {C.rule_am20s5_effective(False{}) == False{} : Bool}
+
+
+# AM20S6
+law am20s6_deadline_pass:
+  {C.rule_am20s6_deadline(True{}) == True{} : Bool}
+
+law am20s6_deadline_fail:
+  {C.rule_am20s6_deadline(False{}) == False{} : Bool}
+
+
+# AM21S2
+law am21s2_transportation_pass:
+  {C.rule_am21s2_transportation(C.IntoxicatingLiquor{}, True{}) == True{} : Bool}
+
+law am21s2_transportation_fail:
+  {C.rule_am21s2_transportation(C.IntoxicatingLiquor{}, False{}) == False{} : Bool}
+
+
+# AM21S3
+law am21s3_deadline_pass:
+  {C.rule_am21s3_deadline(True{}) == True{} : Bool}
+
+law am21s3_deadline_fail:
+  {C.rule_am21s3_deadline(False{}) == False{} : Bool}
+
+
+# AM23S1
+law am23s1_electors_pass:
+  {C.rule_am23s1_electors(True{}, 3n, 3n) == True{} : Bool}
+
+law am23s1_electors_fail:
+  {C.rule_am23s1_electors(True{}, 3n, 4n) == False{} : Bool}
+
+
+# AM23S2
+law am23s2_enforcement_pass:
+  {C.rule_am23s2_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am23s2_enforcement_fail:
+  {C.rule_am23s2_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM24S1
+law am24s1_poll_tax_pass:
+  {C.rule_am24s1_poll_tax(False{}) == True{} : Bool}
+
+law am24s1_poll_tax_fail:
+  {C.rule_am24s1_poll_tax(True{}) == False{} : Bool}
+
+
+# AM24S2
+law am24s2_enforcement_pass:
+  {C.rule_am24s2_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am24s2_enforcement_fail:
+  {C.rule_am24s2_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM26S2
+law am26s2_enforcement_pass:
+  {C.rule_am26s2_enforcement(C.AppropriateLegislation{}, True{}) == True{} : Bool}
+
+law am26s2_enforcement_fail:
+  {C.rule_am26s2_enforcement(C.AppropriateLegislation{}, False{}) == False{} : Bool}
+
+
+# AM27
+law am27_timing_pass:
+  {C.rule_am27_timing(True{}, True{}) == True{} : Bool}
+
+law am27_timing_fail:
+  {C.rule_am27_timing(True{}, False{}) == False{} : Bool}

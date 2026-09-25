@@ -327,6 +327,182 @@ def Laws.clause_indices_bounded(c):
       {==}
     case C.CL_AM26S1_VoteAge{}:
       {==}
+    case C.CL_A1S1_Vesting{}:
+      {==}
+    case C.CL_A1S5_Quorum{}:
+      {==}
+    case C.CL_A1S5_Expulsion{}:
+      {==}
+    case C.CL_A1S5_YeasNays{}:
+      {==}
+    case C.CL_A1S5_Adjournment{}:
+      {==}
+    case C.CL_A1S6_ArrestPrivilege{}:
+      {==}
+    case C.CL_A1S6_SpeechDebate{}:
+      {==}
+    case C.CL_A1S6_Incompatibility{}:
+      {==}
+    case C.CL_A1S6_Emoluments{}:
+      {==}
+    case C.CL_A1S8_TaxUniformity{}:
+      {==}
+    case C.CL_A1S8_Commerce{}:
+      {==}
+    case C.CL_A1S8_NaturalizationBankruptcy{}:
+      {==}
+    case C.CL_A1S8_CoinWeights{}:
+      {==}
+    case C.CL_A1S8_WarDeclaration{}:
+      {==}
+    case C.CL_A1S8_NecessaryProper{}:
+      {==}
+    case C.CL_A1S9_HabeasCorpus{}:
+      {==}
+    case C.CL_A1S9_Attainder{}:
+      {==}
+    case C.CL_A1S9_DirectTax{}:
+      {==}
+    case C.CL_A1S9_ExportTax{}:
+      {==}
+    case C.CL_A1S9_Appropriations{}:
+      {==}
+    case C.CL_A1S9_TitlesNobility{}:
+      {==}
+    case C.CL_A1S10_TreatyAlliance{}:
+      {==}
+    case C.CL_A1S10_CoinTender{}:
+      {==}
+    case C.CL_A1S10_Imposts{}:
+      {==}
+    case C.CL_A1S10_StateWar{}:
+      {==}
+    case C.CL_A2S2_CommanderInChief{}:
+      {==}
+    case C.CL_A2S2_Pardons{}:
+      {==}
+    case C.CL_A2S2_Treaty{}:
+      {==}
+    case C.CL_A2S2_Appointments{}:
+      {==}
+    case C.CL_A2S2_RecessVacancies{}:
+      {==}
+    case C.CL_A2S3_TakeCare{}:
+      {==}
+    case C.CL_A2S3_ExtraordinaryConvene{}:
+      {==}
+    case C.CL_A2S4_Removal{}:
+      {==}
+    case C.CL_A3S1_Vesting{}:
+      {==}
+    case C.CL_A3S1_Tenure{}:
+      {==}
+    case C.CL_A3S1_Compensation{}:
+      {==}
+    case C.CL_A3S3_TreasonDefinition{}:
+      {==}
+    case C.CL_A3S3_PunishmentLimits{}:
+      {==}
+    case C.CL_A4S1_FullFaithCredit{}:
+      {==}
+    case C.CL_A4S2_PrivilegesImmunities{}:
+      {==}
+    case C.CL_A4S2_Extradition{}:
+      {==}
+    case C.CL_A4S2_FugitiveLabor{}:
+      {==}
+    case C.CL_A4S3_NewStates{}:
+      {==}
+    case C.CL_A4S3_Territory{}:
+      {==}
+    case C.CL_A4S4_RepublicanForm{}:
+      {==}
+    case C.CL_A4S4_Protection{}:
+      {==}
+    case C.CL_A6_Supremacy{}:
+      {==}
+    case C.CL_A6_Oaths{}:
+      {==}
+    case C.CL_A7_Ratification{}:
+      {==}
+    case C.CL_AM1_Religion{}:
+      {==}
+    case C.CL_AM1_ExpressionAssembly{}:
+      {==}
+    case C.CL_AM2_KeepBearArms{}:
+      {==}
+    case C.CL_AM3_Quartering{}:
+      {==}
+    case C.CL_AM4_UnreasonableSearch{}:
+      {==}
+    case C.CL_AM4_Warrants{}:
+      {==}
+    case C.CL_AM5_GrandJury{}:
+      {==}
+    case C.CL_AM5_DoubleJeopardy{}:
+      {==}
+    case C.CL_AM5_DueProcess{}:
+      {==}
+    case C.CL_AM5_Takings{}:
+      {==}
+    case C.CL_AM6_SpeedyImpartialTrial{}:
+      {==}
+    case C.CL_AM6_Counsel{}:
+      {==}
+    case C.CL_AM7_CivilJury{}:
+      {==}
+    case C.CL_AM7_Reexamination{}:
+      {==}
+    case C.CL_AM8_ExcessiveBailFines{}:
+      {==}
+    case C.CL_AM8_CruelUnusual{}:
+      {==}
+    case C.CL_AM9_RetainedRights{}:
+      {==}
+    case C.CL_AM10_ReservedPowers{}:
+      {==}
+    case C.CL_AM11_SovereignImmunity{}:
+      {==}
+    case C.CL_AM13S2_Enforcement{}:
+      {==}
+    case C.CL_AM14S1_Citizenship{}:
+      {==}
+    case C.CL_AM14S1_DueProcessEqualProtection{}:
+      {==}
+    case C.CL_AM14S1_PrivilegesImmunities{}:
+      {==}
+    case C.CL_AM14S3_DisabilityRemoved{}:
+      {==}
+    case C.CL_AM14S4_PublicDebt{}:
+      {==}
+    case C.CL_AM14S5_Enforcement{}:
+      {==}
+    case C.CL_AM15S1_VoteRace{}:
+      {==}
+    case C.CL_AM15S2_Enforcement{}:
+      {==}
+    case C.CL_AM19_VoteSex{}:
+      {==}
+    case C.CL_AM20S5_EffectiveDate{}:
+      {==}
+    case C.CL_AM20S6_RatificationDeadline{}:
+      {==}
+    case C.CL_AM21S2_Transportation{}:
+      {==}
+    case C.CL_AM21S3_RatificationDeadline{}:
+      {==}
+    case C.CL_AM23S1_Electors{}:
+      {==}
+    case C.CL_AM23S2_Enforcement{}:
+      {==}
+    case C.CL_AM24S1_PollTax{}:
+      {==}
+    case C.CL_AM24S2_Enforcement{}:
+      {==}
+    case C.CL_AM26S2_Enforcement{}:
+      {==}
+    case C.CL_AM27_CompensationTiming{}:
+      {==}
 
 def Laws.preamble_purpose_affirmed_pass():
   {==}
@@ -708,4 +884,534 @@ def Laws.impeachment_basis_is_present_members():
   {==}
 
 def Laws.article_v_basis_is_membership():
+  {==}
+
+# Clause completion wave proofs
+
+def Laws.a1s1_vesting_pass():
+  {==}
+
+def Laws.a1s1_vesting_fail():
+  {==}
+
+def Laws.a1s5_quorum_pass():
+  {==}
+
+def Laws.a1s5_quorum_fail():
+  {==}
+
+def Laws.a1s5_expulsion_pass():
+  {==}
+
+def Laws.a1s5_expulsion_fail():
+  {==}
+
+def Laws.a1s5_yeas_nays_pass():
+  {==}
+
+def Laws.a1s5_yeas_nays_fail():
+  {==}
+
+def Laws.a1s5_adjournment_pass():
+  {==}
+
+def Laws.a1s5_adjournment_fail():
+  {==}
+
+def Laws.a1s6_arrest_privilege_pass():
+  {==}
+
+def Laws.a1s6_arrest_privilege_fail():
+  {==}
+
+def Laws.a1s6_speech_debate_pass():
+  {==}
+
+def Laws.a1s6_speech_debate_fail():
+  {==}
+
+def Laws.a1s6_incompatible_pass():
+  {==}
+
+def Laws.a1s6_incompatible_fail():
+  {==}
+
+def Laws.a1s6_emolument_pass():
+  {==}
+
+def Laws.a1s6_emolument_fail():
+  {==}
+
+def Laws.a1s8_tax_pass():
+  {==}
+
+def Laws.a1s8_tax_fail():
+  {==}
+
+def Laws.a1s8_commerce_pass():
+  {==}
+
+def Laws.a1s8_commerce_fail():
+  {==}
+
+def Laws.a1s8_naturalization_bankruptcy_pass():
+  {==}
+
+def Laws.a1s8_naturalization_bankruptcy_fail():
+  {==}
+
+def Laws.a1s8_coin_weights_pass():
+  {==}
+
+def Laws.a1s8_coin_weights_fail():
+  {==}
+
+def Laws.a1s8_declare_war_pass():
+  {==}
+
+def Laws.a1s8_declare_war_fail():
+  {==}
+
+def Laws.a1s8_necessary_proper_pass():
+  {==}
+
+def Laws.a1s8_necessary_proper_fail():
+  {==}
+
+def Laws.a1s9_habeas_pass():
+  {==}
+
+def Laws.a1s9_habeas_fail():
+  {==}
+
+def Laws.a1s9_attainder_pass():
+  {==}
+
+def Laws.a1s9_attainder_fail():
+  {==}
+
+def Laws.a1s9_direct_tax_pass():
+  {==}
+
+def Laws.a1s9_direct_tax_fail():
+  {==}
+
+def Laws.a1s9_export_tax_pass():
+  {==}
+
+def Laws.a1s9_export_tax_fail():
+  {==}
+
+def Laws.a1s9_appropriations_pass():
+  {==}
+
+def Laws.a1s9_appropriations_fail():
+  {==}
+
+def Laws.a1s9_titles_pass():
+  {==}
+
+def Laws.a1s9_titles_fail():
+  {==}
+
+def Laws.a1s10_treaty_alliance_pass():
+  {==}
+
+def Laws.a1s10_treaty_alliance_fail():
+  {==}
+
+def Laws.a1s10_coin_tender_pass():
+  {==}
+
+def Laws.a1s10_coin_tender_fail():
+  {==}
+
+def Laws.a1s10_imposts_pass():
+  {==}
+
+def Laws.a1s10_imposts_fail():
+  {==}
+
+def Laws.a1s10_state_war_pass():
+  {==}
+
+def Laws.a1s10_state_war_fail():
+  {==}
+
+def Laws.a2s2_commander_in_chief_pass():
+  {==}
+
+def Laws.a2s2_commander_in_chief_fail():
+  {==}
+
+def Laws.a2s2_pardons_pass():
+  {==}
+
+def Laws.a2s2_pardons_fail():
+  {==}
+
+def Laws.a2s2_treaty_pass():
+  {==}
+
+def Laws.a2s2_treaty_fail():
+  {==}
+
+def Laws.a2s2_appointments_pass():
+  {==}
+
+def Laws.a2s2_appointments_fail():
+  {==}
+
+def Laws.a2s2_recess_pass():
+  {==}
+
+def Laws.a2s2_recess_fail():
+  {==}
+
+def Laws.a2s3_take_care_pass():
+  {==}
+
+def Laws.a2s3_take_care_fail():
+  {==}
+
+def Laws.a2s3_convene_pass():
+  {==}
+
+def Laws.a2s3_convene_fail():
+  {==}
+
+def Laws.a2s4_removal_pass():
+  {==}
+
+def Laws.a2s4_removal_fail():
+  {==}
+
+def Laws.a3s1_vesting_pass():
+  {==}
+
+def Laws.a3s1_vesting_fail():
+  {==}
+
+def Laws.a3s1_tenure_pass():
+  {==}
+
+def Laws.a3s1_tenure_fail():
+  {==}
+
+def Laws.a3s1_compensation_pass():
+  {==}
+
+def Laws.a3s1_compensation_fail():
+  {==}
+
+def Laws.a3s3_treason_definition_pass():
+  {==}
+
+def Laws.a3s3_treason_definition_fail():
+  {==}
+
+def Laws.a3s3_corruption_of_blood_pass():
+  {==}
+
+def Laws.a3s3_corruption_of_blood_fail():
+  {==}
+
+def Laws.a4s1_full_faith_credit_pass():
+  {==}
+
+def Laws.a4s1_full_faith_credit_fail():
+  {==}
+
+def Laws.a4s2_privileges_immunities_pass():
+  {==}
+
+def Laws.a4s2_privileges_immunities_fail():
+  {==}
+
+def Laws.a4s2_extradition_pass():
+  {==}
+
+def Laws.a4s2_extradition_fail():
+  {==}
+
+def Laws.a4s2_fugitive_labor_pass():
+  {==}
+
+def Laws.a4s2_fugitive_labor_fail():
+  {==}
+
+def Laws.a4s3_new_state_pass():
+  {==}
+
+def Laws.a4s3_new_state_fail():
+  {==}
+
+def Laws.a4s3_territory_pass():
+  {==}
+
+def Laws.a4s3_territory_fail():
+  {==}
+
+def Laws.a4s4_republican_form_pass():
+  {==}
+
+def Laws.a4s4_republican_form_fail():
+  {==}
+
+def Laws.a4s4_protection_pass():
+  {==}
+
+def Laws.a4s4_protection_fail():
+  {==}
+
+def Laws.a6_supremacy_pass():
+  {==}
+
+def Laws.a6_supremacy_fail():
+  {==}
+
+def Laws.a6_oaths_pass():
+  {==}
+
+def Laws.a6_oaths_fail():
+  {==}
+
+def Laws.a7_ratification_pass():
+  {==}
+
+def Laws.a7_ratification_fail():
+  {==}
+
+def Laws.am1_religion_pass():
+  {==}
+
+def Laws.am1_religion_fail():
+  {==}
+
+def Laws.am1_expression_pass():
+  {==}
+
+def Laws.am1_expression_fail():
+  {==}
+
+def Laws.am2_arms_pass():
+  {==}
+
+def Laws.am2_arms_fail():
+  {==}
+
+def Laws.am3_quartering_pass():
+  {==}
+
+def Laws.am3_quartering_fail():
+  {==}
+
+def Laws.am4_search_pass():
+  {==}
+
+def Laws.am4_search_fail():
+  {==}
+
+def Laws.am4_warrant_pass():
+  {==}
+
+def Laws.am4_warrant_fail():
+  {==}
+
+def Laws.am5_grand_jury_pass():
+  {==}
+
+def Laws.am5_grand_jury_fail():
+  {==}
+
+def Laws.am5_double_jeopardy_pass():
+  {==}
+
+def Laws.am5_double_jeopardy_fail():
+  {==}
+
+def Laws.am5_due_process_pass():
+  {==}
+
+def Laws.am5_due_process_fail():
+  {==}
+
+def Laws.am5_takings_pass():
+  {==}
+
+def Laws.am5_takings_fail():
+  {==}
+
+def Laws.am6_trial_pass():
+  {==}
+
+def Laws.am6_trial_fail():
+  {==}
+
+def Laws.am6_counsel_pass():
+  {==}
+
+def Laws.am6_counsel_fail():
+  {==}
+
+def Laws.am7_civil_jury_pass():
+  {==}
+
+def Laws.am7_civil_jury_fail():
+  {==}
+
+def Laws.am7_reexamination_pass():
+  {==}
+
+def Laws.am7_reexamination_fail():
+  {==}
+
+def Laws.am8_excessive_pass():
+  {==}
+
+def Laws.am8_excessive_fail():
+  {==}
+
+def Laws.am8_cruel_unusual_pass():
+  {==}
+
+def Laws.am8_cruel_unusual_fail():
+  {==}
+
+def Laws.am9_retained_pass():
+  {==}
+
+def Laws.am9_retained_fail():
+  {==}
+
+def Laws.am10_reserved_pass():
+  {==}
+
+def Laws.am10_reserved_fail():
+  {==}
+
+def Laws.am11_immunity_pass():
+  {==}
+
+def Laws.am11_immunity_fail():
+  {==}
+
+def Laws.am13s2_enforcement_pass():
+  {==}
+
+def Laws.am13s2_enforcement_fail():
+  {==}
+
+def Laws.am14s1_citizenship_pass():
+  {==}
+
+def Laws.am14s1_citizenship_fail():
+  {==}
+
+def Laws.am14s1_dp_ep_pass():
+  {==}
+
+def Laws.am14s1_dp_ep_fail():
+  {==}
+
+def Laws.am14s1_privileges_pass():
+  {==}
+
+def Laws.am14s1_privileges_fail():
+  {==}
+
+def Laws.am14s3_disability_removed_pass():
+  {==}
+
+def Laws.am14s3_disability_removed_fail():
+  {==}
+
+def Laws.am14s4_debt_pass():
+  {==}
+
+def Laws.am14s4_debt_fail():
+  {==}
+
+def Laws.am14s5_enforcement_pass():
+  {==}
+
+def Laws.am14s5_enforcement_fail():
+  {==}
+
+def Laws.am15s1_vote_pass():
+  {==}
+
+def Laws.am15s1_vote_fail():
+  {==}
+
+def Laws.am15s2_enforcement_pass():
+  {==}
+
+def Laws.am15s2_enforcement_fail():
+  {==}
+
+def Laws.am19_vote_pass():
+  {==}
+
+def Laws.am19_vote_fail():
+  {==}
+
+def Laws.am20s5_effective_pass():
+  {==}
+
+def Laws.am20s5_effective_fail():
+  {==}
+
+def Laws.am20s6_deadline_pass():
+  {==}
+
+def Laws.am20s6_deadline_fail():
+  {==}
+
+def Laws.am21s2_transportation_pass():
+  {==}
+
+def Laws.am21s2_transportation_fail():
+  {==}
+
+def Laws.am21s3_deadline_pass():
+  {==}
+
+def Laws.am21s3_deadline_fail():
+  {==}
+
+def Laws.am23s1_electors_pass():
+  {==}
+
+def Laws.am23s1_electors_fail():
+  {==}
+
+def Laws.am23s2_enforcement_pass():
+  {==}
+
+def Laws.am23s2_enforcement_fail():
+  {==}
+
+def Laws.am24s1_poll_tax_pass():
+  {==}
+
+def Laws.am24s1_poll_tax_fail():
+  {==}
+
+def Laws.am24s2_enforcement_pass():
+  {==}
+
+def Laws.am24s2_enforcement_fail():
+  {==}
+
+def Laws.am26s2_enforcement_pass():
+  {==}
+
+def Laws.am26s2_enforcement_fail():
+  {==}
+
+def Laws.am27_timing_pass():
+  {==}
+
+def Laws.am27_timing_fail():
   {==}

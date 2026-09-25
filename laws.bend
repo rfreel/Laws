@@ -623,6 +623,94 @@ type Clause is Data:
   CL_AM25S3_VoluntaryTransfer{}
   CL_AM25S4_CongressDecision{}
   CL_AM26S1_VoteAge{}
+  CL_A1S1_Vesting{}
+  CL_A1S5_Quorum{}
+  CL_A1S5_Expulsion{}
+  CL_A1S5_YeasNays{}
+  CL_A1S5_Adjournment{}
+  CL_A1S6_ArrestPrivilege{}
+  CL_A1S6_SpeechDebate{}
+  CL_A1S6_Incompatibility{}
+  CL_A1S6_Emoluments{}
+  CL_A1S8_TaxUniformity{}
+  CL_A1S8_Commerce{}
+  CL_A1S8_NaturalizationBankruptcy{}
+  CL_A1S8_CoinWeights{}
+  CL_A1S8_WarDeclaration{}
+  CL_A1S8_NecessaryProper{}
+  CL_A1S9_HabeasCorpus{}
+  CL_A1S9_Attainder{}
+  CL_A1S9_DirectTax{}
+  CL_A1S9_ExportTax{}
+  CL_A1S9_Appropriations{}
+  CL_A1S9_TitlesNobility{}
+  CL_A1S10_TreatyAlliance{}
+  CL_A1S10_CoinTender{}
+  CL_A1S10_Imposts{}
+  CL_A1S10_StateWar{}
+  CL_A2S2_CommanderInChief{}
+  CL_A2S2_Pardons{}
+  CL_A2S2_Treaty{}
+  CL_A2S2_Appointments{}
+  CL_A2S2_RecessVacancies{}
+  CL_A2S3_TakeCare{}
+  CL_A2S3_ExtraordinaryConvene{}
+  CL_A2S4_Removal{}
+  CL_A3S1_Vesting{}
+  CL_A3S1_Tenure{}
+  CL_A3S1_Compensation{}
+  CL_A3S3_TreasonDefinition{}
+  CL_A3S3_PunishmentLimits{}
+  CL_A4S1_FullFaithCredit{}
+  CL_A4S2_PrivilegesImmunities{}
+  CL_A4S2_Extradition{}
+  CL_A4S2_FugitiveLabor{}
+  CL_A4S3_NewStates{}
+  CL_A4S3_Territory{}
+  CL_A4S4_RepublicanForm{}
+  CL_A4S4_Protection{}
+  CL_A6_Supremacy{}
+  CL_A6_Oaths{}
+  CL_A7_Ratification{}
+  CL_AM1_Religion{}
+  CL_AM1_ExpressionAssembly{}
+  CL_AM2_KeepBearArms{}
+  CL_AM3_Quartering{}
+  CL_AM4_UnreasonableSearch{}
+  CL_AM4_Warrants{}
+  CL_AM5_GrandJury{}
+  CL_AM5_DoubleJeopardy{}
+  CL_AM5_DueProcess{}
+  CL_AM5_Takings{}
+  CL_AM6_SpeedyImpartialTrial{}
+  CL_AM6_Counsel{}
+  CL_AM7_CivilJury{}
+  CL_AM7_Reexamination{}
+  CL_AM8_ExcessiveBailFines{}
+  CL_AM8_CruelUnusual{}
+  CL_AM9_RetainedRights{}
+  CL_AM10_ReservedPowers{}
+  CL_AM11_SovereignImmunity{}
+  CL_AM13S2_Enforcement{}
+  CL_AM14S1_Citizenship{}
+  CL_AM14S1_DueProcessEqualProtection{}
+  CL_AM14S1_PrivilegesImmunities{}
+  CL_AM14S3_DisabilityRemoved{}
+  CL_AM14S4_PublicDebt{}
+  CL_AM14S5_Enforcement{}
+  CL_AM15S1_VoteRace{}
+  CL_AM15S2_Enforcement{}
+  CL_AM19_VoteSex{}
+  CL_AM20S5_EffectiveDate{}
+  CL_AM20S6_RatificationDeadline{}
+  CL_AM21S2_Transportation{}
+  CL_AM21S3_RatificationDeadline{}
+  CL_AM23S1_Electors{}
+  CL_AM23S2_Enforcement{}
+  CL_AM24S1_PollTax{}
+  CL_AM24S2_Enforcement{}
+  CL_AM26S2_Enforcement{}
+  CL_AM27_CompensationTiming{}
 
 def clause_source(c: Clause) -> SourceBlock:
   match c:
@@ -714,6 +802,182 @@ def clause_source(c: Clause) -> SourceBlock:
       AM25S4{}
     case CL_AM26S1_VoteAge{}:
       AM26S1{}
+    case CL_A1S1_Vesting{}:
+      A1S1{}
+    case CL_A1S5_Quorum{}:
+      A1S5{}
+    case CL_A1S5_Expulsion{}:
+      A1S5{}
+    case CL_A1S5_YeasNays{}:
+      A1S5{}
+    case CL_A1S5_Adjournment{}:
+      A1S5{}
+    case CL_A1S6_ArrestPrivilege{}:
+      A1S6{}
+    case CL_A1S6_SpeechDebate{}:
+      A1S6{}
+    case CL_A1S6_Incompatibility{}:
+      A1S6{}
+    case CL_A1S6_Emoluments{}:
+      A1S6{}
+    case CL_A1S8_TaxUniformity{}:
+      A1S8{}
+    case CL_A1S8_Commerce{}:
+      A1S8{}
+    case CL_A1S8_NaturalizationBankruptcy{}:
+      A1S8{}
+    case CL_A1S8_CoinWeights{}:
+      A1S8{}
+    case CL_A1S8_WarDeclaration{}:
+      A1S8{}
+    case CL_A1S8_NecessaryProper{}:
+      A1S8{}
+    case CL_A1S9_HabeasCorpus{}:
+      A1S9{}
+    case CL_A1S9_Attainder{}:
+      A1S9{}
+    case CL_A1S9_DirectTax{}:
+      A1S9{}
+    case CL_A1S9_ExportTax{}:
+      A1S9{}
+    case CL_A1S9_Appropriations{}:
+      A1S9{}
+    case CL_A1S9_TitlesNobility{}:
+      A1S9{}
+    case CL_A1S10_TreatyAlliance{}:
+      A1S10{}
+    case CL_A1S10_CoinTender{}:
+      A1S10{}
+    case CL_A1S10_Imposts{}:
+      A1S10{}
+    case CL_A1S10_StateWar{}:
+      A1S10{}
+    case CL_A2S2_CommanderInChief{}:
+      A2S2{}
+    case CL_A2S2_Pardons{}:
+      A2S2{}
+    case CL_A2S2_Treaty{}:
+      A2S2{}
+    case CL_A2S2_Appointments{}:
+      A2S2{}
+    case CL_A2S2_RecessVacancies{}:
+      A2S2{}
+    case CL_A2S3_TakeCare{}:
+      A2S3{}
+    case CL_A2S3_ExtraordinaryConvene{}:
+      A2S3{}
+    case CL_A2S4_Removal{}:
+      A2S4{}
+    case CL_A3S1_Vesting{}:
+      A3S1{}
+    case CL_A3S1_Tenure{}:
+      A3S1{}
+    case CL_A3S1_Compensation{}:
+      A3S1{}
+    case CL_A3S3_TreasonDefinition{}:
+      A3S3{}
+    case CL_A3S3_PunishmentLimits{}:
+      A3S3{}
+    case CL_A4S1_FullFaithCredit{}:
+      A4S1{}
+    case CL_A4S2_PrivilegesImmunities{}:
+      A4S2{}
+    case CL_A4S2_Extradition{}:
+      A4S2{}
+    case CL_A4S2_FugitiveLabor{}:
+      A4S2{}
+    case CL_A4S3_NewStates{}:
+      A4S3{}
+    case CL_A4S3_Territory{}:
+      A4S3{}
+    case CL_A4S4_RepublicanForm{}:
+      A4S4{}
+    case CL_A4S4_Protection{}:
+      A4S4{}
+    case CL_A6_Supremacy{}:
+      A6{}
+    case CL_A6_Oaths{}:
+      A6{}
+    case CL_A7_Ratification{}:
+      A7{}
+    case CL_AM1_Religion{}:
+      AM1{}
+    case CL_AM1_ExpressionAssembly{}:
+      AM1{}
+    case CL_AM2_KeepBearArms{}:
+      AM2{}
+    case CL_AM3_Quartering{}:
+      AM3{}
+    case CL_AM4_UnreasonableSearch{}:
+      AM4{}
+    case CL_AM4_Warrants{}:
+      AM4{}
+    case CL_AM5_GrandJury{}:
+      AM5{}
+    case CL_AM5_DoubleJeopardy{}:
+      AM5{}
+    case CL_AM5_DueProcess{}:
+      AM5{}
+    case CL_AM5_Takings{}:
+      AM5{}
+    case CL_AM6_SpeedyImpartialTrial{}:
+      AM6{}
+    case CL_AM6_Counsel{}:
+      AM6{}
+    case CL_AM7_CivilJury{}:
+      AM7{}
+    case CL_AM7_Reexamination{}:
+      AM7{}
+    case CL_AM8_ExcessiveBailFines{}:
+      AM8{}
+    case CL_AM8_CruelUnusual{}:
+      AM8{}
+    case CL_AM9_RetainedRights{}:
+      AM9{}
+    case CL_AM10_ReservedPowers{}:
+      AM10{}
+    case CL_AM11_SovereignImmunity{}:
+      AM11{}
+    case CL_AM13S2_Enforcement{}:
+      AM13S2{}
+    case CL_AM14S1_Citizenship{}:
+      AM14S1{}
+    case CL_AM14S1_DueProcessEqualProtection{}:
+      AM14S1{}
+    case CL_AM14S1_PrivilegesImmunities{}:
+      AM14S1{}
+    case CL_AM14S3_DisabilityRemoved{}:
+      AM14S3{}
+    case CL_AM14S4_PublicDebt{}:
+      AM14S4{}
+    case CL_AM14S5_Enforcement{}:
+      AM14S5{}
+    case CL_AM15S1_VoteRace{}:
+      AM15S1{}
+    case CL_AM15S2_Enforcement{}:
+      AM15S2{}
+    case CL_AM19_VoteSex{}:
+      AM19{}
+    case CL_AM20S5_EffectiveDate{}:
+      AM20S5{}
+    case CL_AM20S6_RatificationDeadline{}:
+      AM20S6{}
+    case CL_AM21S2_Transportation{}:
+      AM21S2{}
+    case CL_AM21S3_RatificationDeadline{}:
+      AM21S3{}
+    case CL_AM23S1_Electors{}:
+      AM23S1{}
+    case CL_AM23S2_Enforcement{}:
+      AM23S2{}
+    case CL_AM24S1_PollTax{}:
+      AM24S1{}
+    case CL_AM24S2_Enforcement{}:
+      AM24S2{}
+    case CL_AM26S2_Enforcement{}:
+      AM26S2{}
+    case CL_AM27_CompensationTiming{}:
+      AM27{}
 
 def clause_index(c: Clause) -> Nat:
   match c:
@@ -805,6 +1069,182 @@ def clause_index(c: Clause) -> Nat:
       42n
     case CL_AM26S1_VoteAge{}:
       43n
+    case CL_A1S1_Vesting{}:
+      44n
+    case CL_A1S5_Quorum{}:
+      45n
+    case CL_A1S5_Expulsion{}:
+      46n
+    case CL_A1S5_YeasNays{}:
+      47n
+    case CL_A1S5_Adjournment{}:
+      48n
+    case CL_A1S6_ArrestPrivilege{}:
+      49n
+    case CL_A1S6_SpeechDebate{}:
+      50n
+    case CL_A1S6_Incompatibility{}:
+      51n
+    case CL_A1S6_Emoluments{}:
+      52n
+    case CL_A1S8_TaxUniformity{}:
+      53n
+    case CL_A1S8_Commerce{}:
+      54n
+    case CL_A1S8_NaturalizationBankruptcy{}:
+      55n
+    case CL_A1S8_CoinWeights{}:
+      56n
+    case CL_A1S8_WarDeclaration{}:
+      57n
+    case CL_A1S8_NecessaryProper{}:
+      58n
+    case CL_A1S9_HabeasCorpus{}:
+      59n
+    case CL_A1S9_Attainder{}:
+      60n
+    case CL_A1S9_DirectTax{}:
+      61n
+    case CL_A1S9_ExportTax{}:
+      62n
+    case CL_A1S9_Appropriations{}:
+      63n
+    case CL_A1S9_TitlesNobility{}:
+      64n
+    case CL_A1S10_TreatyAlliance{}:
+      65n
+    case CL_A1S10_CoinTender{}:
+      66n
+    case CL_A1S10_Imposts{}:
+      67n
+    case CL_A1S10_StateWar{}:
+      68n
+    case CL_A2S2_CommanderInChief{}:
+      69n
+    case CL_A2S2_Pardons{}:
+      70n
+    case CL_A2S2_Treaty{}:
+      71n
+    case CL_A2S2_Appointments{}:
+      72n
+    case CL_A2S2_RecessVacancies{}:
+      73n
+    case CL_A2S3_TakeCare{}:
+      74n
+    case CL_A2S3_ExtraordinaryConvene{}:
+      75n
+    case CL_A2S4_Removal{}:
+      76n
+    case CL_A3S1_Vesting{}:
+      77n
+    case CL_A3S1_Tenure{}:
+      78n
+    case CL_A3S1_Compensation{}:
+      79n
+    case CL_A3S3_TreasonDefinition{}:
+      80n
+    case CL_A3S3_PunishmentLimits{}:
+      81n
+    case CL_A4S1_FullFaithCredit{}:
+      82n
+    case CL_A4S2_PrivilegesImmunities{}:
+      83n
+    case CL_A4S2_Extradition{}:
+      84n
+    case CL_A4S2_FugitiveLabor{}:
+      85n
+    case CL_A4S3_NewStates{}:
+      86n
+    case CL_A4S3_Territory{}:
+      87n
+    case CL_A4S4_RepublicanForm{}:
+      88n
+    case CL_A4S4_Protection{}:
+      89n
+    case CL_A6_Supremacy{}:
+      90n
+    case CL_A6_Oaths{}:
+      91n
+    case CL_A7_Ratification{}:
+      92n
+    case CL_AM1_Religion{}:
+      93n
+    case CL_AM1_ExpressionAssembly{}:
+      94n
+    case CL_AM2_KeepBearArms{}:
+      95n
+    case CL_AM3_Quartering{}:
+      96n
+    case CL_AM4_UnreasonableSearch{}:
+      97n
+    case CL_AM4_Warrants{}:
+      98n
+    case CL_AM5_GrandJury{}:
+      99n
+    case CL_AM5_DoubleJeopardy{}:
+      100n
+    case CL_AM5_DueProcess{}:
+      101n
+    case CL_AM5_Takings{}:
+      102n
+    case CL_AM6_SpeedyImpartialTrial{}:
+      103n
+    case CL_AM6_Counsel{}:
+      104n
+    case CL_AM7_CivilJury{}:
+      105n
+    case CL_AM7_Reexamination{}:
+      106n
+    case CL_AM8_ExcessiveBailFines{}:
+      107n
+    case CL_AM8_CruelUnusual{}:
+      108n
+    case CL_AM9_RetainedRights{}:
+      109n
+    case CL_AM10_ReservedPowers{}:
+      110n
+    case CL_AM11_SovereignImmunity{}:
+      111n
+    case CL_AM13S2_Enforcement{}:
+      112n
+    case CL_AM14S1_Citizenship{}:
+      113n
+    case CL_AM14S1_DueProcessEqualProtection{}:
+      114n
+    case CL_AM14S1_PrivilegesImmunities{}:
+      115n
+    case CL_AM14S3_DisabilityRemoved{}:
+      116n
+    case CL_AM14S4_PublicDebt{}:
+      117n
+    case CL_AM14S5_Enforcement{}:
+      118n
+    case CL_AM15S1_VoteRace{}:
+      119n
+    case CL_AM15S2_Enforcement{}:
+      120n
+    case CL_AM19_VoteSex{}:
+      121n
+    case CL_AM20S5_EffectiveDate{}:
+      122n
+    case CL_AM20S6_RatificationDeadline{}:
+      123n
+    case CL_AM21S2_Transportation{}:
+      124n
+    case CL_AM21S3_RatificationDeadline{}:
+      125n
+    case CL_AM23S1_Electors{}:
+      126n
+    case CL_AM23S2_Enforcement{}:
+      127n
+    case CL_AM24S1_PollTax{}:
+      128n
+    case CL_AM24S2_Enforcement{}:
+      129n
+    case CL_AM26S2_Enforcement{}:
+      130n
+    case CL_AM27_CompensationTiming{}:
+      131n
 
 def clause_effect(c: Clause) -> ClauseEffect:
   match c:
@@ -896,9 +1336,185 @@ def clause_effect(c: Clause) -> ClauseEffect:
       ExecutiveSuccession{}
     case CL_AM26S1_VoteAge{}:
       RightsProtection{}
+    case CL_A1S1_Vesting{}:
+      LegislativeProcedure{}
+    case CL_A1S5_Quorum{}:
+      LegislativeProcedure{}
+    case CL_A1S5_Expulsion{}:
+      LegislativeProcedure{}
+    case CL_A1S5_YeasNays{}:
+      LegislativeProcedure{}
+    case CL_A1S5_Adjournment{}:
+      LegislativeProcedure{}
+    case CL_A1S6_ArrestPrivilege{}:
+      RightsProtection{}
+    case CL_A1S6_SpeechDebate{}:
+      RightsProtection{}
+    case CL_A1S6_Incompatibility{}:
+      OfficeEligibility{}
+    case CL_A1S6_Emoluments{}:
+      OfficeEligibility{}
+    case CL_A1S8_TaxUniformity{}:
+      FederalPower{}
+    case CL_A1S8_Commerce{}:
+      FederalPower{}
+    case CL_A1S8_NaturalizationBankruptcy{}:
+      FederalPower{}
+    case CL_A1S8_CoinWeights{}:
+      FederalPower{}
+    case CL_A1S8_WarDeclaration{}:
+      FederalPower{}
+    case CL_A1S8_NecessaryProper{}:
+      FederalPower{}
+    case CL_A1S9_HabeasCorpus{}:
+      RightsProtection{}
+    case CL_A1S9_Attainder{}:
+      RightsProtection{}
+    case CL_A1S9_DirectTax{}:
+      FederalPower{}
+    case CL_A1S9_ExportTax{}:
+      FederalPower{}
+    case CL_A1S9_Appropriations{}:
+      LegislativeProcedure{}
+    case CL_A1S9_TitlesNobility{}:
+      RightsProtection{}
+    case CL_A1S10_TreatyAlliance{}:
+      FederalPower{}
+    case CL_A1S10_CoinTender{}:
+      FederalPower{}
+    case CL_A1S10_Imposts{}:
+      FederalPower{}
+    case CL_A1S10_StateWar{}:
+      FederalPower{}
+    case CL_A2S2_CommanderInChief{}:
+      FederalPower{}
+    case CL_A2S2_Pardons{}:
+      FederalPower{}
+    case CL_A2S2_Treaty{}:
+      LegislativeProcedure{}
+    case CL_A2S2_Appointments{}:
+      FederalPower{}
+    case CL_A2S2_RecessVacancies{}:
+      FederalPower{}
+    case CL_A2S3_TakeCare{}:
+      Declaratory{}
+    case CL_A2S3_ExtraordinaryConvene{}:
+      Declaratory{}
+    case CL_A2S4_Removal{}:
+      LegislativeProcedure{}
+    case CL_A3S1_Vesting{}:
+      JudicialRule{}
+    case CL_A3S1_Tenure{}:
+      JudicialRule{}
+    case CL_A3S1_Compensation{}:
+      JudicialRule{}
+    case CL_A3S3_TreasonDefinition{}:
+      JudicialRule{}
+    case CL_A3S3_PunishmentLimits{}:
+      JudicialRule{}
+    case CL_A4S1_FullFaithCredit{}:
+      JudicialRule{}
+    case CL_A4S2_PrivilegesImmunities{}:
+      RightsProtection{}
+    case CL_A4S2_Extradition{}:
+      JudicialRule{}
+    case CL_A4S2_FugitiveLabor{}:
+      RightsProtection{}
+    case CL_A4S3_NewStates{}:
+      LegislativeProcedure{}
+    case CL_A4S3_Territory{}:
+      FederalPower{}
+    case CL_A4S4_RepublicanForm{}:
+      FederalPower{}
+    case CL_A4S4_Protection{}:
+      FederalPower{}
+    case CL_A6_Supremacy{}:
+      Declaratory{}
+    case CL_A6_Oaths{}:
+      Declaratory{}
+    case CL_A7_Ratification{}:
+      LegislativeProcedure{}
+    case CL_AM1_Religion{}:
+      RightsProtection{}
+    case CL_AM1_ExpressionAssembly{}:
+      RightsProtection{}
+    case CL_AM2_KeepBearArms{}:
+      RightsProtection{}
+    case CL_AM3_Quartering{}:
+      RightsProtection{}
+    case CL_AM4_UnreasonableSearch{}:
+      RightsProtection{}
+    case CL_AM4_Warrants{}:
+      RightsProtection{}
+    case CL_AM5_GrandJury{}:
+      JudicialRule{}
+    case CL_AM5_DoubleJeopardy{}:
+      JudicialRule{}
+    case CL_AM5_DueProcess{}:
+      RightsProtection{}
+    case CL_AM5_Takings{}:
+      RightsProtection{}
+    case CL_AM6_SpeedyImpartialTrial{}:
+      JudicialRule{}
+    case CL_AM6_Counsel{}:
+      JudicialRule{}
+    case CL_AM7_CivilJury{}:
+      JudicialRule{}
+    case CL_AM7_Reexamination{}:
+      JudicialRule{}
+    case CL_AM8_ExcessiveBailFines{}:
+      RightsProtection{}
+    case CL_AM8_CruelUnusual{}:
+      RightsProtection{}
+    case CL_AM9_RetainedRights{}:
+      RightsProtection{}
+    case CL_AM10_ReservedPowers{}:
+      FederalPower{}
+    case CL_AM11_SovereignImmunity{}:
+      JudicialRule{}
+    case CL_AM13S2_Enforcement{}:
+      FederalPower{}
+    case CL_AM14S1_Citizenship{}:
+      RightsProtection{}
+    case CL_AM14S1_DueProcessEqualProtection{}:
+      RightsProtection{}
+    case CL_AM14S1_PrivilegesImmunities{}:
+      RightsProtection{}
+    case CL_AM14S3_DisabilityRemoved{}:
+      OfficeEligibility{}
+    case CL_AM14S4_PublicDebt{}:
+      FederalPower{}
+    case CL_AM14S5_Enforcement{}:
+      FederalPower{}
+    case CL_AM15S1_VoteRace{}:
+      RightsProtection{}
+    case CL_AM15S2_Enforcement{}:
+      FederalPower{}
+    case CL_AM19_VoteSex{}:
+      RightsProtection{}
+    case CL_AM20S5_EffectiveDate{}:
+      Declaratory{}
+    case CL_AM20S6_RatificationDeadline{}:
+      Declaratory{}
+    case CL_AM21S2_Transportation{}:
+      FederalPower{}
+    case CL_AM21S3_RatificationDeadline{}:
+      Declaratory{}
+    case CL_AM23S1_Electors{}:
+      ElectoralOutcome{}
+    case CL_AM23S2_Enforcement{}:
+      FederalPower{}
+    case CL_AM24S1_PollTax{}:
+      RightsProtection{}
+    case CL_AM24S2_Enforcement{}:
+      FederalPower{}
+    case CL_AM26S2_Enforcement{}:
+      FederalPower{}
+    case CL_AM27_CompensationTiming{}:
+      LegislativeProcedure{}
 
 def clause_count() -> Nat:
-  44n
+  132n
 
 def clause_index_in_range(c: Clause) -> Bool:
   Nat.is_lt(clause_index(c), clause_count())
@@ -950,6 +1566,150 @@ def interpretive_term_is_intoxicating_liquor(t: InterpretiveTerm) -> Bool:
 def interpretive_term_is_unable_to_discharge(t: InterpretiveTerm) -> Bool:
   match t:
     case UnableToDischarge{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_commerce(t: InterpretiveTerm) -> Bool:
+  match t:
+    case Commerce{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_necessary_proper(t: InterpretiveTerm) -> Bool:
+  match t:
+    case NecessaryAndProper{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_good_behavior(t: InterpretiveTerm) -> Bool:
+  match t:
+    case GoodBehavior{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_extraordinary_occasion(t: InterpretiveTerm) -> Bool:
+  match t:
+    case ExtraordinaryOccasion{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_high_crimes(t: InterpretiveTerm) -> Bool:
+  match t:
+    case HighCrimesAndMisdemeanors{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_republican_form(t: InterpretiveTerm) -> Bool:
+  match t:
+    case RepublicanForm{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_establishment(t: InterpretiveTerm) -> Bool:
+  match t:
+    case EstablishmentOfReligion{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_free_exercise(t: InterpretiveTerm) -> Bool:
+  match t:
+    case FreeExercise{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_militia(t: InterpretiveTerm) -> Bool:
+  match t:
+    case WellRegulatedMilitia{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_keep_bear_arms(t: InterpretiveTerm) -> Bool:
+  match t:
+    case KeepAndBearArms{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_unreasonable(t: InterpretiveTerm) -> Bool:
+  match t:
+    case Unreasonable{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_probable_cause(t: InterpretiveTerm) -> Bool:
+  match t:
+    case ProbableCause{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_infamous_crime(t: InterpretiveTerm) -> Bool:
+  match t:
+    case InfamousCrime{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_same_offence(t: InterpretiveTerm) -> Bool:
+  match t:
+    case SameOffence{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_due_process(t: InterpretiveTerm) -> Bool:
+  match t:
+    case DueProcess{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_common_law_suit(t: InterpretiveTerm) -> Bool:
+  match t:
+    case CommonLawSuit{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_excessive(t: InterpretiveTerm) -> Bool:
+  match t:
+    case Excessive{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_cruel_unusual(t: InterpretiveTerm) -> Bool:
+  match t:
+    case CruelAndUnusual{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_retained_right(t: InterpretiveTerm) -> Bool:
+  match t:
+    case RetainedRight{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_delegated_power(t: InterpretiveTerm) -> Bool:
+  match t:
+    case DelegatedPower{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_privileges_or_immunities(t: InterpretiveTerm) -> Bool:
+  match t:
+    case PrivilegesOrImmunities{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_equal_protection(t: InterpretiveTerm) -> Bool:
+  match t:
+    case EqualProtection{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_valid_public_debt(t: InterpretiveTerm) -> Bool:
+  match t:
+    case ValidPublicDebt{}:
+      True{}
+    case _:
+      False{}
+def interpretive_term_is_appropriate_legislation(t: InterpretiveTerm) -> Bool:
+  match t:
+    case AppropriateLegislation{}:
       True{}
     case _:
       False{}
@@ -1987,3 +2747,392 @@ def eval_clause_under_env(clause: Clause, env: InterpEnv, term_a: InterpretiveTe
       eval_rule_am25s3_voluntary_transfer(env, flag1, term_a)
     case _:
       Unknown{}
+
+# --- Condition -> Effect rules: completion wave (46 remaining blocks) ---
+
+# A1S1: all legislative powers vest in Congress (Senate + House).
+def rule_a1s1_vesting(legislative_power_in_congress: Bool) -> Bool:
+  legislative_power_in_congress
+
+# A1S5: a majority of each House is a quorum to do business.
+def rule_a1s5_quorum(counts: ChamberCount) -> Bool:
+  quorum_met(counts)
+
+# A1S5: expulsion needs two thirds concurrence. Judgment call: the text names
+# no basis; modeled on the present basis (of those voting).
+def rule_a1s5_expulsion(yes: Nat, counts: ChamberCount) -> Bool:
+  two_thirds(yes, counts, PresentMembers{})
+
+# A1S5: yeas and nays entered at the desire of one fifth of those present.
+def rule_a1s5_yeas_nays(desiring: Nat, present: Nat) -> Bool:
+  Nat.is_le(present, Nat.mul(5n, desiring))
+
+# A1S5: no adjournment over three days without the other House's consent.
+def rule_a1s5_adjournment(days: Nat, other_consents: Bool) -> Bool:
+  Bool.or(Nat.is_le(days, 3n), other_consents)
+
+# A1S6: privilege from arrest during attendance, except treason/felony/breach.
+def rule_a1s6_arrest_privilege(attending: Bool, treason: Bool, felony: Bool, breach_of_peace: Bool) -> Bool:
+  Bool.and(attending, Bool.not(Bool.or(treason, Bool.or(felony, breach_of_peace))))
+
+# A1S6: no questioning elsewhere for speech or debate in either House.
+def rule_a1s6_speech_debate(questioned_elsewhere: Bool) -> Bool:
+  Bool.not(questioned_elsewhere)
+
+# A1S6: no office-holder under the U.S. sits in either House while in office.
+def rule_a1s6_incompatible(holds_office: Bool, is_member: Bool) -> Bool:
+  Bool.not(Bool.and(holds_office, is_member))
+
+# A1S6: no foreign present/emolument/office/title without Congress's consent.
+def rule_a1s6_emolument(accepts: Bool, congress_consents: Bool) -> Bool:
+  Bool.or(Bool.not(accepts), congress_consents)
+
+# A1S8: taxes for debts/defence/welfare; duties/imposts/excises uniform.
+def rule_a1s8_tax(tax_for_debts_welfare: Bool, uniform: Bool) -> Bool:
+  Bool.and(tax_for_debts_welfare, uniform)
+
+# A1S8: regulate commerce; Commerce is an opaque term input.
+def rule_a1s8_commerce(term: InterpretiveTerm, regulated: Bool) -> Bool:
+  Bool.and(interpretive_term_is_commerce(term), regulated)
+
+# A1S8: uniform rule of naturalization; uniform bankruptcy laws.
+def rule_a1s8_naturalization_bankruptcy(uniform_rule: Bool) -> Bool:
+  uniform_rule
+
+# A1S8: coin money, regulate its value, fix weights and measures.
+def rule_a1s8_coin_weights(coins_money: Bool) -> Bool:
+  coins_money
+
+# A1S8: Congress declares war, grants marque/reprisal, rules captures.
+def rule_a1s8_declare_war(congress_declares: Bool) -> Bool:
+  congress_declares
+
+# A1S8: necessary-and-proper laws; the term stays an opaque input.
+def rule_a1s8_necessary_proper(term: InterpretiveTerm, proper_exercise: Bool) -> Bool:
+  Bool.and(interpretive_term_is_necessary_proper(term), proper_exercise)
+
+# A1S9: habeas not suspended unless rebellion/invasion requires it.
+def rule_a1s9_habeas(suspended: Bool, rebellion: Bool, invasion: Bool) -> Bool:
+  Bool.or(Bool.not(suspended), Bool.or(rebellion, invasion))
+
+# A1S9: no bill of attainder or ex post facto law passes.
+def rule_a1s9_attainder(passed: Bool) -> Bool:
+  Bool.not(passed)
+
+# A1S9: no capitation/direct tax unless apportioned to the census (AM16
+# partially supersedes for income tax; relation R_AM16_A1S9).
+def rule_a1s9_direct_tax(laid: Bool, apportioned: Bool) -> Bool:
+  Bool.or(Bool.not(laid), apportioned)
+
+# A1S9: no tax or duty on articles exported from any state.
+def rule_a1s9_export_tax(tax_on_exports: Bool) -> Bool:
+  Bool.not(tax_on_exports)
+
+# A1S9: no money drawn from the Treasury except by appropriation in law.
+def rule_a1s9_appropriations(drawn: Bool, appropriated: Bool) -> Bool:
+  Bool.or(Bool.not(drawn), appropriated)
+
+# A1S9: no title of nobility granted by the United States.
+def rule_a1s9_titles(granted: Bool) -> Bool:
+  Bool.not(granted)
+
+# A1S10: no state treaty/alliance/confederation or marque/reprisal.
+def rule_a1s10_treaty_alliance(state_enters: Bool) -> Bool:
+  Bool.not(state_enters)
+
+# A1S10: no state coinage, bills of credit, or non-gold/silver tender.
+def rule_a1s10_coin_tender(state_coins_or_tenders: Bool) -> Bool:
+  Bool.not(state_coins_or_tenders)
+
+# A1S10: no state imposts/duties on imports/exports without Congress's
+# consent, except inspection-law necessities.
+def rule_a1s10_imposts(laid: Bool, congress_consents: Bool, inspection_necessary: Bool) -> Bool:
+  Bool.or(Bool.not(laid), Bool.or(congress_consents, inspection_necessary))
+
+# A1S10: no state troops/warships in peacetime, compacts, or war without
+# Congress's consent, unless invaded or in imminent no-delay danger.
+def rule_a1s10_state_war(keeps_troops: Bool, congress_consents: Bool, invaded: Bool, imminent_danger: Bool) -> Bool:
+  Bool.or(Bool.not(keeps_troops), Bool.or(congress_consents, Bool.or(invaded, imminent_danger)))
+
+# A2S2: the President is Commander in Chief of the armed forces and militia.
+def rule_a2s2_commander_in_chief(commands: Bool) -> Bool:
+  commands
+
+# A2S2: reprieves/pardons for federal offences, except impeachment cases.
+def rule_a2s2_pardons(granted: Bool, impeachment_case: Bool) -> Bool:
+  Bool.and(granted, Bool.not(impeachment_case))
+
+# A2S2: treaties need two thirds of the Senators present (basis fixed in
+# treaty_approved).
+def rule_a2s2_treaty(senate_yes: Nat, counts: ChamberCount) -> Bool:
+  treaty_approved(senate_yes, counts)
+
+# A2S2: appointments by and with the Senate's advice and consent.
+def rule_a2s2_appointments(nominated: Bool, senate_consents: Bool) -> Bool:
+  Bool.and(nominated, senate_consents)
+
+# A2S2: recess vacancies filled by commissions expiring at session's end.
+def rule_a2s2_recess(vacancy_during_recess: Bool, filled: Bool) -> Bool:
+  Bool.or(Bool.not(vacancy_during_recess), filled)
+
+# A2S3: the President takes care that the laws are faithfully executed.
+def rule_a2s3_take_care(laws_faithfully_executed: Bool) -> Bool:
+  laws_faithfully_executed
+
+# A2S3: on extraordinary occasions the President may convene the Houses.
+def rule_a2s3_convene(term: InterpretiveTerm, convened: Bool) -> Bool:
+  Bool.and(interpretive_term_is_extraordinary_occasion(term), convened)
+
+# A2S4: civil officers removed on impeachment for and conviction of treason,
+# bribery, or other high crimes and misdemeanors (term opaque).
+def rule_a2s4_removal(impeached: Bool, convicted: Bool, term: InterpretiveTerm, offense_proven: Bool) -> Bool:
+  Bool.and(Bool.and(impeached, convicted), Bool.and(interpretive_term_is_high_crimes(term), offense_proven))
+
+# A3S1: judicial power vests in one supreme Court and inferior courts.
+def rule_a3s1_vesting(vested_in_courts: Bool) -> Bool:
+  vested_in_courts
+
+# A3S1: judges hold office during good behaviour (term opaque).
+def rule_a3s1_tenure(term: InterpretiveTerm, holds_during_good_behavior: Bool) -> Bool:
+  Bool.and(interpretive_term_is_good_behavior(term), holds_during_good_behavior)
+
+# A3S1: judicial compensation not diminished during continuance in office.
+def rule_a3s1_compensation(diminished: Bool) -> Bool:
+  Bool.not(diminished)
+
+# A3S3: treason consists only in levying war or adhering to enemies (evidence
+# rule already modeled by treason_conviction_evidence).
+def rule_a3s3_treason_definition(levying_war: Bool, adhering_to_enemies: Bool) -> Bool:
+  Bool.or(levying_war, adhering_to_enemies)
+
+# A3S3: no corruption of blood or forfeiture beyond the attainted life.
+def rule_a3s3_corruption_of_blood(forfeiture_beyond_life: Bool) -> Bool:
+  Bool.not(forfeiture_beyond_life)
+
+# A4S1: full faith and credit to sister-state acts, records, proceedings.
+def rule_a4s1_full_faith_credit(given: Bool) -> Bool:
+  given
+
+# A4S2: citizens of each state entitled to privileges/immunities of the several.
+def rule_a4s2_privileges_immunities(entitled: Bool) -> Bool:
+  entitled
+
+# A4S2: fugitives from justice delivered up on executive demand.
+def rule_a4s2_extradition(charged: Bool, fled: Bool, demanded: Bool) -> Bool:
+  Bool.and(charged, Bool.and(fled, demanded))
+
+# A4S2: fugitive-service clause kept verbatim; partially superseded by AM13S1
+# (relation R_AM13S1_A4S2) but not repealed, so it stays in force.
+def rule_a4s2_fugitive_labor(delivered_up: Bool) -> Bool:
+  delivered_up
+
+# A4S3: Congress admits new states; none formed within another's jurisdiction
+# or by junction without the states concerned and Congress consenting.
+def rule_a4s3_new_state(within_jurisdiction: Bool, by_junction: Bool, states_consent: Bool, congress_admits: Bool) -> Bool:
+  match states_consent:
+      case True{}:
+        congress_admits
+      case False{}:
+        Bool.and(congress_admits, Bool.and(Bool.not(within_jurisdiction), Bool.not(by_junction)))
+
+# A4S3: Congress disposes of and regulates territory and federal property.
+def rule_a4s3_territory(congress_regulates: Bool) -> Bool:
+  congress_regulates
+
+# A4S4: the United States guarantees every state a republican form (term opaque).
+def rule_a4s4_republican_form(term: InterpretiveTerm, guaranteed: Bool) -> Bool:
+  Bool.and(interpretive_term_is_republican_form(term), guaranteed)
+
+# A4S4: protection against invasion; against domestic violence on application
+# of the legislature (or executive when it cannot convene).
+def rule_a4s4_protection(invasion: Bool, domestic_violence: Bool, application_made: Bool) -> Bool:
+  Bool.or(invasion, Bool.and(domestic_violence, application_made))
+
+# A6: Constitution, federal laws, and treaties are the supreme law of the land.
+def rule_a6_supremacy(supreme_law: Bool) -> Bool:
+  supreme_law
+
+# A6: federal and state legislators and officers bound by oath/affirmation
+# to support the Constitution.
+def rule_a6_oaths(bound_by_oath: Bool) -> Bool:
+  bound_by_oath
+
+# A7: ratification by conventions of nine states suffices to establish.
+def rule_a7_ratification(ratifying: Nat) -> Bool:
+  Nat.is_le(9n, ratifying)
+
+# AM1: no establishment of religion; free exercise not prohibited (terms opaque).
+def rule_am1_religion(est_term: InterpretiveTerm, est_respected: Bool, fe_term: InterpretiveTerm, fe_respected: Bool) -> Bool:
+  Bool.and(Bool.and(interpretive_term_is_establishment(est_term), est_respected), Bool.and(interpretive_term_is_free_exercise(fe_term), fe_respected))
+
+# AM1: no abridging speech, press, peaceable assembly, or petition.
+def rule_am1_expression(abridged: Bool) -> Bool:
+  Bool.not(abridged)
+
+# AM2: the right to keep and bear arms shall not be infringed (terms opaque).
+def rule_am2_arms(militia_term: InterpretiveTerm, militia_necessary: Bool, arms_term: InterpretiveTerm, right_preserved: Bool) -> Bool:
+  Bool.and(Bool.and(interpretive_term_is_militia(militia_term), militia_necessary), Bool.and(interpretive_term_is_keep_bear_arms(arms_term), right_preserved))
+
+# AM3: no peacetime quartering without owner consent; wartime only as
+# prescribed by law.
+def rule_am3_quartering(peacetime: Bool, owner_consents: Bool, prescribed_by_law: Bool) -> Bool:
+  match peacetime:
+      case True{}:
+        owner_consents
+      case False{}:
+        prescribed_by_law
+
+# AM4: the right against unreasonable searches/seizures shall not be violated.
+def rule_am4_search(term: InterpretiveTerm, violated: Bool) -> Bool:
+  Bool.and(interpretive_term_is_unreasonable(term), Bool.not(violated))
+
+# AM4: warrants only on probable cause, supported by oath, particularly
+# describing place/persons/things.
+def rule_am4_warrant(term: InterpretiveTerm, probable_cause_shown: Bool, particularly_described: Bool) -> Bool:
+  Bool.and(interpretive_term_is_probable_cause(term), Bool.and(probable_cause_shown, particularly_described))
+
+# AM5: no holding to answer for capital/infamous crime without grand-jury
+# presentment or indictment.
+def rule_am5_grand_jury(term: InterpretiveTerm, held_to_answer: Bool, indicted: Bool) -> Bool:
+  Bool.and(interpretive_term_is_infamous_crime(term), Bool.or(Bool.not(held_to_answer), indicted))
+
+# AM5: no one twice put in jeopardy for the same offence (term opaque).
+def rule_am5_double_jeopardy(term: InterpretiveTerm, twice_in_jeopardy: Bool) -> Bool:
+  Bool.and(interpretive_term_is_same_offence(term), Bool.not(twice_in_jeopardy))
+
+# AM5: no deprivation of life/liberty/property without due process (term opaque).
+def rule_am5_due_process(term: InterpretiveTerm, deprived_without_due_process: Bool) -> Bool:
+  Bool.and(interpretive_term_is_due_process(term), Bool.not(deprived_without_due_process))
+
+# AM5: private property taken only for public use with just compensation.
+def rule_am5_takings(public_use: Bool, just_compensation: Bool) -> Bool:
+  Bool.and(public_use, just_compensation)
+
+# AM6: criminal trial by jury, speedy and impartial (terms opaque).
+def rule_am6_trial(trial_by_jury: Bool, speedy_term: InterpretiveTerm, speedy_met: Bool, impartial_term: InterpretiveTerm, impartial_met: Bool) -> Bool:
+  Bool.and(trial_by_jury, Bool.and(Bool.and(interpretive_term_is_speedy(speedy_term), speedy_met), Bool.and(interpretive_term_is_impartial(impartial_term), impartial_met)))
+
+# AM6: the accused enjoys the assistance of counsel for defence.
+def rule_am6_counsel(assistance_of_counsel: Bool) -> Bool:
+  assistance_of_counsel
+
+# AM7: jury right preserved where the controversy exceeds twenty dollars.
+def rule_am7_civil_jury(value: Nat) -> Bool:
+  Nat.is_lt(20n, value)
+
+# AM7: jury-tried facts re-examined only per common-law rules (term opaque).
+def rule_am7_reexamination(term: InterpretiveTerm, reexamined_beyond_common_law: Bool) -> Bool:
+  Bool.and(interpretive_term_is_common_law_suit(term), Bool.not(reexamined_beyond_common_law))
+
+# AM8: no excessive bail required nor excessive fines imposed (term opaque).
+def rule_am8_excessive(term: InterpretiveTerm, excessive_imposed: Bool) -> Bool:
+  Bool.and(interpretive_term_is_excessive(term), Bool.not(excessive_imposed))
+
+# AM8: no cruel and unusual punishments inflicted (term opaque).
+def rule_am8_cruel_unusual(term: InterpretiveTerm, inflicted: Bool) -> Bool:
+  Bool.and(interpretive_term_is_cruel_unusual(term), Bool.not(inflicted))
+
+# AM9: enumerated rights not construed to deny others retained (term opaque).
+def rule_am9_retained(term: InterpretiveTerm, denied: Bool) -> Bool:
+  Bool.and(interpretive_term_is_retained_right(term), Bool.not(denied))
+
+# AM10: undelegated, unprohibited powers reserved to states/people (term opaque).
+def rule_am10_reserved(term: InterpretiveTerm, reserved_to_states: Bool) -> Bool:
+  Bool.and(interpretive_term_is_delegated_power(term), reserved_to_states)
+
+# AM11: no federal suit against a state by another state's citizens or
+# foreign citizens/subjects.
+def rule_am11_immunity(suit_against_state: Bool, by_outsider: Bool) -> Bool:
+  Bool.not(Bool.and(suit_against_state, by_outsider))
+
+# AM13S2: Congress enforces abolition by appropriate legislation (term opaque).
+def rule_am13s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM14S1: birth/naturalization in the U.S. plus jurisdiction = citizenship.
+def rule_am14s1_citizenship(born_or_naturalized_in_us: Bool, subject_to_jurisdiction: Bool) -> Bool:
+  Bool.and(born_or_naturalized_in_us, subject_to_jurisdiction)
+
+# AM14S1: no state denies due process or equal protection (terms opaque).
+def rule_am14s1_dp_ep(dp_term: InterpretiveTerm, dp_respected: Bool, ep_term: InterpretiveTerm, ep_respected: Bool) -> Bool:
+  Bool.and(Bool.and(interpretive_term_is_due_process(dp_term), dp_respected), Bool.and(interpretive_term_is_equal_protection(ep_term), ep_respected))
+
+# AM14S1: no state abridges citizens' privileges or immunities (term opaque).
+def rule_am14s1_privileges(term: InterpretiveTerm, abridged: Bool) -> Bool:
+  Bool.and(interpretive_term_is_privileges_or_immunities(term), Bool.not(abridged))
+
+# AM14S3: Congress may remove the insurrection disability by two thirds of
+# each House (membership basis).
+def rule_am14s3_disability_removed(house_yes: Nat, house: ChamberCount, senate_yes: Nat, senate: ChamberCount) -> Bool:
+  Bool.and(two_thirds(house_yes, house, FullMembership{}), two_thirds(senate_yes, senate, FullMembership{}))
+
+# AM14S4: validity of the U.S. public debt shall not be questioned (term opaque).
+def rule_am14s4_debt(term: InterpretiveTerm, questioned: Bool) -> Bool:
+  Bool.and(interpretive_term_is_valid_public_debt(term), Bool.not(questioned))
+
+# AM14S5: Congress enforces by appropriate legislation (term opaque).
+def rule_am14s5_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM15S1: no denial/abridgment of the vote on account of race, color, or
+# previous servitude.
+def rule_am15s1_vote(denied_on_race: Bool) -> Bool:
+  Bool.not(denied_on_race)
+
+# AM15S2: Congress enforces by appropriate legislation (term opaque).
+def rule_am15s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM19: no denial/abridgment of the vote on account of sex.
+def rule_am19_vote(denied_on_sex: Bool) -> Bool:
+  Bool.not(denied_on_sex)
+
+# AM20S5: sections 1-2 take effect Oct 15 after ratification — temporal
+# activation belongs to TASKS.md item 3; recorded here as Declaratory.
+def rule_am20s5_effective(took_effect: Bool) -> Bool:
+  took_effect
+
+# AM20S6: inoperative unless ratified within seven years — temporal; item 3.
+def rule_am20s6_deadline(ratified_within_seven_years: Bool) -> Bool:
+  ratified_within_seven_years
+
+# AM21S2: liquor transportation/delivery in violation of state law prohibited
+# (term opaque).
+def rule_am21s2_transportation(term: InterpretiveTerm, transported_in_violation: Bool) -> Bool:
+  Bool.and(interpretive_term_is_intoxicating_liquor(term), transported_in_violation)
+
+# AM21S3: inoperative unless ratified by state conventions within seven
+# years — temporal; item 3.
+def rule_am21s3_deadline(ratified_within_seven_years: Bool) -> Bool:
+  ratified_within_seven_years
+
+# AM23S1: District electors equal its would-be Senate+House number, never more
+# than the least populous state. The equality is caller-computed (as with the
+# Sunday exclusion in presentment); the rule enforces the cap.
+def rule_am23s1_electors(entitled_equals_appointed: Bool, least_populous_state_electors: Nat, appointed: Nat) -> Bool:
+  match entitled_equals_appointed:
+    case True{}:
+      Nat.is_le(appointed, least_populous_state_electors)
+    case False{}:
+      False{}
+
+# AM23S2: Congress enforces by appropriate legislation (term opaque).
+def rule_am23s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM24S1: no denial/abridgment of the vote for failure to pay a poll tax.
+def rule_am24s1_poll_tax(denied_for_nonpayment: Bool) -> Bool:
+  Bool.not(denied_for_nonpayment)
+
+# AM24S2: Congress enforces by appropriate legislation (term opaque).
+def rule_am24s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM26S2: Congress enforces by appropriate legislation (term opaque).
+def rule_am26s2_enforcement(term: InterpretiveTerm, congress_enforces: Bool) -> Bool:
+  Bool.and(interpretive_term_is_appropriate_legislation(term), congress_enforces)
+
+# AM27: no law varying congressional compensation takes effect until an
+# election of Representatives intervenes.
+def rule_am27_timing(varying_law: Bool, election_intervened: Bool) -> Bool:
+  Bool.or(Bool.not(varying_law), election_intervened)
